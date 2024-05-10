@@ -11,7 +11,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 /**
- * 售币机取消上架市场
+
  */
 @Service
 public class SellGoldMachineCancelMarketApi extends SystemEventHttpHandler<Session> {

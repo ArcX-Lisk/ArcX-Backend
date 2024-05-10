@@ -9,7 +9,7 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 /**
- * 字符串工具类
+
  */
 public class StrUtil {
 
@@ -17,7 +17,7 @@ public class StrUtil {
             'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'};
 
     /**
-     * 字符串是否为空
+
      * @param str
      * @return
      */
@@ -30,7 +30,7 @@ public class StrUtil {
     }
 
     /**
-     * 获取文件名
+
      * @param str
      * @return
      */
@@ -39,23 +39,23 @@ public class StrUtil {
     }
 
     /**
-     * 生成随机订单号
+
      * @return
      */
     public static String getOrderIdByUUId() {
-        int machineId = 1;//最大支持1-9个集群机器部署
+        int machineId = 1;
         int hashCodeV = UUID.randomUUID().toString().hashCode();
-        if(hashCodeV < 0) {//有可能是负数
+        if(hashCodeV < 0) {
             hashCodeV = - hashCodeV;
         }
-        // 0 代表前面补充0
-        // 4 代表长度为4
-        // d 代表参数为正数型
+        
+        
+        
         return machineId + String.format("%015d", hashCodeV);
     }
 
     /**
-     * list转换成str，用","拼接
+
      * @param list
      * @return
      */
@@ -71,7 +71,7 @@ public class StrUtil {
     }
 
     /**
-     * 字符串转换成list
+
      * @param str
      * @return
      */
@@ -85,7 +85,7 @@ public class StrUtil {
     }
 
     /**
-     * 获取小写随机字母
+
      * @return
      */
     public static String getLowerRandomLetter(){
@@ -95,7 +95,7 @@ public class StrUtil {
     }
 
     /**
-     * 获取大写随机字母
+
      * @return
      */
     public static String getUpperRandomLetter(){
@@ -106,7 +106,7 @@ public class StrUtil {
 
 
     /**
-     * 十六进制转10进制数字
+
      * @param str
      * @return
      */
@@ -121,7 +121,7 @@ public class StrUtil {
     }
 
     /**
-     * 字符串转换成Map,字符串格式为xxx?timeStamp=1010&code=xxxx
+
      * @param uri
      * @return
      */
@@ -141,7 +141,7 @@ public class StrUtil {
     }
 
     /**
-     * 判断是否纯数字
+
      * @param str
      * @return
      */
@@ -150,7 +150,7 @@ public class StrUtil {
     }
 
     /**
-     * 去重
+
      * @return
      */
     public static List<Integer> distinct(List<Integer> list){
@@ -162,7 +162,7 @@ public class StrUtil {
     }
 
     /**
-     * list转换成字符串
+
      * @param nameList
      * @return
      */
@@ -178,7 +178,7 @@ public class StrUtil {
     }
 
     /**
-     * 根据IP获取区域信息
+
      * @param ip
      * @return
      */
@@ -209,7 +209,7 @@ public class StrUtil {
 
 
     /**
-     * 生成cdkey
+
      * @return
      */
     public static String createCdKey(String channelKey, List<String> addList, List<String> poolList){
@@ -226,7 +226,7 @@ public class StrUtil {
 
 
     /**
-     * 获取所有数字
+
      * @return
      */
     public static int getAllNum(String str){
@@ -245,7 +245,7 @@ public class StrUtil {
     }
 
     /**
-     * 处理识别的数字字符串
+
      * @param valCode
      * @return
      */
@@ -259,9 +259,9 @@ public class StrUtil {
         valCode = valCode.replaceAll("⑦", "7");
         valCode = valCode.replaceAll("⑧", "8");
         valCode = valCode.replaceAll("⑨", "9");
-        valCode = valCode.replaceAll("o","0");//字母o替换成0
-        valCode = valCode.replaceAll("L", "1");//字母L替换成1
-        valCode = valCode.replaceAll("l", "1");//字母l替换成1
+        valCode = valCode.replaceAll("o","0");
+        valCode = valCode.replaceAll("L", "1");
+        valCode = valCode.replaceAll("l", "1");
         if(valCode.startsWith("0")){
             valCode = "1"+valCode;
         }
@@ -269,7 +269,7 @@ public class StrUtil {
     }
 
     /**
-     * 获取参数转换成list
+
      * @param map
      * @return
      */
@@ -284,14 +284,14 @@ public class StrUtil {
     }
 
     /**
-     * 添加分页信息
+
      */
     public static StringBuilder appendPageMsg(StringBuilder sb, int pageNum, int pageSize){
         return sb.append(" limit ").append((pageNum-1)*pageSize).append(",").append(pageSize);
     }
 
     /**
-     * 四舍五入
+
      */
     public static int round(double d){
         BigDecimal bigDecimal = new BigDecimal(d);
@@ -300,7 +300,7 @@ public class StrUtil {
     }
 
     /**
-     * 截取一位小数
+
      */
     public static double truncateOneDecimal(double num){
         BigDecimal bg = new BigDecimal(num);
@@ -308,7 +308,7 @@ public class StrUtil {
     }
 
     /**
-     * 截取两位小数
+
      */
     public static double truncateTwoDecimal(double num){
         BigDecimal bg = new BigDecimal(num);
@@ -316,7 +316,7 @@ public class StrUtil {
     }
 
     /**
-     * 截取9位小数
+
      */
     public static double truncateNineDecimal(double num){
         BigDecimal bg = new BigDecimal(num);
@@ -324,7 +324,7 @@ public class StrUtil {
     }
 
     /**
-     * 返回列表数量
+
      */
     public static int listNum(List<Integer> list){
         if(list==null || list.size()==0 || list.get(0)==null) {
@@ -335,7 +335,7 @@ public class StrUtil {
     }
 
     /**
-     * 返回列表数量
+
      */
     public static int listSize(List<Integer> list){
         if(list==null || list.size()==0 || list.get(0)==null) {
@@ -346,7 +346,7 @@ public class StrUtil {
     }
 
     /**
-     * 返回列表数量
+
      */
     public static int strListSize(List<String> list){
         if(list==null || list.size()==0 || list.get(0)==null) {
@@ -357,19 +357,19 @@ public class StrUtil {
     }
 
     /**
-     * 返回列表第一个信息
+
      */
     public static String listFirstStr(List<String> list){
         return (list==null || list.size()==0 || list.get(0)==null)?"":list.get(0);
     }
 
     /**
-     * 转换数值格式
+
      */
     public static String toMoneySize(long num){
         BigDecimal bg = new BigDecimal(num);
         double d1 =  bg.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
-        //转换成带,的两位小数
+        
         DecimalFormat df = new DecimalFormat("###,###");
         if(d1==0){
             return "0";
@@ -379,12 +379,12 @@ public class StrUtil {
     }
 
     /**
-     * 转换数值格式（带4位小数）
+
      */
     public static String toFourMoneySize(double num){
         BigDecimal bg = new BigDecimal(num);
         double d1 =  bg.setScale(4, BigDecimal.ROUND_HALF_UP).doubleValue();
-        //转换成带,的两位小数
+        
         DecimalFormat df = new DecimalFormat("###,###.####");
         if(d1==0){
             return "0";
@@ -394,7 +394,7 @@ public class StrUtil {
     }
 
     /**
-     * 截取4位小数
+
      */
     public static double truncateFourDecimal(double num){
         BigDecimal bg = new BigDecimal(num);

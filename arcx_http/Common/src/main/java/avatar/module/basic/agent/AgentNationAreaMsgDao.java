@@ -7,7 +7,7 @@ import avatar.util.system.StrUtil;
 import java.util.List;
 
 /**
- * 代理国家区域信息数据接口
+
  */
 public class AgentNationAreaMsgDao {
     private static final AgentNationAreaMsgDao instance = new AgentNationAreaMsgDao();
@@ -16,15 +16,15 @@ public class AgentNationAreaMsgDao {
     }
 
     /**
-     * 查询所有信息
+
      */
     public int loadByNation(String nation) {
-        //从缓存获取
+        
         int areaId = loadCache(nation);
         if(areaId==-1){
-            //从数据库查询
+            
             areaId = loadDbByNation(nation);
-            //设置缓存
+            
             setCache(nation, areaId);
         }
         return areaId;
@@ -33,7 +33,7 @@ public class AgentNationAreaMsgDao {
     //=========================cache===========================
 
     /**
-     * 查询缓存
+
      */
     private int loadCache(String nation){
         Object obj = GameData.getCache().get(PrefixMsg.AGENT_NATION_AREA_MSG+"_"+nation);
@@ -41,7 +41,7 @@ public class AgentNationAreaMsgDao {
     }
 
     /**
-     * 添加缓存
+
      */
     private void setCache(String nation, int areaId){
         GameData.getCache().set(PrefixMsg.AGENT_NATION_AREA_MSG+"_"+nation, areaId);
@@ -50,7 +50,7 @@ public class AgentNationAreaMsgDao {
     //=========================db===========================
 
     /**
-     * 从数据库查询
+
      */
     private int loadDbByNation(String nation) {
         String sql = "select area_id from agent_area_nation_msg where nation_name=?";

@@ -12,7 +12,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * 玩家道具信息数据接口
+
  */
 public class UserPropertyMsgDao {
     private static final UserPropertyMsgDao instance = new UserPropertyMsgDao();
@@ -21,12 +21,12 @@ public class UserPropertyMsgDao {
     }
 
     /**
-     * 查询缓存信息
+
      */
     public UserPropertyMsgEntity loadByMsg(int userId, int propertyType){
         UserPropertyMsgEntity entity = loadCache(userId, propertyType);
         if(entity==null){
-            //查询数据库
+            
             entity = loadDbByMsg(userId, propertyType);
             if(entity==null && UserUtil.existUser(userId)){
                 entity = insert(UserPropertyUtil.initUserPropertyMsgEntity(userId, propertyType));
@@ -41,7 +41,7 @@ public class UserPropertyMsgDao {
     //=========================cache===========================
 
     /**
-     * 查询缓存
+
      */
     private UserPropertyMsgEntity loadCache(int userId, int propertyType){
         return (UserPropertyMsgEntity)
@@ -49,7 +49,7 @@ public class UserPropertyMsgDao {
     }
 
     /**
-     * 添加缓存
+
      */
     private void setCache(int userId, int propertyType, UserPropertyMsgEntity entity){
         GameData.getCache().set(UserPrefixMsg.USER_PROPERTY_MSG+"_"+userId+"_"+propertyType, entity);
@@ -58,24 +58,24 @@ public class UserPropertyMsgDao {
     //=========================db===========================
 
     /**
-     * 根据玩家ID查询
+
      */
     private UserPropertyMsgEntity loadDbByMsg(int userId, int commodityType) {
         Map<String, Object> paramsMap = new HashMap<>();
-        paramsMap.put("user_id", userId);//玩家ID
-        paramsMap.put("property_type", commodityType);//商品类型
+        paramsMap.put("user_id", userId);
+        paramsMap.put("property_type", commodityType);
         String sql = SqlUtil.getSql("user_property_msg", paramsMap).toString();
         return GameData.getDB().get(UserPropertyMsgEntity.class, sql, new Object[]{});
     }
 
     /**
-     * 添加数据
+
      */
     private UserPropertyMsgEntity insert(UserPropertyMsgEntity entity) {
         int id = GameData.getDB().insertAndReturn(entity);
         if(id>0){
             entity.setId(id);//id
-            //更新缓存
+            
             setCache(entity.getUserId(), entity.getPropertyType(), entity);
             return entity;
         }else{
@@ -84,13 +84,13 @@ public class UserPropertyMsgDao {
     }
 
     /**
-     * 更新
+
      */
     public boolean update(UserPropertyMsgEntity entity){
-        entity.setUpdateTime(TimeUtil.getNowTimeStr());//更新时间
+        entity.setUpdateTime(TimeUtil.getNowTimeStr());
         boolean flag = GameData.getDB().update(entity);
         if(flag){
-            //更新缓存
+            
             setCache(entity.getUserId(), entity.getPropertyType(), entity);
         }
         return flag;

@@ -11,7 +11,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 /**
- * 刷新商城道具
+
  */
 @Service
 public class RefreshMallPropertyApi extends SystemEventHttpHandler<Session> {

@@ -3,61 +3,61 @@ package avatar.data.crossServer;
 import java.io.Serializable;
 
 /**
- * 跨服查询设备奖励信息
+
  */
 public class CrossServerSearchProductPrizeMsg implements Serializable {
-    //炼金塔堆塔
+    
     private int pileTower;
 
-    //龙珠
+    
     private int allDragon;
 
-    //房间排行榜第一名
+    
     private int roomRankFirst;
 
-    //房间排行榜第二名
+    
     private int roomRankSecond;
 
-    //房间排行榜第三名
+    
     private int roomRankThird;
 
-    //免费游戏
+    
     private int freeGame;
 
-    //宝石游戏
+    
     private int gem;
 
-    //大奖转盘-minord奖池
+    
     private int jackpotMinor;
 
-    //大奖转盘-major奖池
+    
     private int jackpotMajor;
 
-    //大奖转盘-grand奖池
+    
     private int jackpotGrand;
 
-    //集卡数
+    
     private int collectCard;
 
-    //金字塔
+    
     private int agyptBox;
 
-    //八卦
+    
     private int gossip;
 
-    //三国战斗
+    
     private int heroBattle;
 
-    //闪电
+    
     private int thunder;
 
-    //金刚大奖转盘
+    
     private int kingkongJackpot;
 
-    //三国大奖转盘
+    
     private int heroJackpot;
 
-    //口哨
+    
     private int whistle;
 
     public int getPileTower() {

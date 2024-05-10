@@ -1,20 +1,20 @@
 package avatar.data.product.innoMsg;
 
 /**
- * 自研设备设备中奖信息
+
  */
 public class InnoProductAwardMsg {
-    private String alias;//设备号
+    private String alias;
 
-    private int userId;//玩家ID
+    private int userId;
 
-    private String userName;//玩家昵称
+    private String userName;
 
-    private String imgUrl;//玩家头像
+    private String imgUrl;
 
-    private int serverSideType;//服务端类型
+    private int serverSideType;
 
-    private int awardType;//中奖类型
+    private int awardType;
 
     public String getAlias() {
         return alias;

@@ -10,237 +10,237 @@ import avatar.util.user.UserUsdtUtil;
 import java.util.Map;
 
 /**
- * NFT检测参数工具类
+
  */
 public class NftCheckParamsUtil {
     /**
-     * 兑换NFT的金币
+
      */
     public static int exchangeNftGold(Map<String, Object> map){
-        int status = CheckParamsUtil.checkAccessToken(map);//成功
+        int status = CheckParamsUtil.checkAccessToken(map);
         if(ParamsUtil.isSuccess(status)) {
             try {
-                String nftCd = ParamsUtil.stringParmasNotNull(map, "nftCd");//NFT编号
-                long usdtAmt = ParamsUtil.longParmasNotNull(map, "usdtAmt");//购买的USDT数量
-                long usdtExc = ParamsUtil.longParmasNotNull(map, "usdtExc");//USDT兑换值
+                String nftCd = ParamsUtil.stringParmasNotNull(map, "nftCd");
+                long usdtAmt = ParamsUtil.longParmasNotNull(map, "usdtAmt");
+                long usdtExc = ParamsUtil.longParmasNotNull(map, "usdtExc");
                 if(StrUtil.checkEmpty(nftCd) || usdtAmt<=0 || usdtExc<=0){
-                    status = ClientCode.PARAMS_ERROR.getCode();//参数错误
+                    status = ClientCode.PARAMS_ERROR.getCode();
                 }else if(UserUsdtUtil.usdtBalance(ParamsUtil.userId(map))<usdtAmt){
-                    status = ClientCode.BALANCE_NO_ENOUGH.getCode();//余额不足
+                    status = ClientCode.BALANCE_NO_ENOUGH.getCode();
                 }
             } catch (Exception e) {
                 ErrorDealUtil.printError(e);
-                status = ClientCode.PARAMS_ERROR.getCode();//参数错误
+                status = ClientCode.PARAMS_ERROR.getCode();
             }
         }
         return status;
     }
 
     /**
-     * NFT信息
+
      */
     public static int nftMsg(Map<String, Object> map) {
-        int status = CheckParamsUtil.checkAccessToken(map);//成功
+        int status = CheckParamsUtil.checkAccessToken(map);
         if(ParamsUtil.isSuccess(status)) {
             try {
-                String nftCd = ParamsUtil.nftCode(map);//NFT编号
+                String nftCd = ParamsUtil.nftCode(map);
                 if(StrUtil.checkEmpty(nftCd)){
-                    status = ClientCode.PARAMS_ERROR.getCode();//参数错误
+                    status = ClientCode.PARAMS_ERROR.getCode();
                 }
             } catch (Exception e) {
                 ErrorDealUtil.printError(e);
-                status = ClientCode.PARAMS_ERROR.getCode();//参数错误
+                status = ClientCode.PARAMS_ERROR.getCode();
             }
         }
         return status;
     }
 
     /**
-     * NFT升级
+
      */
     public static int upgradeNft(Map<String, Object> map) {
-        int status = CheckParamsUtil.checkAccessToken(map);//成功
+        int status = CheckParamsUtil.checkAccessToken(map);
         if(ParamsUtil.isSuccess(status)) {
             try {
-                String nftCd = ParamsUtil.nftCode(map);//NFT编号
-                int atbTp = ParamsUtil.intParmasNotNull(map, "atbTp");//属性类型
+                String nftCd = ParamsUtil.nftCode(map);
+                int atbTp = ParamsUtil.intParmasNotNull(map, "atbTp");
                 if(StrUtil.checkEmpty(nftCd) || StrUtil.checkEmpty(NftAttributeTypeEnum.getNameByCode(atbTp))){
-                    status = ClientCode.PARAMS_ERROR.getCode();//参数错误
+                    status = ClientCode.PARAMS_ERROR.getCode();
                 }else if(SellGoldMachineMsgDao.getInstance().loadMsg(nftCd)==null){
-                    status = ClientCode.NFT_NO_EXIST.getCode();//无对应NFT信息
+                    status = ClientCode.NFT_NO_EXIST.getCode();
                 }
             } catch (Exception e) {
                 ErrorDealUtil.printError(e);
-                status = ClientCode.PARAMS_ERROR.getCode();//参数错误
+                status = ClientCode.PARAMS_ERROR.getCode();
             }
         }
         return status;
     }
 
     /**
-     * 售币机增加储币
+
      */
     public static int sellGoldMachineAddCoin(Map<String, Object> map) {
-        int status = CheckParamsUtil.checkAccessToken(map);//成功
+        int status = CheckParamsUtil.checkAccessToken(map);
         if(ParamsUtil.isSuccess(status)) {
             try {
-                String nftCd = ParamsUtil.nftCode(map);//NFT编号
-                long gdAmt = ParamsUtil.longParmasNotNull(map, "gdAmt");//	补货的金币数量
+                String nftCd = ParamsUtil.nftCode(map);
+                long gdAmt = ParamsUtil.longParmasNotNull(map, "gdAmt");
                 if(StrUtil.checkEmpty(nftCd) || gdAmt<=0){
-                    status = ClientCode.PARAMS_ERROR.getCode();//参数错误
+                    status = ClientCode.PARAMS_ERROR.getCode();
                 }else if(SellGoldMachineMsgDao.getInstance().loadMsg(nftCd)==null){
-                    status = ClientCode.NFT_NO_EXIST.getCode();//无对应NFT信息
+                    status = ClientCode.NFT_NO_EXIST.getCode();
                 }
             } catch (Exception e) {
                 ErrorDealUtil.printError(e);
-                status = ClientCode.PARAMS_ERROR.getCode();//参数错误
+                status = ClientCode.PARAMS_ERROR.getCode();
             }
         }
         return status;
     }
 
     /**
-     * 售币机维修耐久度
+
      */
     public static int sellGoldMachineRepairDurability(Map<String, Object> map) {
-        int status = CheckParamsUtil.checkAccessToken(map);//成功
+        int status = CheckParamsUtil.checkAccessToken(map);
         if(ParamsUtil.isSuccess(status)) {
             try {
-                String nftCd = ParamsUtil.nftCode(map);//NFT编号
+                String nftCd = ParamsUtil.nftCode(map);
                 if(StrUtil.checkEmpty(nftCd)){
-                    status = ClientCode.PARAMS_ERROR.getCode();//参数错误
+                    status = ClientCode.PARAMS_ERROR.getCode();
                 }else if(SellGoldMachineMsgDao.getInstance().loadMsg(nftCd)==null){
-                    status = ClientCode.NFT_NO_EXIST.getCode();//无对应NFT信息
+                    status = ClientCode.NFT_NO_EXIST.getCode();
                 }
             } catch (Exception e) {
                 ErrorDealUtil.printError(e);
-                status = ClientCode.PARAMS_ERROR.getCode();//参数错误
+                status = ClientCode.PARAMS_ERROR.getCode();
             }
         }
         return status;
     }
 
     /**
-     * 售币机营业
+
      */
     public static int sellGoldMachineOperate(Map<String, Object> map) {
-        int status = CheckParamsUtil.checkAccessToken(map);//成功
+        int status = CheckParamsUtil.checkAccessToken(map);
         if(ParamsUtil.isSuccess(status)) {
             try {
-                String nftCd = ParamsUtil.nftCode(map);//NFT编号
-                double salePrice = ParamsUtil.doubleParmasNotNull(map, "slPrc");//出售价格
+                String nftCd = ParamsUtil.nftCode(map);
+                double salePrice = ParamsUtil.doubleParmasNotNull(map, "slPrc");
                 if(StrUtil.checkEmpty(nftCd) || salePrice<1){
-                    status = ClientCode.PARAMS_ERROR.getCode();//参数错误
+                    status = ClientCode.PARAMS_ERROR.getCode();
                 }else if(SellGoldMachineMsgDao.getInstance().loadMsg(nftCd)==null){
-                    status = ClientCode.NFT_NO_EXIST.getCode();//无对应NFT信息
+                    status = ClientCode.NFT_NO_EXIST.getCode();
                 }
             } catch (Exception e) {
                 ErrorDealUtil.printError(e);
-                status = ClientCode.PARAMS_ERROR.getCode();//参数错误
+                status = ClientCode.PARAMS_ERROR.getCode();
             }
         }
         return status;
     }
 
     /**
-     * 售币机停止营业
+
      */
     public static int sellGoldMachineStopOperate(Map<String, Object> map) {
-        int status = CheckParamsUtil.checkAccessToken(map);//成功
+        int status = CheckParamsUtil.checkAccessToken(map);
         if(ParamsUtil.isSuccess(status)) {
             try {
-                String nftCd = ParamsUtil.nftCode(map);//NFT编号
+                String nftCd = ParamsUtil.nftCode(map);
                 if(StrUtil.checkEmpty(nftCd)){
-                    status = ClientCode.PARAMS_ERROR.getCode();//参数错误
+                    status = ClientCode.PARAMS_ERROR.getCode();
                 }else if(SellGoldMachineMsgDao.getInstance().loadMsg(nftCd)==null){
-                    status = ClientCode.NFT_NO_EXIST.getCode();//无对应NFT信息
+                    status = ClientCode.NFT_NO_EXIST.getCode();
                 }
             } catch (Exception e) {
                 ErrorDealUtil.printError(e);
-                status = ClientCode.PARAMS_ERROR.getCode();//参数错误
+                status = ClientCode.PARAMS_ERROR.getCode();
             }
         }
         return status;
     }
 
     /**
-     * 售币机上架市场
+
      */
     public static int sellGoldMachineListMarket(Map<String, Object> map) {
-        int status = CheckParamsUtil.checkAccessToken(map);//成功
+        int status = CheckParamsUtil.checkAccessToken(map);
         if(ParamsUtil.isSuccess(status)) {
             try {
-                String nftCd = ParamsUtil.nftCode(map);//NFT编号
+                String nftCd = ParamsUtil.nftCode(map);
                 long salePrice = ParamsUtil.longParmasNotNull(map, "slPrc");
                 if(StrUtil.checkEmpty(nftCd) || salePrice<=0){
-                    status = ClientCode.PARAMS_ERROR.getCode();//参数错误
+                    status = ClientCode.PARAMS_ERROR.getCode();
                 }else if(SellGoldMachineMsgDao.getInstance().loadMsg(nftCd)==null){
-                    status = ClientCode.NFT_NO_EXIST.getCode();//无对应NFT信息
+                    status = ClientCode.NFT_NO_EXIST.getCode();
                 }
             } catch (Exception e) {
                 ErrorDealUtil.printError(e);
-                status = ClientCode.PARAMS_ERROR.getCode();//参数错误
+                status = ClientCode.PARAMS_ERROR.getCode();
             }
         }
         return status;
     }
 
     /**
-     * 售币机取消上架市场
+
      */
     public static int sellGoldMachineCancelMarket(Map<String, Object> map) {
-        int status = CheckParamsUtil.checkAccessToken(map);//成功
+        int status = CheckParamsUtil.checkAccessToken(map);
         if(ParamsUtil.isSuccess(status)) {
             try {
-                String nftCd = ParamsUtil.nftCode(map);//NFT编号
+                String nftCd = ParamsUtil.nftCode(map);
                 if(StrUtil.checkEmpty(nftCd)){
-                    status = ClientCode.PARAMS_ERROR.getCode();//参数错误
+                    status = ClientCode.PARAMS_ERROR.getCode();
                 }else if(SellGoldMachineMsgDao.getInstance().loadMsg(nftCd)==null){
-                    status = ClientCode.NFT_NO_EXIST.getCode();//无对应NFT信息
+                    status = ClientCode.NFT_NO_EXIST.getCode();
                 }
             } catch (Exception e) {
                 ErrorDealUtil.printError(e);
-                status = ClientCode.PARAMS_ERROR.getCode();//参数错误
+                status = ClientCode.PARAMS_ERROR.getCode();
             }
         }
         return status;
     }
 
     /**
-     * NFT报告
+
      */
     public static int nftReport(Map<String, Object> map) {
-        int status = CheckParamsUtil.checkAccessTokenPage(map);//成功
+        int status = CheckParamsUtil.checkAccessTokenPage(map);
         if(ParamsUtil.isSuccess(status)) {
             try {
-                String nftCd = ParamsUtil.nftCode(map);//NFT编号
+                String nftCd = ParamsUtil.nftCode(map);
                 if(StrUtil.checkEmpty(nftCd)){
-                    status = ClientCode.PARAMS_ERROR.getCode();//参数错误
+                    status = ClientCode.PARAMS_ERROR.getCode();
                 }else if(SellGoldMachineMsgDao.getInstance().loadMsg(nftCd)==null){
-                    status = ClientCode.NFT_NO_EXIST.getCode();//无对应NFT信息
+                    status = ClientCode.NFT_NO_EXIST.getCode();
                 }
             } catch (Exception e) {
                 ErrorDealUtil.printError(e);
-                status = ClientCode.PARAMS_ERROR.getCode();//参数错误
+                status = ClientCode.PARAMS_ERROR.getCode();
             }
         }
         return status;
     }
 
     /**
-     * 购买NFT
+
      */
     public static int buyNft(Map<String, Object> map) {
-        int status = CheckParamsUtil.checkAccessTokenPage(map);//成功
+        int status = CheckParamsUtil.checkAccessTokenPage(map);
         if(ParamsUtil.isSuccess(status)) {
             try {
-                String nftCd = ParamsUtil.nftCode(map);//NFT编号
+                String nftCd = ParamsUtil.nftCode(map);
                 if(StrUtil.checkEmpty(nftCd)){
-                    status = ClientCode.PARAMS_ERROR.getCode();//参数错误
+                    status = ClientCode.PARAMS_ERROR.getCode();
                 }
             } catch (Exception e) {
                 ErrorDealUtil.printError(e);
-                status = ClientCode.PARAMS_ERROR.getCode();//参数错误
+                status = ClientCode.PARAMS_ERROR.getCode();
             }
         }
         return status;

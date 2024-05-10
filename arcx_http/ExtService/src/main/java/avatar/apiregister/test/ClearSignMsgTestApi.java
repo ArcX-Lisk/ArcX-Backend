@@ -11,7 +11,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 /**
- * 清除签到信息
+
  */
 @Service
 public class ClearSignMsgTestApi extends SystemEventHttpHandler<Session> {

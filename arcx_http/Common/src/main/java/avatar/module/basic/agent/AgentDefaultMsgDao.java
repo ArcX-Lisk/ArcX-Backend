@@ -5,7 +5,7 @@ import avatar.global.prefixMsg.PrefixMsg;
 import avatar.util.GameData;
 
 /**
- * 代理默认信息数据接口
+
  */
 public class AgentDefaultMsgDao {
     private static final AgentDefaultMsgDao instance = new AgentDefaultMsgDao();
@@ -14,12 +14,12 @@ public class AgentDefaultMsgDao {
     }
 
     /**
-     * 查询缓存信息
+
      */
     public AgentDefaultMsgEntity loadMsg(){
         AgentDefaultMsgEntity entity = loadCache();
         if(entity==null){
-            //查询数据库
+            
             entity = loadDbMsg();
             setCache(entity);
         }
@@ -29,7 +29,7 @@ public class AgentDefaultMsgDao {
     //=========================cache===========================
 
     /**
-     * 查询缓存
+
      */
     private AgentDefaultMsgEntity loadCache(){
         return (AgentDefaultMsgEntity)
@@ -37,7 +37,7 @@ public class AgentDefaultMsgDao {
     }
 
     /**
-     * 添加缓存
+
      */
     private void setCache(AgentDefaultMsgEntity entity){
         GameData.getCache().set(PrefixMsg.AGENT_DEFAULT_MSG, entity);
@@ -46,7 +46,7 @@ public class AgentDefaultMsgDao {
     //=========================db===========================
 
     /**
-     * 根据ID查询
+
      */
     private AgentDefaultMsgEntity loadDbMsg() {
         String sql = "select * from agent_default_msg";

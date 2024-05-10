@@ -11,7 +11,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 /**
- * 设备报修
+
  */
 @Service
 public class RepairProductApi extends SystemEventHttpHandler<Session> {
@@ -23,7 +23,7 @@ public class RepairProductApi extends SystemEventHttpHandler<Session> {
     public void method(Session session, Map<String, Object> map) throws Exception {
         ExecutorService cachedPool = Executors.newCachedThreadPool();
         cachedPool.execute(() -> {
-            //逻辑处理
+            
             ProductService.repairProduct(map, session);
         });
         cachedPool.shutdown();

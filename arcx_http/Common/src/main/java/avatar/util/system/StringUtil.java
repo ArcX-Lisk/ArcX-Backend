@@ -127,10 +127,10 @@ public class StringUtil {
         return num;
     }
     /**
-     * 字符串是否符合匹配正则表达式
-     * @param str   字符串
-     * @param regex  正则表达式
-     * @return true:符合  false:不符合
+
+
+
+
      */
     public static boolean matches(String str,String regex){
 		Pattern pattern = Pattern.compile(regex); 
@@ -138,7 +138,7 @@ public class StringUtil {
         return matcher.matches();
 	}
 
-    /**首字母大写*/
+    
     public static String uppercaseStr(String str) {
     	//str = str.substring(0, 1).toUpperCase() + str.substring(1);
         char[] cs=str.toCharArray();
@@ -149,7 +149,7 @@ public class StringUtil {
         return str;
     }
     
-    /**首字母转成小写*/
+    
     public static String lowerCaseStr(String str){
     	char[] cs=str.toCharArray();
         if(cs[0] >= 65 &&cs[0] < 97 ){ 
@@ -160,7 +160,7 @@ public class StringUtil {
     }
 
     /**
-     * 获取数字
+
      * @param obj
      * @return
      */

@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * 福利签到奖励数据接口
+
  */
 public class WelfareSignAwardDao {
     private static final WelfareSignAwardDao instance = new WelfareSignAwardDao();
@@ -19,16 +19,16 @@ public class WelfareSignAwardDao {
     }
 
     /**
-     * 查询福利签到奖励
+
      */
     public ConcurrentHashMap<Integer, List<WelfareSignAwardEntity>> loadAll() {
-        //从缓存获取
+        
         ConcurrentHashMap<Integer, List<WelfareSignAwardEntity>> map = loadCache();
         if(map==null){
-            //查询信息
+            
             List<WelfareSignAwardEntity> list = loadDbAll();
             if(list!=null && list.size()>0){
-                //设置缓存
+                
                 map = setCache(list);
             }
         }
@@ -36,7 +36,7 @@ public class WelfareSignAwardDao {
     }
 
     /**
-     * 查询所有福利签到天数
+
      */
     public List<Integer> loadAllDay() {
         List<Integer> list = new ArrayList<>();
@@ -51,20 +51,20 @@ public class WelfareSignAwardDao {
     //=========================cache===========================
 
     /**
-     * 查询缓存
+
      */
     private ConcurrentHashMap<Integer, List<WelfareSignAwardEntity>> loadCache(){
         return (ConcurrentHashMap<Integer, List<WelfareSignAwardEntity>>) GameData.getCache().get(ActivityPrefixMsg.WELFARE_SIGN_AWARD);
     }
 
     /**
-     * 添加缓存
+
      */
     private ConcurrentHashMap<Integer, List<WelfareSignAwardEntity>> setCache(List<WelfareSignAwardEntity> list){
         ConcurrentHashMap<Integer, List<WelfareSignAwardEntity>> map = new ConcurrentHashMap<>();
         list.forEach(entity->{
-            int day = entity.getDay();//天数
-            List<WelfareSignAwardEntity> msgList = map.get(day);//信息列表
+            int day = entity.getDay();
+            List<WelfareSignAwardEntity> msgList = map.get(day);
             if(msgList==null){
                 msgList = new ArrayList<>();
             }
@@ -78,7 +78,7 @@ public class WelfareSignAwardDao {
     //=========================db===========================
 
     /**
-     * 查询福利签到信息
+
      */
     private List<WelfareSignAwardEntity> loadDbAll() {
         String sql = "select * from welfare_sign_award order by day,sequence";

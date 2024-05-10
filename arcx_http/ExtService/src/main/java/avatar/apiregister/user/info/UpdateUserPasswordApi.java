@@ -11,7 +11,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 /**
- * 更新玩家密码
+
  */
 @Service
 public class UpdateUserPasswordApi extends SystemEventHttpHandler<Session> {

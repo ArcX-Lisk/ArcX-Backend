@@ -5,25 +5,25 @@ import avatar.data.crossServer.ConciseServerUserMsg;
 import java.util.List;
 
 /**
- * 设备信息
+
  */
 public class ProductMsg {
-    //设备ID
+    
     private int devId;
 
-    //设备名称
+    
     private String devNm;
 
-    //设备图片
+    
     private String devPct;
 
-    //游戏价格
+    
     private int csAmt;
 
-    //设备在玩玩家头像
+    
     private List<ConciseServerUserMsg> plyTbln;
 
-    //设备列表
+    
     private List<Integer> devTbln;
 
     public int getDevId() {

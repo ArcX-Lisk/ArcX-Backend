@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 玩家在线信息
+
  */
 public class UserOnlineMsgDao {
     private static final UserOnlineMsgDao instance = new UserOnlineMsgDao();
@@ -17,12 +17,12 @@ public class UserOnlineMsgDao {
     }
 
     /**
-     * 查询缓存信息
+
      */
     public List<UserOnlineMsgEntity> loadByUserId(int userId){
         List<UserOnlineMsgEntity> list = loadCache(userId);
         if(list==null){
-            //查询数据库
+            
             list = loadDbByUserId(userId);
             setCache(userId, list);
         }
@@ -32,7 +32,7 @@ public class UserOnlineMsgDao {
     //=========================cache===========================
 
     /**
-     * 查询缓存
+
      */
     private List<UserOnlineMsgEntity> loadCache(int userId){
         return (List<UserOnlineMsgEntity>)
@@ -40,7 +40,7 @@ public class UserOnlineMsgDao {
     }
 
     /**
-     * 添加缓存
+
      */
     private void setCache(int userId, List<UserOnlineMsgEntity> list){
         GameData.getCache().set(UserPrefixMsg.USER_ONLINE_MSG+"_"+userId, list);
@@ -49,7 +49,7 @@ public class UserOnlineMsgDao {
     //=========================db===========================
 
     /**
-     * 查询信息
+
      */
     private List<UserOnlineMsgEntity> loadDbByUserId(int userId) {
         String sql = "select * from user_online_msg where user_id=? order by create_time desc";

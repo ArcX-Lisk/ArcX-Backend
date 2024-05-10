@@ -29,7 +29,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 /**
- * 推币机操作接口
+
  */
 @Service
 public class CoinPusherOperationApi extends SystemEventHandler2<Session> {
@@ -42,47 +42,47 @@ public class CoinPusherOperationApi extends SystemEventHandler2<Session> {
         ExecutorService cachedPool = Executors.newCachedThreadPool();
         cachedPool.execute(() -> {
             try {
-                //逻辑处理
-                String accessToken = session.getAccessToken();//玩家通行证
-                //前端传递的参数
+                
+                String accessToken = session.getAccessToken();
+                
                 JSONObject jsonObject = JsonUtil.bytesToJson(bytes);
-                //推送前端的参数
+                
                 JSONObject dataJson = new JSONObject();
-                //验证参数
+                
                 int status = CheckParamsUtil.checkProductOperation(accessToken, jsonObject, dataJson);
-                //查询是否设备类型正确
+                
                 if(ParamsUtil.isSuccess(status)){
-                    int productId = jsonObject.getInteger("devId");//设备ID
+                    int productId = jsonObject.getInteger("devId");
                     if(!ProductUtil.isSpecifyMachine(productId, ProductTypeEnum.PUSH_COIN_MACHINE.getCode())){
-                        status = ClientCode.PRODUCT_TYPE_ERROR.getCode();//设备类型错误
+                        status = ClientCode.PRODUCT_TYPE_ERROR.getCode();
                     }
                 }
-                //逻辑处理
+                
                 if(ParamsUtil.isSuccess(status)){
-                    int userId = UserUtil.loadUserIdByToken(accessToken);//玩家ID
-                    int productId = jsonObject.getInteger("devId");//设备ID
-                    int operateState = jsonObject.getInteger("hdlTp");//操作状态
-                    int coinMulti = jsonObject.containsKey("gdMul")?jsonObject.getInteger("gdMul"):0;//投币倍率
-                    String version = jsonObject.containsKey("vsCd")?jsonObject.getString("vsCd"):"";//版本号
-                    boolean unlockFlag = InnoProductUtil.isUnlockVersion(version);//是否不锁定限制
-                    //获取设备锁
+                    int userId = UserUtil.loadUserIdByToken(accessToken);
+                    int productId = jsonObject.getInteger("devId");
+                    int operateState = jsonObject.getInteger("hdlTp");
+                    int coinMulti = jsonObject.containsKey("gdMul")?jsonObject.getInteger("gdMul"):0;
+                    String version = jsonObject.containsKey("vsCd")?jsonObject.getString("vsCd"):"";
+                    boolean unlockFlag = InnoProductUtil.isUnlockVersion(version);
+                    
                     RedisLock lock = new RedisLock(RedisLock.loadCache(), LockMsg.PRODUCT_ROOM_DEAL_LOCK+"_"+productId,
                             2000);
                     try {
                         if (lock.lock()) {
                             ProductRoomMsg roomMsg = ProductRoomDao.getInstance().loadByProductId(productId);
-                            //检测是否操作正常
+                            
                             status = CoinPusherInnoService.checkOperate(userId, coinMulti, operateState, roomMsg, unlockFlag);
                             if(ParamsUtil.isSuccess(status)){
-                                //更新投币倍率信息
+                                
                                 if(coinMulti>0 && operateState== ProductOperationEnum.START_GAME.getCode()){
                                     ProductGamingUtil.updateUserStartGameMultiMsg(userId, coinMulti);
                                 }
-                                //设备操作
+                                
                                 ProductSocketOperateService.coinPusherOperate(productId, operateState, userId);
                             }
                             if(!ParamsUtil.isSuccess(status) || operateState== ProductOperationEnum.OFF_LINE.getCode()) {
-                                LogUtil.getLogger().error("玩家{}发送的推币机信息{}，错误码{}-----", userId,
+
                                         JsonUtil.mapToJson(jsonObject), status);
                             }
                         }

@@ -13,14 +13,14 @@ import avatar.util.system.TimeUtil;
 import java.util.List;
 
 /**
- * 自研设备交互工具类
+
  */
 public class SyncInnoConnectUtil {
     /**
-     * 初始化自研设备服务器连接
+
      */
     public static void connectInnoProductServer() {
-        //查询服务器信息
+        
         List<SyncInnoProductIpEntity> list = SyncInnoProductIpDao.getInstance().loadAll();
         if(list!=null && list.size()>0){
             list.forEach(entity->{
@@ -30,19 +30,19 @@ public class SyncInnoConnectUtil {
                 }
             });
         }else{
-            LogUtil.getLogger().info("初始化自研设备服务器的websocket的时候，查询不到服务器信息");
+
         }
     }
 
     /**
-     * 获取链接信息
+
      */
     public static String linkMsg(String ip, int port){
         return ip+port+loadHostId(ip, port+"");
     }
 
     /**
-     * 根据IP获取对应的ID
+
      */
     public static int loadHostId(String ip, String port) {
         int hostId = 0;
@@ -61,7 +61,7 @@ public class SyncInnoConnectUtil {
     }
 
     /**
-     * 是否超时链接
+
      */
     public static boolean isOutTimeLink(String linkMsg) {
         boolean flag = false;
@@ -71,9 +71,9 @@ public class SyncInnoConnectUtil {
             if (lock.lock()) {
                 long time = ConnectSocketLinkDao.getInstance().loadByLinkMsg(linkMsg);
                 if((TimeUtil.getNowTime()-time)>2000){
-                    //连接超时时间5秒
+                    
                     flag = true;
-                    //重置连接时间
+                    
                     ConnectSocketLinkDao.getInstance().setCache(linkMsg, TimeUtil.getNowTime());
                 }
             }

@@ -15,7 +15,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 /**
- * 设备到服务端获得币
+
  */
 @Service
 public class InnerGetCoinApi extends SystemEventHandler2<Session> {
@@ -25,17 +25,17 @@ public class InnerGetCoinApi extends SystemEventHandler2<Session> {
 
     @Override
     public void method(Session session, byte[] bytes) throws Exception {
-        //逻辑处理
+        
         ExecutorService cachedPool = Executors.newCachedThreadPool();
         cachedPool.execute(() -> {
-            //前端传递的参数
+            
             JSONObject jsonObject = JsonUtil.bytesToJson(bytes);
-            //转换参数
+            
             if(InnerEnCodeUtil.checkEncode(jsonObject)){
-//                LogUtil.getLogger().info("收到普通设备服务器发送的订阅获得币信息{}--------", JsonUtil.mapToJson(jsonObject));
+
                 ResponseGeneralMsg responseGeneralMsg = InnerNormalProductUtil.initResponseGeneralMsg(jsonObject);
-                int result = jsonObject.get("retNum")==null?0:(int) jsonObject.get("retNum");//获得币结果
-                //流程处理
+                int result = jsonObject.get("retNum")==null?0:(int) jsonObject.get("retNum");
+                
                 InnerProductService.describeGetCoinMsg(responseGeneralMsg, result);
             }
         });

@@ -13,17 +13,17 @@ import avatar.util.thirdpart.GameShiftUtil;
 import avatar.util.thirdpart.SolanaUtil;
 
 /**
- * 钱包工具类
+
  */
 public class WalletUtil {
 
     /**
-     * 处理提现
+
      */
     public static void walletWithdraw(int tokenType, int amount, int userId) {
-        //查询账号信息
+        
         Web3GameShiftAccountEntity accountEntity = Web3GameShiftAccountDao.getInstance().loadByMsg(userId);
-        //提现失败的返还处理
+        
         boolean flag = false;
         if(tokenType==TokensTypeEnum.AXC.getCode()){
             //axc
@@ -33,18 +33,18 @@ public class WalletUtil {
             flag = SolanaUtil.transferUsdtBalance(userId, amount, accountEntity.getUsdtAccount());
         }
         if(!flag){
-            //提现失败返还
+            
             UserCostLogUtil.backTransferFail(userId, tokenType, amount);
         }
     }
 
     /**
-     * 处理钱包充值
+
      */
     public static String walletRecharge(int tokenType, int amount, int userId) {
-        //查询账号信息
+        
         Web3GameShiftAccountEntity accountEntity = Web3GameShiftAccountDao.getInstance().loadByMsg(userId);
-        String txHash = "";//凭证
+        String txHash = "";
         if(tokenType==TokensTypeEnum.AXC.getCode()){
             //axc
             txHash = SolanaUtil.loadAxcTransferTransaction(userId, amount, 0, accountEntity.getWallet(),
@@ -58,14 +58,14 @@ public class WalletUtil {
     }
 
     /**
-     * 代币转移
+
      */
     public static String transferTokens(int tokenType, double amount, int userId, String address) {
-        //查询账号信息
+        
         Web3GameShiftAccountEntity accountEntity = Web3GameShiftAccountDao.getInstance().loadByMsg(userId);
-        String txHash = "";//凭证
-        int decimals = StrUtil.loadDecimals(amount);//精度
-        int resultAmount = StrUtil.dealNumByDecimals(amount, decimals);//整数
+        String txHash = "";
+        int decimals = StrUtil.loadDecimals(amount);
+        int resultAmount = StrUtil.dealNumByDecimals(amount, decimals);
         if(tokenType==TokensTypeEnum.AXC.getCode()){
             //axc
             txHash = SolanaUtil.loadAxcTransferTransaction(userId, resultAmount, decimals, accountEntity.getWallet(),
@@ -79,7 +79,7 @@ public class WalletUtil {
     }
 
     /**
-     * 获取代币token
+
      */
     public static String loadTransferTokens(int tokenType, String address) {
         String accountToken = "";
@@ -98,7 +98,7 @@ public class WalletUtil {
     }
 
     /**
-     * 钱包最小信息
+
      */
     public static RetWalletConfigMsg minInfo() {
         RetWalletConfigMsg msg = new RetWalletConfigMsg();
@@ -110,7 +110,7 @@ public class WalletUtil {
     }
 
     /**
-     * 钱包上限信息
+
      */
     public static RetWalletConfigMsg maxIfo() {
         RetWalletConfigMsg msg = new RetWalletConfigMsg();
@@ -122,7 +122,7 @@ public class WalletUtil {
     }
 
     /**
-     * 钱包手续费信息
+
      */
     public static RetWalletConfigMsg feeIfo() {
         RetWalletConfigMsg msg = new RetWalletConfigMsg();

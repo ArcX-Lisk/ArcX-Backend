@@ -9,11 +9,11 @@ import avatar.util.crossServer.CrossServerMsgUtil;
 import avatar.util.system.StrUtil;
 
 /**
- * 多媒体工具类
+
  */
 public class MediaUtil {
     /**
-     * 获取多媒体路径
+
      */
     public static String getMediaUrl(String originalUrl){
         if(StrUtil.checkEmpty(originalUrl)){
@@ -33,7 +33,7 @@ public class MediaUtil {
     }
 
     /**
-     * 获取跨服多媒体路径
+
      */
     public static String getCrossServerMediaUrl(int serverType, String originalUrl){
         String retUrl = "";
@@ -48,7 +48,7 @@ public class MediaUtil {
             }
         }
         if(CrossServerMsgUtil.isMetaPusherServer(serverType) || retUrl.contains("default")){
-            //mp或者默认头像
+            
             retUrl = UserCrossPlatformImgDao.getInstance().loadMsg();
         }
         return retUrl;

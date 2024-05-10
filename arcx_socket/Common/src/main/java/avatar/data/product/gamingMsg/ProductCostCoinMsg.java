@@ -3,16 +3,16 @@ package avatar.data.product.gamingMsg;
 import java.io.Serializable;
 
 /**
- * 设备消费信息
+
  */
 public class ProductCostCoinMsg implements Serializable {
-    //设备ID
+    
     private int productId;
 
-    //累计增加币值
+    
     private long sumAddCoin;
 
-    //累计扣除币值
+    
     private long sumCostCoin;
 
     public int getProductId() {

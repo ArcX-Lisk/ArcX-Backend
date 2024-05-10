@@ -1,24 +1,24 @@
 package avatar.data.product.innoMsg;
 
 /**
- * 自研设备自动投币
+
  */
 public class InnoAutoPushCoinMsg {
-    private int productId;//设备ID
+    private int productId;
 
-    private String alias;//设备号
+    private String alias;
 
-    private int userId;//玩家ID
+    private int userId;
 
-    private String userName;//玩家昵称
+    private String userName;
 
-    private String imgUrl;//玩家头像
+    private String imgUrl;
 
-    private int serverSideType;//服务端类型
+    private int serverSideType;
 
-    private long requestTime;//请求时间
+    private long requestTime;
 
-    private int isStart;//是否开始自动投币
+    private int isStart;
 
     public int getProductId() {
         return productId;

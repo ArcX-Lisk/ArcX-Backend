@@ -13,8 +13,8 @@ import java.util.ArrayList;
 public class MyXlsReader {
 
 	private Workbook workbook;
-	private final int initRowIndex = 2;//默认从第二行后读取。第一行是注释，第二行是字段名，第三行才是内容
-	private final int initOneIndex = 1;// 特殊情况从第一行后读取
+	private final int initRowIndex = 2;
+	private final int initOneIndex = 1;
 
 	public MyXlsReader(String fileName) {
 		File file = new File(fileName);
@@ -69,9 +69,9 @@ public class MyXlsReader {
 	}
 
 	/**
-	 * 按列读取一列
+
 	 *
-	 * @param columnIndex 需要读取的列，从0开始计数，如第一列是columnIndex = 0。 并且不能小于1，因为默认第一列是字段名
+
 	 */
 	public <T> T getScalarColumnData(String sheetName, int columnIndex,
 									 ExcelObjectBuilder<T> builder) {
@@ -102,9 +102,9 @@ public class MyXlsReader {
 	}
 
 //	/**
-//	 * 按列读取多列
+
 //	 *
-//	 * @param startColumnIndex 从那一列开始读，从0开始计数，如第一列是columnIndex = 0。 并且不能小于1，因为默认第一列是字段名
+
 //	 */
 //	public <T> ArrayList<T> getColumnDataList(String sheetName, int startColumnIndex,
 //											  ExcelObjectBuilder<T> builder) {
@@ -141,9 +141,9 @@ public class MyXlsReader {
 //	}
 
 	/**
-	 * 按行读取
+
 	 *
-	 * @param rowIndex 默认从第二行后读取。第一行是注释，第二行是字段名，第三行才是内容
+
 	 */
 	public <T> T getScalarRowData(String sheetName, int rowIndex, ExcelObjectBuilder<T> builder) {
 		if (rowIndex <= 0) {
@@ -172,9 +172,9 @@ public class MyXlsReader {
 	}
 
 //	/**
-//	 * 按行读取多行
+
 //	 *
-//	 * @param startRowIndex 默认从第二行后读取。第一行是注释，第二行是字段名，第三行才是内容
+
 //	 */
 //	public <T> ArrayList<T> getRowDataList(String sheetName, int startRowIndex,
 //										   ExcelObjectBuilder<T> builder) {

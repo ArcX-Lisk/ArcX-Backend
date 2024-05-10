@@ -1,16 +1,16 @@
 package avatar.data.nft;
 
 /**
- * NFT售币机耐久度信息
+
  */
 public class NftDurabilityMsg {
-    //耐久度
+    
     private long durbtyAmt;
 
-    //商品类型
+    
     private int cmdTp;
 
-    //商品数量
+    
     private long csAmt;
 
     public long getDurbtyAmt() {

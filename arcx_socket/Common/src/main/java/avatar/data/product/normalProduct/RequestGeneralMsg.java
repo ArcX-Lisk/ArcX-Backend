@@ -1,22 +1,22 @@
 package avatar.data.product.normalProduct;
 
 /**
- * 请求通用信息
+
  */
 public class RequestGeneralMsg {
-    //服务端类型
+    
     private int serverSideType;
 
-    //设备号
+    
     private String alias;
 
-    //玩家ID
+    
     private int userId;
 
-    //玩家昵称
+    
     private String userName;
 
-    //玩家头像
+    
     private String imgUrl;
 
     public int getServerSideType() {

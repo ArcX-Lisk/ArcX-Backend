@@ -3,16 +3,16 @@ package avatar.data.user.info;
 import java.io.Serializable;
 
 /**
- * 邮箱验证码信息
+
  */
 public class EmailVerifyCodeMsg implements Serializable {
-    //邮箱
+    
     private String email;
 
-    //验证码
+    
     private String verifyCode;
 
-    //发送时间
+    
     private long sendTime;
 
     public String getEmail() {

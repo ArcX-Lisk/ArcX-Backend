@@ -7,7 +7,7 @@ import avatar.util.utilDB.annotation.Table;
 import org.springframework.stereotype.Service;
 
 @Service
-@Table(name="sell_gold_machine_msg" , comment = "售币机信息")
+
 public class SellGoldMachineMsgEntity extends BaseEntity {
     public SellGoldMachineMsgEntity() {
         super(SellGoldMachineMsgEntity.class);
@@ -17,61 +17,61 @@ public class SellGoldMachineMsgEntity extends BaseEntity {
     @Column(name = "id" , comment = "id" )
     private int id;
 
-    @Column(name = "user_id" , comment = "玩家ID" )
+
     private int userId;
 
-    @Column(name = "nft_code" , comment = "NFT编号")
+
     private String nftCode;
 
-    @Column(name = "nft_name" , comment = "售币机名称")
+
     private String nftName;
 
-    @Column(name = "img_id" , comment = "售币机图片" )
+
     private int imgId;
 
-    @Column(name = "lv" , comment = "等级" )
+
     private int lv;
 
-    @Column(name = "exp_num" , comment = "当前经验" )
+
     private long expNum;
 
-    @Column(name = "space_lv" , comment = "储币等级" )
+
     private int spaceLv;
 
-    @Column(name = "income_lv" , comment = "入货等级" )
+
     private int incomeLv;
 
-    @Column(name = "gold_num" , comment = "金币数量" )
+
     private long goldNum;
 
-    @Column(name = "durability" , comment = "耐久度" )
+
     private long durability;
 
-    @Column(name = "adv" , comment = "广告" )
+
     private long adv;
 
-    @Column(name = "sale_commodity_type" , comment = "销售商品类型" )
+
     private int saleCommodityType;
 
-    @Column(name = "sale_num" , comment = "销售价格" )
+
     private long saleNum;
 
-    @Column(name = "operate_price" , comment = "经营价格(百万)" )
+
     private double operatePrice;
 
-    @Column(name = "start_operate_time" , comment = "开始经营时间")
+
     private String startOperateTime;
 
-    @Column(name = "sell_time" , comment = "售币次数" )
+
     private int sellTime;
 
-    @Column(name = "status" , comment = "状态" )
+
     private int status;
 
-    @Column(name = "create_time" , comment = "创建时间")
+
     private String createTime;
 
-    @Column(name = "update_time" , comment = "更新时间")
+
     private String updateTime;
 
     public int getId() {

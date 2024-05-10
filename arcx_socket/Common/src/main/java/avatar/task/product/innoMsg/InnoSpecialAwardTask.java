@@ -14,24 +14,24 @@ import com.yaowan.game.common.scheduler.ScheduledTask;
 import java.util.Map;
 
 /**
- * 自研设备特殊奖项处理定时器
+
  */
 public class InnoSpecialAwardTask extends ScheduledTask {
 
-    //玩家ID
+    
     private int userId;
 
-    //设备ID
+    
     private int productId;
 
-    //设备奖励类型
+    
     private int productAwardType;
 
-    //是否开始
+    
     private int isStart;
 
     public InnoSpecialAwardTask(int userId, int productId, int productAwardType, int isStart) {
-        super("自研设备特殊奖项处理定时器");
+
         this.productId = productId;
         this.userId = userId;
         this.productAwardType = productAwardType;
@@ -45,17 +45,17 @@ public class InnoSpecialAwardTask extends ScheduledTask {
         try {
             if (lock.lock()) {
                 if(productAwardType== ProductAwardTypeEnum.AGYPT_OPEN_BOX.getCode()){
-                    //埃及开箱子
-                    LogUtil.getLogger().info("玩家{}在自研设备{}上埃及开箱子中奖{}-------", userId, productId,
-                            ParamsUtil.isConfirm(isStart)?"开始":"结束");
+                    
+
+
                 }else if(productAwardType== ProductAwardTypeEnum.WHISTLE.getCode()){
-                    //小丑马戏团套圈
-                    LogUtil.getLogger().info("玩家{}在自研设备{}上小丑马戏团动物套圈中奖{}-------", userId, productId,
-                            ParamsUtil.isConfirm(isStart)?"开始":"结束");
+                    
+
+
                 }else if(productAwardType== ProductAwardTypeEnum.PIRATE_CANNON.getCode()){
-                    //海盗开炮
-                    LogUtil.getLogger().info("玩家{}在自研设备{}上海盗开炮中奖{}-------", userId, productId,
-                            ParamsUtil.isConfirm(isStart)?"开始":"结束");
+                    
+
+
                 }
                 Map<Integer, Long> awardTypeMap = SelfSpecialAwardMsgDao.getInstance().loadByProductId(productId);
                 if(isStart== YesOrNoEnum.YES.getCode()){
@@ -63,7 +63,7 @@ public class InnoSpecialAwardTask extends ScheduledTask {
                 }else if(isStart== YesOrNoEnum.NO.getCode()){
                     awardTypeMap.remove(productAwardType);
                 }
-                //重置缓存
+                
                 SelfSpecialAwardMsgDao.getInstance().setCache(productId, awardTypeMap);
             }
         } catch (Exception e) {

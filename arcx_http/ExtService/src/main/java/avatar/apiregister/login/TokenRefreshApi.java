@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import java.util.Map;
 
 /**
- * 凭证刷新
+
  */
 @Service
 public class TokenRefreshApi extends SystemEventHttpHandler<Session> {
@@ -19,7 +19,7 @@ public class TokenRefreshApi extends SystemEventHttpHandler<Session> {
 
     @Override
     public void method(Session session, Map<String, Object> map) throws Exception {
-        //逻辑处理
+        
         LoginDealService.refreshToken(map, session);
     }
 }

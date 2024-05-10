@@ -11,18 +11,18 @@ import avatar.util.product.ProductUtil;
 import com.yaowan.game.common.scheduler.ScheduledTask;
 
 /**
- * 推送自研设备服务器自动投币定时器
+
  */
 public class SyncInnoAutoPushCoinTask extends ScheduledTask {
 
-    private int userId;//玩家ID
+    private int userId;
 
-    private int productId;//设备ID
+    private int productId;
 
-    private int isStart;//是否开始自动投币
+    private int isStart;
 
     public SyncInnoAutoPushCoinTask(int userId, int productId, int isStart) {
-        super("推送自研设备服务器自动投币定时器");
+
         this.userId = userId;
         this.productId = productId;
         this.isStart = isStart;
@@ -30,15 +30,15 @@ public class SyncInnoAutoPushCoinTask extends ScheduledTask {
 
     @Override
     public void run() {
-        //发送心跳
+        
         String host = ProductUtil.productIp(productId);
         int port = ProductUtil.productSocketPort(productId);
-        String linkMsg = SyncInnoConnectUtil.linkMsg(host, port);//链接信息
+        String linkMsg = SyncInnoConnectUtil.linkMsg(host, port);
         SyncInnoClient client = SyncInnoOperateUtil.loadClient(host, port, linkMsg);
         if (client != null && client.isOpen()) {
-            LogUtil.getLogger().info("推送自研设备{}做操作：{}--------", productId, isStart== YesOrNoEnum.YES.getCode()?
-                    "开始自动投币":"取消自动投币");
-            //推送自动投币请求请求
+
+
+            
             SyncInnoUtil.authPushCoin(client, InnoParamsUtil.initInnoAutoPushCoinMsg(productId,
                     ProductUtil.loadProductAlias(productId), userId, isStart));
         }

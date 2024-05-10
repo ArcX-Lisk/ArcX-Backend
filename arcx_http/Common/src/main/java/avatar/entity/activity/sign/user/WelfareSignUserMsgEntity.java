@@ -7,7 +7,7 @@ import avatar.util.utilDB.annotation.Table;
 import org.springframework.stereotype.Service;
 
 @Service
-@Table(name="welfare_sign_user_msg" , comment = "福利签到玩家信息")
+
 public class WelfareSignUserMsgEntity extends BaseEntity {
     public WelfareSignUserMsgEntity() {
         super(WelfareSignUserMsgEntity.class);
@@ -17,16 +17,16 @@ public class WelfareSignUserMsgEntity extends BaseEntity {
     @Column(name = "id" , comment = "id" )
     private int id;
 
-    @Column(name = "user_id" , comment = "玩家ID" )
+
     private int userId;
 
-    @Column(name = "sign_time" , comment = "签到时间" )
+
     private String signTime;
 
-    @Column(name = "continue_sign_day" , comment = "连续签到天数" )
+
     private int continueSignDay;
 
-    @Column(name = "sum_sign_day" , comment = "总签到天数" )
+
     private int sumSignDay;
 
     public int getId() {

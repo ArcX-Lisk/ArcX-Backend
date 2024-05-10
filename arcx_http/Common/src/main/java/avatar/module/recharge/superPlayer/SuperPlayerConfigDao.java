@@ -5,7 +5,7 @@ import avatar.global.prefixMsg.RechargePrefixMsg;
 import avatar.util.GameData;
 
 /**
- * 超级玩家配置数据接口
+
  */
 public class SuperPlayerConfigDao {
     private static final SuperPlayerConfigDao instance = new SuperPlayerConfigDao();
@@ -14,15 +14,15 @@ public class SuperPlayerConfigDao {
     }
 
     /**
-     * 查询信息
+
      */
     public SuperPlayerConfigEntity loadMsg() {
-        //从缓存获取
+        
         SuperPlayerConfigEntity entity = loadCache();
         if(entity==null){
             entity = loadDbMsg();
             if(entity!=null) {
-                //设置缓存
+                
                 setCache(entity);
             }
         }
@@ -32,14 +32,14 @@ public class SuperPlayerConfigDao {
     //=========================cache===========================
 
     /**
-     * 查询缓存
+
      */
     private SuperPlayerConfigEntity loadCache(){
         return (SuperPlayerConfigEntity) GameData.getCache().get(RechargePrefixMsg.SUPER_PLAYER_CONFIG);
     }
 
     /**
-     * 添加缓存
+
      */
     private void setCache(SuperPlayerConfigEntity entity){
         GameData.getCache().set(RechargePrefixMsg.SUPER_PLAYER_CONFIG, entity);
@@ -48,7 +48,7 @@ public class SuperPlayerConfigDao {
     //=========================db===========================
 
     /**
-     * 查询信息
+
      */
     private SuperPlayerConfigEntity loadDbMsg() {
         String sql = "select * from super_player_config";

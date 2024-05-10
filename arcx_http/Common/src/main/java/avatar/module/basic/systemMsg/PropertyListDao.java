@@ -8,7 +8,7 @@ import avatar.util.system.StrUtil;
 import java.util.List;
 
 /**
- * 道具列表数据接口
+
  */
 public class PropertyListDao {
     private static final PropertyListDao instance = new PropertyListDao();
@@ -17,15 +17,15 @@ public class PropertyListDao {
     }
 
     /**
-     * 查询信息
+
      */
     public List<Integer> loadMsg() {
-        //从缓存获取
+        
         List<Integer> list = loadCache();
         if (list==null) {
-            //查询数据库
+            
             list = loadDbMsg();
-            //设置缓存
+            
             setCache(list);
         }
         return list;
@@ -34,14 +34,14 @@ public class PropertyListDao {
     //=========================cache===========================
 
     /**
-     * 查询缓存
+
      */
     private List<Integer> loadCache() {
         return (List<Integer>) GameData.getCache().get(PrefixMsg.PROPERTY_LIST);
     }
 
     /**
-     * 设置缓存
+
      *
      */
     private void setCache(List<Integer> list) {
@@ -51,7 +51,7 @@ public class PropertyListDao {
     //=========================db===========================
 
     /**
-     * 查询信息
+
      */
     private List<Integer> loadDbMsg() {
         String sql = "select property_type from property_msg where active_flag=? order by sequence,property_type";

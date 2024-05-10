@@ -11,7 +11,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 /**
- * 注销账号
+
  */
 @Service
 public class LogoutAccountApi extends SystemEventHttpHandler<Session> {

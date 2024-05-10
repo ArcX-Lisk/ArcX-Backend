@@ -7,7 +7,7 @@ import avatar.util.system.TimeUtil;
 import avatar.util.user.UserAttributeUtil;
 
 /**
- * 玩家属性配置数据接口
+
  */
 public class UserAttributeMsgDao {
     private static final UserAttributeMsgDao instance = new UserAttributeMsgDao();
@@ -16,7 +16,7 @@ public class UserAttributeMsgDao {
     }
 
     /**
-     * 查询缓存信息
+
      */
     public UserAttributeMsgEntity loadMsg(int userId){
         UserAttributeMsgEntity entity = loadCache(userId);
@@ -35,7 +35,7 @@ public class UserAttributeMsgDao {
     //=========================cache===========================
 
     /**
-     * 查询缓存
+
      */
     private UserAttributeMsgEntity loadCache(int userId){
         return (UserAttributeMsgEntity)
@@ -43,7 +43,7 @@ public class UserAttributeMsgDao {
     }
 
     /**
-     * 添加缓存
+
      */
     private void setCache(int userId, UserAttributeMsgEntity entity){
         GameData.getCache().set(UserPrefixMsg.USER_ATTRIBUTE_MSG+"_"+userId, entity);
@@ -52,7 +52,7 @@ public class UserAttributeMsgDao {
     //=========================db===========================
 
     /**
-     * 根据玩家ID查询
+
      */
     private UserAttributeMsgEntity loadDbByUserId(int userId) {
         String sql = "select * from user_attribute_msg where user_id=?";
@@ -60,7 +60,7 @@ public class UserAttributeMsgDao {
     }
 
     /**
-     * 添加
+
      */
     private UserAttributeMsgEntity insert(UserAttributeMsgEntity entity){
         int id = GameData.getDB().insertAndReturn(entity);
@@ -73,13 +73,13 @@ public class UserAttributeMsgDao {
     }
 
     /**
-     * 更新
+
      */
     public boolean update(UserAttributeMsgEntity entity){
-        entity.setUpdateTime(TimeUtil.getNowTimeStr());//更新时间
+        entity.setUpdateTime(TimeUtil.getNowTimeStr());
         boolean flag = GameData.getDB().update(entity);
         if(flag){
-            //设置缓存
+            
             setCache(entity.getUserId(), entity);
         }
         return flag;

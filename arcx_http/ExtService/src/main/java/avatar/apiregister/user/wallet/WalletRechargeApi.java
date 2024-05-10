@@ -11,7 +11,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 /**
- * 钱包充值
+
  */
 @Service
 public class WalletRechargeApi extends SystemEventHttpHandler<Session> {

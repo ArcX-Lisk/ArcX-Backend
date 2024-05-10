@@ -5,7 +5,7 @@ import avatar.global.prefixMsg.UserPrefixMsg;
 import avatar.util.GameData;
 
 /**
- * 玩家属性配置数据接口
+
  */
 public class UserAttributeConfigDao {
     private static final UserAttributeConfigDao instance = new UserAttributeConfigDao();
@@ -14,7 +14,7 @@ public class UserAttributeConfigDao {
     }
 
     /**
-     * 查询缓存信息
+
      */
     public UserAttributeConfigEntity loadMsg(int lv){
         UserAttributeConfigEntity entity = loadCache(lv);
@@ -30,7 +30,7 @@ public class UserAttributeConfigDao {
     //=========================cache===========================
 
     /**
-     * 查询缓存
+
      */
     private UserAttributeConfigEntity loadCache(int lv){
         return (UserAttributeConfigEntity)
@@ -38,7 +38,7 @@ public class UserAttributeConfigDao {
     }
 
     /**
-     * 添加缓存
+
      */
     private void setCache(int lv, UserAttributeConfigEntity entity){
         GameData.getCache().set(UserPrefixMsg.USER_ATTRIBUTE_CONFIG+"_"+lv, entity);
@@ -47,7 +47,7 @@ public class UserAttributeConfigDao {
     //=========================db===========================
 
     /**
-     * 根据等级查询
+
      */
     private UserAttributeConfigEntity loadDbByLv(int lv) {
         String sql = "select * from user_attribute_config where lv=?";

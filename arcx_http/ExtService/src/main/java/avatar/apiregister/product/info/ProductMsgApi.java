@@ -11,7 +11,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 /**
- * 设备信息
+
  */
 @Service
 public class ProductMsgApi extends SystemEventHttpHandler<Session> {

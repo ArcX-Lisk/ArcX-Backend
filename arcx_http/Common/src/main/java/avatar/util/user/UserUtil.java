@@ -36,52 +36,52 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 玩家工具类
+
  */
 public class UserUtil {
     /**
-     * 获取玩家状态
+
      */
     public static int loadUserStatus(int userId) {
-        //查询玩家信息
+        
         UserInfoEntity userInfoEntity = UserInfoDao.getInstance().loadByUserId(userId);
         return userInfoEntity==null?-1:userInfoEntity.getStatus();
     }
 
     /**
-     * 更新IP信息
+
      */
     public static void updateIpMsg(int userId, String userIp) {
-        //查询玩家信息
+        
         UserInfoEntity userInfoEntity = UserInfoDao.getInstance().loadByUserId(userId);
         if(!userInfoEntity.getIp().equals(userIp)){
-            userInfoEntity.setIp(userIp);//玩家IP
+            userInfoEntity.setIp(userIp);
             UserInfoDao.getInstance().update(userInfoEntity);
         }
     }
 
     /**
-     * 登录token处理返回
+
      */
     public static int tokenLoginRet(int userId, Map<String, Object> dataMap) {
-        int status = ClientCode.SUCCESS.getCode();//错误码，成功
+        int status = ClientCode.SUCCESS.getCode();
         boolean updateFlag = updateUserTokenMsg(userId, dataMap);
         if(!updateFlag){
-            status = ClientCode.FAIL.getCode();//失败
+            status = ClientCode.FAIL.getCode();
         }
         return status;
     }
 
     /**
-     * 更新玩家凭证信息
+
      */
     private static boolean updateUserTokenMsg(int userId, Map<String, Object> dataMap) {
         UserTokenMsgEntity tokenMsgEntity = UserTokenMsgDao.getInstance().update(userId);
         if(tokenMsgEntity!=null){
-            dataMap.put("aesTkn", tokenMsgEntity.getAccessToken());//调用凭证
-            dataMap.put("aesOt", tokenMsgEntity.getAccessOutTime());//调用凭证过期时间
-            dataMap.put("refTkn", tokenMsgEntity.getRefreshToken());//刷新凭证
-            dataMap.put("refOt", tokenMsgEntity.getRefreshOutTime());//刷新凭证过期时间
+            dataMap.put("aesTkn", tokenMsgEntity.getAccessToken());
+            dataMap.put("aesOt", tokenMsgEntity.getAccessOutTime());
+            dataMap.put("refTkn", tokenMsgEntity.getRefreshToken());
+            dataMap.put("refOt", tokenMsgEntity.getRefreshOutTime());
             return true;
         }else {
             return false;
@@ -89,39 +89,39 @@ public class UserUtil {
     }
 
     /**
-     * 填充玩家设备唯一ID信息
+
      */
     public static UserMacMsgEntity initUserMacMsgEntity(int userId, String mac, int isRegister) {
         UserMacMsgEntity entity = new UserMacMsgEntity();
-        entity.setUserId(userId);//玩家ID
-        entity.setMac(mac);//设备唯一ID
-        entity.setIsRegister(isRegister);//是否注册
-        entity.setCreateTime(TimeUtil.getNowTimeStr());//创建时间
+        entity.setUserId(userId);
+        entity.setMac(mac);
+        entity.setIsRegister(isRegister);
+        entity.setCreateTime(TimeUtil.getNowTimeStr());
         return entity;
     }
 
     /**
-     * 填充玩家实体信息
+
      */
     public static UserInfoEntity initUserInfoEntity(String nickName, String imgUrl, String userIp, String email,
             int loginWayType, int mobilePlatformType) {
         UserInfoEntity entity = new UserInfoEntity();
-        entity.setNickName(nickName);//昵称
-        entity.setImgUrl(imgUrl);//头像
-        entity.setIp(userIp);//玩家IP
-        entity.setLoginWay(loginWayType);//登录方式
-        entity.setMobilePlatformType(mobilePlatformType);//手机平台类型
-        entity.setSex(SexEnum.MALE.getCode());//性别：男
-        entity.setEmail(email);//邮箱
-        entity.setPassword("");//密码
-        entity.setStatus(UserStatusEnum.NORMAL.getCode());//状态：正常
-        entity.setCreateTime(TimeUtil.getNowTimeStr());//创建时间
-        entity.setUpdateTime("");//更新时间
+        entity.setNickName(nickName);
+        entity.setImgUrl(imgUrl);
+        entity.setIp(userIp);
+        entity.setLoginWay(loginWayType);
+        entity.setMobilePlatformType(mobilePlatformType);
+        entity.setSex(SexEnum.MALE.getCode());
+        entity.setEmail(email);
+        entity.setPassword("");
+        entity.setStatus(UserStatusEnum.NORMAL.getCode());
+        entity.setCreateTime(TimeUtil.getNowTimeStr());
+        entity.setUpdateTime("");
         return entity;
     }
 
     /**
-     * 获取默认头像
+
      */
     public static String loadDefaultImg(){
         List<String> list = UserDefaultHeadImgDao.getInstance().loadAll();
@@ -129,34 +129,34 @@ public class UserUtil {
             Collections.shuffle(list);
             return list.get(0);
         }else{
-            LogUtil.getLogger().info("获取玩家默认头像的时候查询不到信息------");
+
             return "";
         }
     }
 
     /**
-     * 填充注册IP实体信息
+
      */
     public static UserRegisterIpEntity initUserRegisterIpEntity(int userId, String userIp, Map<String, Object> paramsMap) {
-        int loginWayType = ParamsUtil.loginWayType(paramsMap);//登录方式
-        int mobilePlatform = ParamsUtil.loadMobilePlatform(paramsMap);//手机平台
-        String versionCode = ParamsUtil.versionCode(paramsMap);//版本号
+        int loginWayType = ParamsUtil.loginWayType(paramsMap);
+        int mobilePlatform = ParamsUtil.loadMobilePlatform(paramsMap);
+        String versionCode = ParamsUtil.versionCode(paramsMap);
         UserRegisterIpEntity entity = new UserRegisterIpEntity();
-        entity.setUserId(userId);//玩家ID
-        entity.setIp(userIp);//玩家IP
-        entity.setRegisterVersion(versionCode);//注册版本号
-        entity.setLoginWayType(loginWayType);//登录方式
-        entity.setLoginPlatform(mobilePlatform);//登录平台
-        entity.setLastIp(userIp);//当前IP
-        entity.setLastLoginWay(loginWayType);//当前登录方式
-        entity.setLastLoginPlatform(mobilePlatform);//当前登录平台
-        entity.setLastVersion(versionCode);//当前版本号
-        entity.setCreateTime(TimeUtil.getNowTimeStr());//创建时间
+        entity.setUserId(userId);
+        entity.setIp(userIp);
+        entity.setRegisterVersion(versionCode);
+        entity.setLoginWayType(loginWayType);
+        entity.setLoginPlatform(mobilePlatform);
+        entity.setLastIp(userIp);
+        entity.setLastLoginWay(loginWayType);
+        entity.setLastLoginPlatform(mobilePlatform);
+        entity.setLastVersion(versionCode);
+        entity.setCreateTime(TimeUtil.getNowTimeStr());
         return entity;
     }
 
     /**
-     * 添加玩家设备唯一ID信息
+
      */
     public static void addRegisterUserMacMsg(int userId, String mac) {
         UserMacMsgEntity entity = initUserMacMsgEntity(userId, mac, YesOrNoEnum.YES.getCode());
@@ -164,7 +164,7 @@ public class UserUtil {
     }
 
     /**
-     * 添加第三方唯一ID
+
      */
     public static void addUserThirdPartMsg(int userId, String thirdPartUid) {
         UserThirdPartUidMsgEntity entity = initUserThirdPartUidMsgEntity(userId, thirdPartUid);
@@ -172,65 +172,65 @@ public class UserUtil {
     }
 
     /**
-     * 填充玩家第三方唯一ID
+
      */
     private static UserThirdPartUidMsgEntity initUserThirdPartUidMsgEntity(int userId, String thirdPartUid) {
         UserThirdPartUidMsgEntity entity = new UserThirdPartUidMsgEntity();
-        entity.setUserId(userId);//玩家ID
-        entity.setUid(thirdPartUid);//唯一ID
-        entity.setCreateTime(TimeUtil.getNowTimeStr());//创建时间
+        entity.setUserId(userId);
+        entity.setUid(thirdPartUid);
+        entity.setCreateTime(TimeUtil.getNowTimeStr());
         return entity;
     }
 
     /**
-     * 获取玩家IP
+
      */
     public static String loadUserIp(int userId){
-        //查询玩家信息
+        
         UserInfoEntity entity = UserInfoDao.getInstance().loadByUserId(userId);
         return entity==null?"":entity.getIp();
     }
 
     /**
-     * 更新玩家登录信息
+
      */
     public static void updateUserLoginMsg(int userId, Map<String, Object> paramsMap) {
-        int loginWayType = ParamsUtil.loginWayType(paramsMap);//登录方式
-        int mobilePlatform = ParamsUtil.loadMobilePlatform(paramsMap);//手机平台
-        String versionCode = ParamsUtil.versionCode(paramsMap);//版本号
-        String userIp = ParamsUtil.ip(paramsMap);//玩家IP
-        //查询玩家信息
+        int loginWayType = ParamsUtil.loginWayType(paramsMap);
+        int mobilePlatform = ParamsUtil.loadMobilePlatform(paramsMap);
+        String versionCode = ParamsUtil.versionCode(paramsMap);
+        String userIp = ParamsUtil.ip(paramsMap);
+        
         UserInfoEntity entity = UserInfoDao.getInstance().loadByUserId(userId);
         if(entity.getMobilePlatformType()!=mobilePlatform || entity.getLoginWay()!=loginWayType){
-            entity.setMobilePlatformType(mobilePlatform);//手机平台类型
-            entity.setLoginWay(loginWayType);//登录方式
+            entity.setMobilePlatformType(mobilePlatform);
+            entity.setLoginWay(loginWayType);
             UserInfoDao.getInstance().update(entity);
         }
-        //更新玩家注册信息
+        
         UserRegisterIpEntity registerIpEntity = UserRegisterIpDao.getInstance().loadDbByUserId(userId);
         if(registerIpEntity!=null){
-            registerIpEntity.setLastIp(userIp);//当前登录IP
-            registerIpEntity.setLastLoginWay(loginWayType);//当前登录方式
-            registerIpEntity.setLastLoginPlatform(mobilePlatform);//当前登录平台
-            registerIpEntity.setLastVersion(versionCode);//当前版本号
+            registerIpEntity.setLastIp(userIp);
+            registerIpEntity.setLastLoginWay(loginWayType);
+            registerIpEntity.setLastLoginPlatform(mobilePlatform);
+            registerIpEntity.setLastVersion(versionCode);
             UserRegisterIpDao.getInstance().update(registerIpEntity);
         }else{
-            //添加注册信息
+            
             UserRegisterIpDao.getInstance().insert(UserUtil.initUserRegisterIpEntity(userId, userIp, paramsMap));
         }
     }
 
     /**
-     * 填充跨服玩家设备大奖信息
+
      */
     public static List<UserGrandPrizeSearchMsg> initProductGrandPrize(CrossServerSearchProductPrizeMsg productPrizeMsg) {
         List<UserGrandPrizeSearchMsg> retList = new ArrayList<>();
         if(productPrizeMsg!=null) {
-            //查询设备大奖图片信息
+            
             List<ImgProductGrandPrizeMsgEntity> imgList = ImgProductGrandPrizeMsgDao.getInstance().loadAll();
             if (imgList.size() > 0) {
                 imgList.forEach(imgEntity -> {
-                    int prizeNum = dealCrossPrizeNum(productPrizeMsg, imgEntity.getEnConciseName());//中奖数量
+                    int prizeNum = dealCrossPrizeNum(productPrizeMsg, imgEntity.getEnConciseName());
                     if (prizeNum != -1) {
                         retList.add(initUserGrandPrizeSearchMsg(prizeNum, imgEntity));
                     }
@@ -241,75 +241,75 @@ public class UserUtil {
     }
 
     /**
-     * 填充玩家设备大奖查询信息
+
      */
     private static UserGrandPrizeSearchMsg initUserGrandPrizeSearchMsg(int prizeNum, ImgProductGrandPrizeMsgEntity imgEntity) {
         UserGrandPrizeSearchMsg msg = new UserGrandPrizeSearchMsg();
-        msg.setPzPic(MediaUtil.getMediaUrl(imgEntity.getImgUrl()));//设备大奖图片
-        msg.setPzQt(prizeNum);//设备大奖数量
+        msg.setPzPic(MediaUtil.getMediaUrl(imgEntity.getImgUrl()));
+        msg.setPzQt(prizeNum);
         return msg;
     }
 
     /**
-     * 处理中奖数量
+
      */
     private static int dealCrossPrizeNum(CrossServerSearchProductPrizeMsg msg, String name) {
         int retNum = -1;
         switch (name) {
             case "gossip":
-                //八卦
+                
                 retNum = msg==null?0:msg.getGossip();
                 break;
             case "gem":
-                //宝石
+                
                 retNum = msg==null?0:msg.getGem();
                 break;
             case "pileTower":
-                //炼金塔堆塔
+                
                 retNum = msg==null?0:msg.getPileTower();
                 break;
             case "agyptBox":
-                //金字塔
+                
                 retNum = msg==null?0:msg.getAgyptBox();
                 break;
             case "allDragon":
-                //龙珠
+                
                 retNum = msg==null?0:msg.getAllDragon();
                 break;
             case "heroJackpot":
-                //三国大奖转盘
+                
                 retNum = msg==null?0:msg.getHeroJackpot();
                 break;
             case "freeGame":
-                //免费游戏
+                
                 retNum = msg==null?0:msg.getFreeGame();
                 break;
             case "jackpotMinor":
-                //大奖转盘-minor奖池
+                
                 retNum = msg==null?0:msg.getJackpotMinor();
                 break;
             case "jackpotMajor":
-                //大奖转盘-major奖池
+                
                 retNum = msg==null?0:msg.getJackpotMajor();
                 break;
             case "jackpotGrand":
-                //大奖转盘-grand奖池
+                
                 retNum = msg==null?0:msg.getJackpotGrand();
                 break;
             case "thunder":
-                //闪电
+                
                 retNum = msg==null?0:msg.getThunder();
                 break;
             case "collectCard":
-                //碎片
+                
                 retNum = msg==null?0:msg.getCollectCard();
                 break;
             case "whistle":
-                //口哨
+                
                 retNum = msg==null?0:msg.getWhistle();
                 break;
             case "kingkongJackpot":
-                //金刚大奖转盘
+                
                 retNum = msg==null?0:msg.getKingkongJackpot();
                 break;
         }
@@ -317,85 +317,85 @@ public class UserUtil {
     }
 
     /**
-     * 填充玩家设备获奖信息
+
      */
     public static UserGrandPrizeMsgEntity initUserGrandPrizeMsgEntity(int userId) {
         UserGrandPrizeMsgEntity entity = new UserGrandPrizeMsgEntity();
-        entity.setUserId(userId);//玩家ID
-        entity.setPileTower(0);//炼金塔堆塔
-        entity.setDragonBall(0);//龙珠
-        entity.setRoomRankFirst(0);//房间排行榜第一名
-        entity.setRoomRankSecond(0);//房间排行榜第二名
-        entity.setRoomRankThird(0);//房间排行榜第三名
-        entity.setFreeGame(0);//免费游戏
-        entity.setGem(0);//宝石游戏
-        entity.setPrizeWheelGrand(0);//大奖转盘-grand奖池
-        entity.setPrizeWheelMajor(0);//大奖转盘-major奖池
-        entity.setPrizeWheelMinor(0);//大奖转盘-grand奖池
-        entity.setAgyptBox(0);//埃及开箱子
-        entity.setGossip(0);//八卦
-        entity.setHeroBattle(0);//英雄战斗
-        entity.setThunder(0);//闪电
-        entity.setJackpotKingkong(0);//金刚大奖转盘
-        entity.setJackpotHero(0);//三国大奖转盘
-        entity.setWhistle(0);//口哨
-        entity.setCreateTime(TimeUtil.getNowTimeStr());//创建时间
-        entity.setUpdateTime(TimeUtil.getNowTimeStr());//更新时间
+        entity.setUserId(userId);
+        entity.setPileTower(0);
+        entity.setDragonBall(0);
+        entity.setRoomRankFirst(0);
+        entity.setRoomRankSecond(0);
+        entity.setRoomRankThird(0);
+        entity.setFreeGame(0);
+        entity.setGem(0);
+        entity.setPrizeWheelGrand(0);
+        entity.setPrizeWheelMajor(0);
+        entity.setPrizeWheelMinor(0);
+        entity.setAgyptBox(0);
+        entity.setGossip(0);
+        entity.setHeroBattle(0);
+        entity.setThunder(0);
+        entity.setJackpotKingkong(0);
+        entity.setJackpotHero(0);
+        entity.setWhistle(0);
+        entity.setCreateTime(TimeUtil.getNowTimeStr());
+        entity.setUpdateTime(TimeUtil.getNowTimeStr());
         return entity;
     }
 
     /**
-     * 添加注册送币
+
      */
     public static void addRegisterWelfare(int userId) {
-        int presentCoin = LoginUtil.registerPresentCoin();//注册送币
+        int presentCoin = LoginUtil.registerPresentCoin();
         if(presentCoin>0){
-            //添加到玩家账户
+            
             boolean flag = UserBalanceUtil.addUserBalance(userId, CommodityUtil.gold(), presentCoin);
             if(flag) {
-                //添加日志
+                
                 UserCostLogUtil.registerWelfare(userId, presentCoin);
             }else{
-                LogUtil.getLogger().error("添加玩家{}注册赠送的{}游戏币失败------", userId, presentCoin);
+
             }
         }
-        //TODO 暂时送10000USDT
+        
         UserUsdtUtil.addUsdtBalance(userId, 10000);
     }
 
     /**
-     * 是否玩家存在
+
      */
     public static boolean existUser(int userId) {
-        //查询玩家信息
+        
         UserInfoEntity entity = UserInfoDao.getInstance().loadByUserId(userId);
         return entity!=null && entity.getStatus()== UserStatusEnum.NORMAL.getCode();
     }
 
     /**
-     * 更新玩家信息
+
      */
     public static void updateUserInfo(int userId, String nickName, int sex) {
-        //查询玩家信息
+        
         UserInfoEntity entity = UserInfoDao.getInstance().loadByUserId(userId);
-        entity.setNickName(nickName);//玩家昵称
-        entity.setSex(sex);//性别
+        entity.setNickName(nickName);
+        entity.setSex(sex);
         UserInfoDao.getInstance().update(entity);
     }
 
     /**
-     * 更新玩家密码
+
      */
     public static void updateUserPassword(int userId, String email, String password) {
-        //查询玩家信息
+        
         UserInfoEntity entity = UserInfoDao.getInstance().loadByUserId(userId);
         try {
-            boolean emailBindFlag = StrUtil.checkEmpty(entity.getEmail());//是否绑定邮箱
-            entity.setEmail(email);//邮箱
-            entity.setPassword(MD5Util.MD5(password));//密码
+            boolean emailBindFlag = StrUtil.checkEmpty(entity.getEmail());
+            entity.setEmail(email);
+            entity.setPassword(MD5Util.MD5(password));
             boolean flag = UserInfoDao.getInstance().update(entity);
             if(flag && emailBindFlag){
-                //设置邮箱玩家
+                
                 EmailUserDao.getInstance().setCache(email, userId);
             }
         }catch (Exception e){
@@ -404,29 +404,29 @@ public class UserUtil {
     }
 
     /**
-     * 填充玩家信息
+
      */
     public static void loadUserInfo(int userId, Map<String, Object> dataMap) {
-        //查询玩家信息
+        
         UserInfoEntity entity = UserInfoDao.getInstance().loadByUserId(userId);
-        dataMap.put("plyNm", entity.getNickName());//玩家昵称
-        dataMap.put("plyPct", MediaUtil.getMediaUrl(entity.getImgUrl()));//玩家头像
-        dataMap.put("email", entity.getEmail());//邮箱
-        dataMap.put("sex", entity.getSex());//性别
-        //查询玩家属性信息
+        dataMap.put("plyNm", entity.getNickName());
+        dataMap.put("plyPct", MediaUtil.getMediaUrl(entity.getImgUrl()));
+        dataMap.put("email", entity.getEmail());
+        dataMap.put("sex", entity.getSex());
+        
         UserAttributeMsgEntity userAttribute = UserAttributeMsgDao.getInstance().loadMsg(userId);
         if(userAttribute!=null) {
-            dataMap.put("atbTbln", UserAttributeUtil.userAttributeMsg(userAttribute));//玩家属性
+            dataMap.put("atbTbln", UserAttributeUtil.userAttributeMsg(userAttribute));
         }else{
-            LogUtil.getLogger().error("查询玩家{}信息的时候，填充玩家的属性信息失败------", userId);
+
         }
     }
 
     /**
-     * 更新玩家邮箱信息
+
      */
     public static void updateUserEmail(int userId, String email) {
-        //查询玩家信息
+        
         UserInfoEntity entity = UserInfoDao.getInstance().loadByUserId(userId);
         if(email!=null){
             entity.setEmail(email);
@@ -438,10 +438,10 @@ public class UserUtil {
     }
 
     /**
-     * 获取玩家邮箱
+
      */
     public static String loadUserEmail(int userId) {
-        //查询玩家信息
+        
         UserInfoEntity entity = UserInfoDao.getInstance().loadByUserId(userId);
         return entity==null?"":entity.getEmail();
     }

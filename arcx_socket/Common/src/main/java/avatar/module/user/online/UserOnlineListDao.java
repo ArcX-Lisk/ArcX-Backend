@@ -11,7 +11,7 @@ import java.util.HashMap;
 import java.util.List;
 
 /**
- * 玩家在线列表信息
+
  */
 public class UserOnlineListDao {
     private static final UserOnlineListDao instance = new UserOnlineListDao();
@@ -20,12 +20,12 @@ public class UserOnlineListDao {
     }
 
     /**
-     * 查询缓存信息
+
      */
     public List<Integer> loadAll(){
         List<Integer> list = loadCache();
         if(list==null){
-            //查询数据库
+            
             list = loadDbAll();
             setCache(list);
         }
@@ -35,7 +35,7 @@ public class UserOnlineListDao {
     //=========================cache===========================
 
     /**
-     * 查询缓存
+
      */
     private List<Integer> loadCache(){
         return (List<Integer>)
@@ -43,14 +43,14 @@ public class UserOnlineListDao {
     }
 
     /**
-     * 添加缓存
+
      */
     private void setCache(List<Integer> list){
         GameData.getCache().set(UserPrefixMsg.USER_ONLINE_LIST, list);
     }
 
     /**
-     * 删除缓存
+
      */
     public void removeCache(){
         GameData.getCache().removeCache(UserPrefixMsg.USER_ONLINE_LIST);
@@ -59,7 +59,7 @@ public class UserOnlineListDao {
     //=========================db===========================
 
     /**
-     * 查询所有信息
+
      */
     private List<Integer> loadDbAll() {
         String sql = SqlUtil.appointListSql("user_online_msg", "user_id",

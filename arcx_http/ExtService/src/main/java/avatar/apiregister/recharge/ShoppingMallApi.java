@@ -11,7 +11,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 /**
- * 商城中心
+
  */
 @Service
 public class ShoppingMallApi extends SystemEventHttpHandler<Session> {

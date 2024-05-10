@@ -10,20 +10,20 @@ import avatar.module.basic.img.ImgProductDetailDao;
 import avatar.module.basic.img.ImgProductMsgDao;
 
 /**
- * 蹄片工具类
+
  */
 public class ImgUtil {
     /**
-     * 获取设备图片
+
      */
     public static String loadProductImg(int productImgId) {
-        //查询设备图片信息
+        
         ImgProductMsgEntity entity = ImgProductMsgDao.getInstance().loadByImgId(productImgId);
         return entity==null?"":MediaUtil.getMediaUrl(entity.getImgUrl());
     }
 
     /**
-     * 设备详情
+
      */
     public static String loadProductDetailImg(int imgProductDetailId) {
         String retMsg = "";
@@ -35,16 +35,16 @@ public class ImgUtil {
     }
 
     /**
-     * 获取奖励图片
+
      */
     public static String loadAwardImg(int awardImgId){
-        //查询奖励图片信息
+        
         ImgAwardMsgEntity entity = ImgAwardMsgDao.getInstance().loadByImgId(awardImgId);
         return entity==null?"":entity.getImgUrl();
     }
 
     /**
-     * NFT图片
+
      */
     public static String nftImg(int imgId) {
         ImgNftEntity entity = ImgNftDao.getInstance().loadByImgId(imgId);

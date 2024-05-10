@@ -1,7 +1,7 @@
 package avatar.data.user.wallet;
 
 /**
- * 钱包配置信息
+
  */
 public class RetWalletConfigMsg {
     //SOL

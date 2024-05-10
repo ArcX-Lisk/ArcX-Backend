@@ -3,19 +3,19 @@ package avatar.data.user.balance;
 import java.io.Serializable;
 
 /**
- * 玩家在线得分信息
+
  */
 public class UserOnlineScoreMsg implements Serializable {
-    //玩家ID
+    
     private int userId;
 
-    //商品类型
+    
     private int commodityType;
 
-    //增加数量
+    
     private long addNum;
 
-    //扣除数量
+    
     private long costNum;
 
     public int getUserId() {

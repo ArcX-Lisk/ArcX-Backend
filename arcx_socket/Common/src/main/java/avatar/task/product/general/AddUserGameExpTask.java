@@ -9,15 +9,15 @@ import avatar.util.user.UserNoticePushUtil;
 import com.yaowan.game.common.scheduler.ScheduledTask;
 
 /**
- * 添加玩家游戏经验
+
  */
 public class AddUserGameExpTask extends ScheduledTask {
-    private int userId;//玩家ID
+    private int userId;
 
-    private long coinNum;//游戏币数量
+    private long coinNum;
 
     public AddUserGameExpTask(int userId, long coinNum) {
-        super("添加玩家游戏经验");
+
         this.userId = userId;
         this.coinNum = coinNum;
     }

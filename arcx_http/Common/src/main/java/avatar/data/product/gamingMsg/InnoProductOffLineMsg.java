@@ -3,16 +3,16 @@ package avatar.data.product.gamingMsg;
 import java.io.Serializable;
 
 /**
- * 自研设备下线信息
+
  */
 public class InnoProductOffLineMsg implements Serializable {
-    //设备ID
+    
     private int productId;
 
-    //倍率等级
+    
     private int multi;
 
-    //下机时间
+    
     private long offLineTime;
 
     public int getProductId() {

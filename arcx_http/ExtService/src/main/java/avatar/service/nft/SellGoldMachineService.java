@@ -18,47 +18,47 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * 售币机接口实现类
+
  */
 public class SellGoldMachineService {
     /**
-     * 销售中的售币机
+
      */
     public static void operateSellGoldMachine(Map<String, Object> map, Session session) {
-        int status = CheckParamsUtil.checkAccessToken(map);//成功
-        Map<String, Object> dataMap = new HashMap<>();//内容参数信息
+        int status = CheckParamsUtil.checkAccessToken(map);
+        Map<String, Object> dataMap = new HashMap<>();
         if(ParamsUtil.isSuccess(status)) {
-            int userId = ParamsUtil.userId(map);//玩家ID
-            //获取销售中的售币机
+            int userId = ParamsUtil.userId(map);
+            
             String nftCode = SellGoldMachineUtil.loadOperateMachine();
             if (!StrUtil.checkEmpty(nftCode)) {
                 SellGoldMachineUtil.dealSellGoldMachineMsg(userId, nftCode, dataMap);
             } else {
-                status = ClientCode.NO_SELL_GOLD_MACHINE.getCode();//暂无售币机
+                status = ClientCode.NO_SELL_GOLD_MACHINE.getCode();
             }
         }
-        //推送结果
+        
         SendMsgUtil.sendBySessionAndMap(session, status, dataMap);
     }
 
     /**
-     * 兑换NFT的金币
+
      */
     public static void exchangeNftGold(Map<String, Object> map, Session session) {
-        int status = NftCheckParamsUtil.exchangeNftGold(map);//成功
-        Map<String, Object> dataMap = new HashMap<>();//内容参数信息
+        int status = NftCheckParamsUtil.exchangeNftGold(map);
+        Map<String, Object> dataMap = new HashMap<>();
         if(ParamsUtil.isSuccess(status)) {
-            String nftCode = ParamsUtil.stringParmasNotNull(map, "nftCd");//NFT编号
+            String nftCode = ParamsUtil.stringParmasNotNull(map, "nftCd");
             RedisLock lock = new RedisLock(RedisLock.loadCache(), LockMsg.SELL_GOLD_MACHINE_LOCK + "_" + nftCode,
                     2000);
             try {
                 if (lock.lock()) {
-                    //查询售币机信息
+                    
                     SellGoldMachineMsgEntity entity = SellGoldMachineMsgDao.getInstance().loadMsg(nftCode);
-                    //检测兑换NFT的金币
+                    
                     status = SellGoldMachineUtil.checkExchangeNftGold(map, entity);
                     if(ParamsUtil.isSuccess(status)){
-                        //兑换金币
+                        
                         SellGoldMachineUtil.exchangeNftGold(map, entity);
                     }
                 }
@@ -68,7 +68,7 @@ public class SellGoldMachineService {
                 lock.unlock();
             }
         }
-        //推送结果
+        
         SendMsgUtil.sendBySessionAndMap(session, status, dataMap);
     }
 }

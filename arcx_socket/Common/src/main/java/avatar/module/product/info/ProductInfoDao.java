@@ -5,7 +5,7 @@ import avatar.global.prefixMsg.ProductPrefixMsg;
 import avatar.util.GameData;
 
 /**
- * 设备信息数据接口
+
  */
 public class ProductInfoDao {
     private static final ProductInfoDao instance = new ProductInfoDao();
@@ -14,12 +14,12 @@ public class ProductInfoDao {
     }
 
     /**
-     * 查询缓存信息
+
      */
     public ProductInfoEntity loadByProductId(int productId){
         ProductInfoEntity entity = loadCache(productId);
         if(entity==null){
-            //查询数据库
+            
             entity = loadDbById(productId);
             if(entity!=null){
                 setCache(productId, entity);
@@ -31,7 +31,7 @@ public class ProductInfoDao {
     //=========================cache===========================
 
     /**
-     * 查询缓存
+
      */
     private ProductInfoEntity loadCache(int productId){
         return (ProductInfoEntity)
@@ -39,7 +39,7 @@ public class ProductInfoDao {
     }
 
     /**
-     * 添加缓存
+
      */
     private void setCache(int productId, ProductInfoEntity entity){
         GameData.getCache().set(ProductPrefixMsg.PRODUCT_INFO+"_"+productId, entity);
@@ -49,7 +49,7 @@ public class ProductInfoDao {
     //=========================db===========================
 
     /**
-     * 根据设备ID查询
+
      */
     private ProductInfoEntity loadDbById(int productId) {
         return GameData.getDB().get(ProductInfoEntity.class, productId);

@@ -11,7 +11,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 /**
- * 快速加入的设备
+
  */
 @Service
 public class FastJoinProductApi extends SystemEventHttpHandler<Session> {

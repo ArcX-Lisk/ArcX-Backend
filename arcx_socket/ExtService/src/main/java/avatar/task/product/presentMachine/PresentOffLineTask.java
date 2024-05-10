@@ -13,21 +13,21 @@ import avatar.util.trigger.SchedulerSample;
 import com.yaowan.game.common.scheduler.ScheduledTask;
 
 /**
- * 礼品机下爪定时器
+
  */
 public class PresentOffLineTask extends ScheduledTask {
-    private int userId;//玩家ID
+    private int userId;
 
-    private int productId;//设备ID
+    private int productId;
 
-    private int time;//次数
+    private int time;
 
-    private int gamingState;//游戏环节
+    private int gamingState;
 
-    private long onProductTime;//上机时间
+    private long onProductTime;
 
     public PresentOffLineTask(int userId, int productId, int time, int gamingState, long onProductTime) {
-        super("礼品机定时下机");
+
         this.userId = userId;
         this.productId = productId;
         this.time = time;
@@ -37,22 +37,22 @@ public class PresentOffLineTask extends ScheduledTask {
 
     @Override
     public void run() {
-        boolean flag = true;//是否继续启用定时器
-        LogUtil.getLogger().info("玩家{}在设备{}上抓礼品定时下机---------",userId,productId);
-        //获取设备锁
+        boolean flag = true;
+
+        
         RedisLock lock = new RedisLock(RedisLock.loadCache(), LockMsg.PRODUCT_ROOM_DEAL_LOCK+"_"+productId,
                 2000);
         try {
             if (lock.lock()) {
-                //设备信息
+                
                 ProductRoomMsg roomMsg = ProductRoomDao.getInstance().loadByProductId(productId);
                 if(roomMsg!=null){
-                    flag = false;//成功下机
-                    //是当前玩家并且是当前本次操作
+                    flag = false;
+                    
                     if(roomMsg.getGamingUserId()==userId && ProductUtil.startGameTime(productId) ==time
                             && roomMsg.getOnProductTime()==onProductTime){
-                        LogUtil.getLogger().info("玩家{}在设备{}上抓礼品成功定时下机---------",userId,productId);
-                        //设备操作
+
+                        
                         ProductSocketOperateService.presentOperate(productId, ProductOperationEnum.OFF_LINE.getCode(),userId);
                     }
                 }
@@ -62,9 +62,9 @@ public class PresentOffLineTask extends ScheduledTask {
         }finally {
             lock.unlock();
         }
-        //下机失败，重新处理，继续启用定时器
+        
         if(flag){
-            LogUtil.getLogger().info("玩家{}在礼品机设备{}上下机失败，重新处理--------", userId, productId);
+
             SchedulerSample.delayed(100, new
                     PresentOffLineTask(userId,productId,time,gamingState, onProductTime));
         }

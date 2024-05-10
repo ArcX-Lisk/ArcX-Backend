@@ -1,21 +1,21 @@
 package avatar.data.product.innoMsg;
 
 /**
- * 接收自研设备开始游戏占用中校验操作信息
+
  */
 public class InnoStartGameOccupyMsg {
 
-    private String alias;//设备号
+    private String alias;
 
-    private int userId;//玩家ID
+    private int userId;
 
-    private String userName;//玩家昵称
+    private String userName;
 
-    private String imgUrl;//玩家头像
+    private String imgUrl;
 
-    private int serverSideType;//服务端类型
+    private int serverSideType;
 
-    private long onProductTime;//上机时间
+    private long onProductTime;
 
     public String getAlias() {
         return alias;

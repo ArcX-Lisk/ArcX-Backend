@@ -7,7 +7,7 @@ import avatar.util.utilDB.annotation.Table;
 import org.springframework.stereotype.Service;
 
 @Service
-@Table(name="product_repair" , comment = "报修机器")
+
 public class ProductRepairEntity extends BaseEntity {
     public ProductRepairEntity() {
         super(ProductRepairEntity.class);
@@ -17,22 +17,22 @@ public class ProductRepairEntity extends BaseEntity {
     @Column(name = "id" , comment = "id" )
     private int id;
 
-    @Column(name = "user_id" , comment = "玩家ID" )
+
     private int userId;
 
-    @Column(name = "product_id" , comment = "店铺ID" )
+
     private int productId;
 
-    @Column(name = "break_type" , comment = "故障类型" )
+
     private int breakType;
 
-    @Column(name = "status" , comment = "状态" )
+
     private int status;
 
-    @Column(name = "create_time" , comment = "创建时间")
+
     private String createTime;
 
-    @Column(name = "update_time" , comment = "更新时间")
+
     private String updateTime;
 
     public int getId() {

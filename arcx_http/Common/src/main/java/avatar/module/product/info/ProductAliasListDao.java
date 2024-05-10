@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 设备号
+
  */
 public class ProductAliasListDao {
     private static final ProductAliasListDao instance = new ProductAliasListDao();
@@ -16,15 +16,15 @@ public class ProductAliasListDao {
     }
 
     /**
-     * 查询设备号信息
+
      */
     public List<String> loadAll() {
-        //从缓存获取
+        
         List<String> list = loadCache();
         if(list==null || list.size()==0){
-            //查询数据库
+            
             list = loadDbAll();
-            //添加缓存
+            
             if(list!=null && list.size()>0){
                 setCache(list);
             }
@@ -35,21 +35,21 @@ public class ProductAliasListDao {
     //=========================cache===========================
 
     /**
-     * 查询缓存
+
      */
     public List<String> loadCache(){
         return (List<String>) GameData.getCache().get(ProductPrefixMsg.PRODUCT_ALIAS_LIST);
     }
 
     /**
-     * 设置缓存
+
      */
     public void setCache(List<String> list){
         GameData.getCache().set(ProductPrefixMsg.PRODUCT_ALIAS_LIST, list);
     }
 
     /**
-     * 添加缓存
+
      */
     public void addCache(String alias){
         List<String> list = loadAll();
@@ -63,7 +63,7 @@ public class ProductAliasListDao {
     }
 
     /**
-     * 删除设备号
+
      */
     public void resetCache() {
         GameData.getCache().removeCache(ProductPrefixMsg.PRODUCT_ALIAS_LIST);
@@ -72,7 +72,7 @@ public class ProductAliasListDao {
     //=========================db===========================
 
     /**
-     * 查询信息
+
      */
     private List<String> loadDbAll() {
         String sql = "select alias from product_info";

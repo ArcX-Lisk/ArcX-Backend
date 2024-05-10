@@ -7,7 +7,7 @@ import avatar.util.GameData;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * 设备alias数据接口
+
  */
 public class ProductAliasDao {
     private static final ProductAliasDao instance = new ProductAliasDao();
@@ -16,18 +16,18 @@ public class ProductAliasDao {
     }
 
     /**
-     * 查询信息
+
      */
     public int loadByAlias(String alias) {
         int productId = loadCache(alias);
         if(productId==0){
-            //查询数据库信息
+            
             ProductInfoEntity productInfoEntity = loadDbByAlias(alias);
             if(productInfoEntity!=null){
                 productId = productInfoEntity.getId();
             }
             if(productId!=0){
-                //设置缓存
+                
                 setCache(alias, productId);
             }
         }
@@ -37,7 +37,7 @@ public class ProductAliasDao {
     //=========================cache===========================
 
     /**
-     * 查询缓存
+
      */
     public int loadCache(String alias){
         ConcurrentHashMap<String, Integer> map = (ConcurrentHashMap<String, Integer>)
@@ -50,7 +50,7 @@ public class ProductAliasDao {
     }
 
     /**
-     * 添加缓存
+
      */
     public void setCache(String alias, int productId){
         ConcurrentHashMap<String, Integer> map = (ConcurrentHashMap<String, Integer>)
@@ -63,7 +63,7 @@ public class ProductAliasDao {
     }
 
     /**
-     * 删除缓存
+
      */
     public void removeCache(){
         GameData.getCache().removeCache(ProductPrefixMsg.PRODUCT_ALIAS);
@@ -73,7 +73,7 @@ public class ProductAliasDao {
     //=========================db===========================
 
     /**
-     * 根据alias查询设备信息
+
      */
     private ProductInfoEntity loadDbByAlias(String alias) {
         String sql = "select * from product_info where alias=? ";

@@ -29,7 +29,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 /**
- * 礼品机操作
+
  */
 @Service
 public class PresentOperationApi extends SystemEventHandler2<Session> {
@@ -42,27 +42,27 @@ public class PresentOperationApi extends SystemEventHandler2<Session> {
         ExecutorService cachedPool = Executors.newCachedThreadPool();
         cachedPool.execute(() -> {
             try {
-                //逻辑处理
-                String accessToken = session.getAccessToken();//玩家通行证
-                //前端传递的参数
+                
+                String accessToken = session.getAccessToken();
+                
                 JSONObject jsonObject = JsonUtil.bytesToJson(bytes);
-                //推送前端的参数
+                
                 JSONObject dataJson = new JSONObject();
-                //验证参数
+                
                 int status = CheckParamsUtil.checkProductOperation(accessToken, jsonObject, dataJson);
-                //查询是否设备类型正确
+                
                 if(ParamsUtil.isSuccess(status)){
-                    int productId = jsonObject.getInteger("devId");//设备ID
+                    int productId = jsonObject.getInteger("devId");
                     if(!ProductUtil.isSpecifyMachine(productId, ProductTypeEnum.PRESENT_MACHINE.getCode())){
-                        status = ClientCode.PRODUCT_TYPE_ERROR.getCode();//设备类型错误
+                        status = ClientCode.PRODUCT_TYPE_ERROR.getCode();
                     }
                 }
-                //逻辑处理
+                
                 if(ParamsUtil.isSuccess(status)){
-                    int userId = UserUtil.loadUserIdByToken(accessToken);//玩家ID
-                    int productId = jsonObject.getInteger("devId");//设备ID
-                    int operateState = jsonObject.getInteger("hdlTp");//操作状态
-                    //获取设备锁
+                    int userId = UserUtil.loadUserIdByToken(accessToken);
+                    int productId = jsonObject.getInteger("devId");
+                    int operateState = jsonObject.getInteger("hdlTp");
+                    
                     RedisLock lock = new RedisLock(RedisLock.loadCache(), LockMsg.PRODUCT_ROOM_DEAL_LOCK+"_"+productId,
                             2000);
                     try {
@@ -70,15 +70,15 @@ public class PresentOperationApi extends SystemEventHandler2<Session> {
                             DollGamingMsg gamingMsg = DollGamingMsgDao.getInstance().loadByProductId(productId);
                             ProductRoomMsg productRoomMsg = ProductRoomDao.getInstance().loadByProductId(productId);
                             if(gamingMsg.isInitalization()){
-                                LogUtil.getLogger().info("礼品机设备{}正在下爪初始化过程中，不处理其他指令--------",productId);
+
                             }else {
-                                //检测是否操作正常
+                                
                                 status = PresentService.checkOperate(operateState, userId, productRoomMsg);
                                 if (ParamsUtil.isSuccess(status)) {
-                                    //设备操作
+                                    
                                     ProductSocketOperateService.presentOperate(productId, operateState, userId);
                                 }
-                                LogUtil.getLogger().info("玩家{}在礼品机设备{}上做{}操作，结果为{}-------", userId, productId,
+
                                         ProductOperationEnum.loadByCode(operateState), status);
                             }
                         }

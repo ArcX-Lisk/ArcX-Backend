@@ -7,7 +7,7 @@ import avatar.util.utilDB.annotation.Table;
 import org.springframework.stereotype.Service;
 
 @Service
-@Table(name="user_usdt_balance" , comment = "玩家USDT余额信息")
+
 public class UserUsdtBalanceEntity extends BaseEntity {
     public UserUsdtBalanceEntity() {
         super(UserUsdtBalanceEntity.class);
@@ -17,16 +17,16 @@ public class UserUsdtBalanceEntity extends BaseEntity {
     @Column(name = "id" , comment = "id" )
     private int id;
 
-    @Column(name = "user_id" , comment = "玩家ID")
+
     private int userId;
 
-    @Column(name = "num" , comment = "usdt余额")
+
     private double num;
 
-    @Column(name = "create_time" , comment = "创建时间")
+
     private String createTime;
 
-    @Column(name = "update_time" , comment = "更新时间")
+
     private String updateTime;
 
     public int getId() {

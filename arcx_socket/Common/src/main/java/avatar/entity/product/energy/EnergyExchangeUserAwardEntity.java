@@ -7,7 +7,7 @@ import avatar.util.utilDB.annotation.Table;
 import org.springframework.stereotype.Service;
 
 @Service
-@Table(name="energy_exchange_award" , comment = "能量兑换奖励")
+
 public class EnergyExchangeUserAwardEntity extends BaseEntity {
     public EnergyExchangeUserAwardEntity() {
         super(EnergyExchangeUserAwardEntity.class);
@@ -17,28 +17,28 @@ public class EnergyExchangeUserAwardEntity extends BaseEntity {
     @Column(name = "id" , comment = "id" )
     private int id;
 
-    @Column(name = "history_id" , comment = "历史ID" )
+
     private long historyId;
 
-    @Column(name = "award_type" , comment = "奖励类型" )
+
     private int awardType;
 
-    @Column(name = "award_id" , comment = "奖励ID" )
+
     private int awardId;
 
-    @Column(name = "min_num" , comment = "奖励最小值" )
+
     private int minNum;
 
-    @Column(name = "max_num" , comment = "奖励最大值" )
+
     private int maxNum;
 
-    @Column(name = "award_probability" , comment = "中奖概率" )
+
     private int awardProbability;
 
-    @Column(name = "total_probability" , comment = "总概率" )
+
     private int totalProbability;
 
-    @Column(name = "award_num" , comment = "奖励数量" )
+
     private int awardNum;
 
     public int getId() {

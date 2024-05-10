@@ -1,19 +1,19 @@
 package avatar.data.recharge;
 
 /**
- * 充值金币信息
+
  */
 public class RechargeCoinMsg {
-    //商品ID
+    
     private int cmdId;
 
-    //游戏币数量
+    
     private long cnAmt;
 
-    //USDT价格
+    
     private int usdtAmt;
 
-    //图片
+    
     private String pct;
 
     public int getCmdId() {

@@ -1,22 +1,22 @@
 package avatar.data.user.balance;
 
 /**
- * 玩家道具信息
+
  */
 public class PropertyKnapsackMsg {
-    //道具类型
+    
     private int pptTp;
 
-    //道具名称
+    
     private String nm;
 
-    //道具描述
+    
     private String dsc;
 
-    //道具图片
+    
     private String pct;
 
-    //道具数量
+    
     private long ppyAmt;
 
     public int getPptTp() {

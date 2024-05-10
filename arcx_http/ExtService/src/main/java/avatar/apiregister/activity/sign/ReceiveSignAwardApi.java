@@ -11,7 +11,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 /**
- * 领取签到奖励
+
  */
 @Service
 public class ReceiveSignAwardApi extends SystemEventHttpHandler<Session> {

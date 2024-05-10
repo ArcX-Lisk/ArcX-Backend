@@ -11,7 +11,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 /**
- * 链上钱包
+
  */
 @Service
 public class ChainWalletApi extends SystemEventHttpHandler<Session> {

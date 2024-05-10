@@ -7,7 +7,7 @@ import avatar.util.utilDB.annotation.Table;
 import org.springframework.stereotype.Service;
 
 @Service
-@Table(name="product_repair_config" , comment = "设备维护配置")
+
 public class ProductRepairConfigEntity extends BaseEntity {
     public ProductRepairConfigEntity() {
         super(ProductRepairConfigEntity.class);
@@ -17,7 +17,7 @@ public class ProductRepairConfigEntity extends BaseEntity {
     @Column(name = "id" , comment = "id" )
     private int id;
 
-    @Column(name = "offical_url" , comment = "公众号路径" )
+
     private String officalUrl;
 
     public int getId() {

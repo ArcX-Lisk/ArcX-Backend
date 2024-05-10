@@ -7,7 +7,7 @@ import avatar.util.utilDB.annotation.Table;
 import org.springframework.stereotype.Service;
 
 @Service
-@Table(name="img_nft" , comment = "NFT图片")
+
 public class ImgNftEntity extends BaseEntity {
     public ImgNftEntity() {
         super(ImgNftEntity.class);
@@ -17,19 +17,19 @@ public class ImgNftEntity extends BaseEntity {
     @Column(name = "id" , comment = "id" )
     private int id;
 
-    @Column(name = "nft_type" , comment = "NFT类型" )
+
     private int nftType;
 
-    @Column(name = "name" , comment = "名称")
+
     private String name;
 
-    @Column(name = "img_url" , comment = "图片")
+
     private String imgUrl;
 
-    @Column(name = "create_time" , comment = "创建时间")
+
     private String createTime;
 
-    @Column(name = "update_time" , comment = "更新时间")
+
     private String updateTime;
 
     public int getId() {

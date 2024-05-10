@@ -1,13 +1,13 @@
 package avatar.data.product.innoMsg;
 
 /**
- * 设备倍率限制信息
+
  */
 public class ProductCoinMultiLimitMsg {
-    //倍率
+    
     private int mulAmt;
 
-    //是否限制
+    
     private int lmFlg;
 
     public int getMulAmt() {

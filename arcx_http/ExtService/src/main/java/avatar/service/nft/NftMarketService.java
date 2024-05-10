@@ -22,18 +22,18 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * NFT市场接口实现类
+
  */
 public class NftMarketService {
     /**
-     * NFT市场列表
+
      */
     public static void marketNftList(Map<String, Object> map, Session session) {
         List<MarketNftMsg> retList = new ArrayList<>();
-        //检测参数
+        
         int status = CheckParamsUtil.checkPage(map);
         if(ParamsUtil.isSuccess(status)) {
-            //查询信息
+            
             List<String> list = ListUtil.getPageList(ParamsUtil.pageNum(map),
                     ParamsUtil.pageSize(map), NftMarketListDao.getInstance().loadMsg());
             if(list.size()>0){
@@ -45,47 +45,47 @@ public class NftMarketService {
                 });
             }
         }
-        //传输的jsonMap，先填充list
+        
         Map<String,Object> jsonMap = new HashMap<>();
         jsonMap.put("serverTbln", retList);
-        //推送结果
+        
         SendMsgUtil.sendBySessionAndList(session, status, jsonMap);
     }
 
     /**
-     * 市场NFT信息
+
      */
     public static void marketNftMsg(Map<String, Object> map, Session session) {
-        int status = NftCheckParamsUtil.nftMsg(map);//成功
-        Map<String, Object> dataMap = new HashMap<>();//内容参数信息
+        int status = NftCheckParamsUtil.nftMsg(map);
+        Map<String, Object> dataMap = new HashMap<>();
         if(ParamsUtil.isSuccess(status)) {
-            String nftCode = ParamsUtil.nftCode(map);//NFT编号
-            //填充市场NFT信息
+            String nftCode = ParamsUtil.nftCode(map);
+            
             status = NftUtil.initMarketNftMsg(nftCode, dataMap);
         }
-        //推送结果
+        
         SendMsgUtil.sendBySessionAndMap(session, status, dataMap);
     }
 
     /**
-     * 购买NFT
+
      */
     public static void buyNft(Map<String, Object> map, Session session) {
-        int status = NftCheckParamsUtil.buyNft(map);//成功
-        Map<String, Object> dataMap = new HashMap<>();//内容参数信息
+        int status = NftCheckParamsUtil.buyNft(map);
+        Map<String, Object> dataMap = new HashMap<>();
         if(ParamsUtil.isSuccess(status)) {
-            String nftCode = ParamsUtil.nftCode(map);//NFT编号
+            String nftCode = ParamsUtil.nftCode(map);
             RedisLock lock = new RedisLock(RedisLock.loadCache(), LockMsg.SELL_GOLD_MACHINE_LOCK + "_" + nftCode,
                     2000);
             try {
                 if (lock.lock()) {
-                    int userId = ParamsUtil.userId(map);//玩家ID
-                    int nftType = NftUtil.loadNftType(nftCode);//NFT类型
+                    int userId = ParamsUtil.userId(map);
+                    int nftType = NftUtil.loadNftType(nftCode);
                     if(nftType==NftTypeEnum.SELL_COIN_MACHINE.getCode()){
-                        //售币机
+                        
                         status = SellGoldMachineUtil.buyNft(userId, nftCode);
                     }else{
-                        status = ClientCode.NFT_NO_EXIST.getCode();//无对应NFT信息
+                        status = ClientCode.NFT_NO_EXIST.getCode();
                     }
                 }
             } catch (Exception e) {
@@ -94,7 +94,7 @@ public class NftMarketService {
                 lock.unlock();
             }
         }
-        //推送结果
+        
         SendMsgUtil.sendBySessionAndMap(session, status, dataMap);
     }
 }

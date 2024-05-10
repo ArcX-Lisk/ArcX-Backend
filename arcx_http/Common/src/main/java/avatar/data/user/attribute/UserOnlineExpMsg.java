@@ -3,16 +3,16 @@ package avatar.data.user.attribute;
 import java.io.Serializable;
 
 /**
- * 玩家在线经验信息
+
  */
 public class UserOnlineExpMsg implements Serializable {
-    //玩家ID
+    
     private int userId;
 
-    //游戏币数
+    
     private long coinNum;
 
-    //经验数
+    
     private long expNum;
 
     public int getUserId() {

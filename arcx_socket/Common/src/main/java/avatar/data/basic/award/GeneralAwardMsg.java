@@ -1,19 +1,19 @@
 package avatar.data.basic.award;
 
 /**
- * 奖励信息
+
  */
 public class GeneralAwardMsg {
-    //商品类型
+    
     private int cmdTp;
 
-    //商品ID
+    
     private int cmdId;
 
-    //奖励图片
+    
     private String awdPct;
 
-    //奖励数量
+    
     private int awdAmt;
 
     public int getCmdTp() {

@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 充值金币列表数据接口
+
  */
 public class RechargeGoldListDao {
     private static final RechargeGoldListDao instance = new RechargeGoldListDao();
@@ -18,14 +18,14 @@ public class RechargeGoldListDao {
     }
 
     /**
-     * 查询信息
+
      */
     public List<Integer> loadMsg() {
-        //从缓存获取
+        
         List<Integer> list = loadCache();
         if(list==null){
             list = loadDbMsg();
-            //设置缓存
+            
             setCache(list);
         }
         return list;
@@ -34,14 +34,14 @@ public class RechargeGoldListDao {
     //=========================cache===========================
 
     /**
-     * 查询缓存
+
      */
     private List<Integer> loadCache(){
         return (List<Integer>) GameData.getCache().get(RechargePrefixMsg.RECHARGE_GOLD_LIST);
     }
 
     /**
-     * 添加缓存
+
      */
     private void setCache(List<Integer> list){
         GameData.getCache().set(RechargePrefixMsg.RECHARGE_GOLD_LIST, list);
@@ -50,7 +50,7 @@ public class RechargeGoldListDao {
     //=========================db===========================
 
     /**
-     * 查询信息
+
      */
     private List<Integer> loadDbMsg() {
         String sql = "select id from recharge_gold_info where active_flag=? order by sequence";

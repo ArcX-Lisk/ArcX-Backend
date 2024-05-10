@@ -3,22 +3,22 @@ package avatar.data.product.gamingMsg;
 import java.io.Serializable;
 
 /**
- * 娃娃机游戏信息
+
  */
 public class DollGamingMsg implements Serializable {
-    //设备ID
+    
     private int productId;
 
-    //游戏次数
+    
     private int time;
 
-    //是否设备初始化
+    
     private boolean isInitalization;
 
-    //是否已经操作
+    
     private boolean isCatch;
 
-    //游戏环节
+    
     private int gamingState;
 
     public int getProductId() {

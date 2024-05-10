@@ -22,7 +22,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 /**
- * 系统通知
+
  */
 @Service
 public class SystemNoticeApi extends SystemEventHttpHandler<Session> {
@@ -34,13 +34,13 @@ public class SystemNoticeApi extends SystemEventHttpHandler<Session> {
     public void method(Session session, Map<String, Object> map) throws Exception {
         ExecutorService cachedPool = Executors.newCachedThreadPool();
         cachedPool.execute(() -> {
-            //逻辑处理
+            
             try {
-                int userId = ParamsUtil.intParmasNotNull(map, "dealUserId");//玩家ID
-                String content = ParamsUtil.stringParmasNotNull(map, "content");//通知内容
-                String platform = ParamsUtil.stringParmasNotNull(map, "platform");//平台信息
+                int userId = ParamsUtil.intParmasNotNull(map, "dealUserId");
+                String content = ParamsUtil.stringParmasNotNull(map, "content");
+                String platform = ParamsUtil.stringParmasNotNull(map, "platform");
                 if (platform.equals(ConfigMsg.sysPlatform)) {
-                    String accessToken = UserUtil.loadAccessToken(userId);//玩家通行证
+                    String accessToken = UserUtil.loadAccessToken(userId);
                     if(!StrUtil.checkEmpty(accessToken)) {
                         Session userSession = GameData.getSessionManager().getSessionByAccesstoken(accessToken);
                         if (userSession != null) {
@@ -48,7 +48,7 @@ public class SystemNoticeApi extends SystemEventHttpHandler<Session> {
                         }
                     }
                 } else {
-                    LogUtil.getLogger().info("接收到玩家{}系统通知的请求，但是平台信息不符合--------", userId);
+
                 }
             }catch (Exception e){
                 ErrorDealUtil.printError(e);

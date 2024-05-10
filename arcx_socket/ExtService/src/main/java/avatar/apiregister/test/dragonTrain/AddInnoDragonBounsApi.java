@@ -18,7 +18,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * 添加自研龙珠奖励
+
  */
 @Service
 public class AddInnoDragonBounsApi extends SystemEventHttpHandler<Session> {
@@ -28,19 +28,19 @@ public class AddInnoDragonBounsApi extends SystemEventHttpHandler<Session> {
 
     @Override
     public void method(Session session, Map<String, Object> map) throws Exception {
-        int userId = ParamsUtil.intParmasNotNull(map, "dealUserId");//玩家ID
-        int productId = ParamsUtil.intParmasNotNull(map, "productId");//设备ID
+        int userId = ParamsUtil.intParmasNotNull(map, "dealUserId");
+        int productId = ParamsUtil.intParmasNotNull(map, "productId");
         if(CheckUtil.isTestEnv()){
-            //查询玩家信息
+            
             if(UserInfoDao.getInstance().loadByUserId(userId)!=null){
                 if(ProductInfoDao.getInstance().loadByProductId(productId)==null){
-                    LogUtil.getLogger().info("添加自研龙珠奖励查询不到设备{}的信息-------", productId);
+
                 }else {
                     SchedulerSample.delayed(100, new InnoProductDragonWinPrizeDealTask(
                             productId, userId));
                 }
             }else{
-                LogUtil.getLogger().info("添加自研龙珠奖励查询不到玩家{}的信息-------", userId);
+
             }
         }
         SendMsgUtil.sendBySessionAndMap(session, ClientCode.SUCCESS.getCode(), new HashMap<>());

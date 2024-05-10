@@ -3,13 +3,13 @@ package avatar.data.basic.agent;
 import java.io.Serializable;
 
 /**
- * 代理连接信息
+
  */
 public class AgentConnectMsg implements Serializable {
-    //ip地址
+    
     private String ip;
 
-    //端口号
+    
     private String port;
 
     public String getIp() {

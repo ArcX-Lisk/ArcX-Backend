@@ -7,7 +7,7 @@ import avatar.util.utilDB.annotation.Table;
 import org.springframework.stereotype.Service;
 
 @Service
-@Table(name="inno_product_coin_weight" , comment = "自研设备游戏币权重")
+
 public class InnoProductCoinWeightEntity extends BaseEntity {
     public InnoProductCoinWeightEntity() {
         super(InnoProductCoinWeightEntity.class);
@@ -17,16 +17,16 @@ public class InnoProductCoinWeightEntity extends BaseEntity {
     @Column(name = "id" , comment = "id" )
     private int id;
 
-    @Column(name = "level" , comment = "权重等级" )
+
     private int level;
 
-    @Column(name = "coin" , comment = "游戏币" )
+
     private int coin;
 
-    @Column(name = "create_time" , comment = "创建时间")
+
     private String createTime;
 
-    @Column(name = "update_time" , comment = "更新时间")
+
     private String updateTime;
 
     public int getId() {

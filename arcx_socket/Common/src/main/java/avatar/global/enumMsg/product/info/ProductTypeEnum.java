@@ -1,12 +1,12 @@
 package avatar.global.enumMsg.product.info;
 
 /**
- * 设备类型
+
  */
 public enum ProductTypeEnum {
-    PUSH_COIN_MACHINE(1,"推币机"),
-    DOLL_MACHINE(2,"娃娃机"),
-    PRESENT_MACHINE(3,"礼品机"),
+
+
+
     ;
 
     private int code;
@@ -26,7 +26,7 @@ public enum ProductTypeEnum {
     }
 
     /**
-     * 根据code获取名称
+
      */
     public static String loadNameByCode(int code){
         ProductTypeEnum[] msgArr = ProductTypeEnum.values();

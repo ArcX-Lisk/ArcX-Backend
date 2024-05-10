@@ -10,75 +10,75 @@ import avatar.util.system.StrUtil;
 import java.util.Map;
 
 /**
- * 登录检测参数工具类
+
  */
 public class LoginCheckParamsUtil {
     /**
-     * 检测凭证更新的参数
+
      */
     public static int checkRefreshToken(Map<String, Object> map) {
-        int status = CheckParamsUtil.checkAccessToken(map);//验证调用凭证
+        int status = CheckParamsUtil.checkAccessToken(map);
         if(ParamsUtil.isSuccess(status)) {
             try {
-                String refreshToken = map.get("refTkn").toString();//刷新凭证
-                LogUtil.getLogger().info("玩家refreshToken{}-------", refreshToken);
+                String refreshToken = map.get("refTkn").toString();
+
                 if(StrUtil.checkEmpty(refreshToken)){
-                    status = ClientCode.PARAMS_ERROR.getCode();//参数错误
+                    status = ClientCode.PARAMS_ERROR.getCode();
                 }
             } catch (Exception e) {
                 ErrorDealUtil.printError(e);
-                status = ClientCode.PARAMS_ERROR.getCode();//参数错误
+                status = ClientCode.PARAMS_ERROR.getCode();
             }
         }
         return status;
     }
 
     /**
-     * 检测玩家登录的参数
+
      */
     public static int userLogin(Map<String, Object> map) {
-        int status = ClientCode.SUCCESS.getCode();//成功
+        int status = ClientCode.SUCCESS.getCode();
         try {
-            int loginWayType = ParamsUtil.loginWayType(map);//登录方式
-            String mac = ParamsUtil.macId(map);//设备唯一ID
-            String code = ParamsUtil.stringParmas(map, "iosTkn");//授权code
-            String email = ParamsUtil.stringParmas(map, "email");//邮箱
-            String vfyCd = ParamsUtil.stringParmas(map, "vfyCd");//验证码
-            String pwd = ParamsUtil.stringParmas(map, "pwd");//密码
+            int loginWayType = ParamsUtil.loginWayType(map);
+            String mac = ParamsUtil.macId(map);
+            String code = ParamsUtil.stringParmas(map, "iosTkn");
+            String email = ParamsUtil.stringParmas(map, "email");
+            String vfyCd = ParamsUtil.stringParmas(map, "vfyCd");
+            String pwd = ParamsUtil.stringParmas(map, "pwd");
             if(StrUtil.checkEmpty(LoginWayTypeEnum.getNameByCode(loginWayType)) || StrUtil.checkEmpty(mac)){
-                status = ClientCode.PARAMS_ERROR.getCode();//参数错误
+                status = ClientCode.PARAMS_ERROR.getCode();
             }else if(loginWayType==LoginWayTypeEnum.EMAIL.getCode() && StrUtil.checkEmpty(email)){
-                status = ClientCode.PARAMS_ERROR.getCode();//参数错误
+                status = ClientCode.PARAMS_ERROR.getCode();
             }else if(loginWayType==LoginWayTypeEnum.EMAIL.getCode() && StrUtil.checkEmpty(vfyCd) &&
                     StrUtil.checkEmpty(pwd)){
-                status = ClientCode.PARAMS_ERROR.getCode();//参数错误
+                status = ClientCode.PARAMS_ERROR.getCode();
             }else if(loginWayType==LoginWayTypeEnum.EMAIL.getCode() && !StrUtil.checkEmpty(vfyCd)){
-                //邮箱验证码登录
+                
                 status = LoginUtil.verifyEmailCodeOutTime(email, vfyCd);
             }else if(loginWayType==LoginWayTypeEnum.EMAIL.getCode() && !StrUtil.checkEmpty(pwd)){
-                //邮箱密码登录
+                
                 status = LoginUtil.checkEmailUser(email, pwd);
             }
         }catch(Exception e){
             ErrorDealUtil.printError(e);
-            status = ClientCode.PARAMS_ERROR.getCode();//参数错误
+            status = ClientCode.PARAMS_ERROR.getCode();
         }
         return status;
     }
 
     /**
-     * 邮箱验证码
+
      */
     public static int emailVerifyCode(Map<String, Object> map) {
-        int status = ClientCode.SUCCESS.getCode();//成功
+        int status = ClientCode.SUCCESS.getCode();
         try {
-            String email = ParamsUtil.stringParmasNotNull(map, "email");//邮箱
+            String email = ParamsUtil.stringParmasNotNull(map, "email");
             if(StrUtil.checkEmpty(email)){
-                status = ClientCode.PARAMS_ERROR.getCode();//参数错误
+                status = ClientCode.PARAMS_ERROR.getCode();
             }
         }catch(Exception e){
             ErrorDealUtil.printError(e);
-            status = ClientCode.PARAMS_ERROR.getCode();//参数错误
+            status = ClientCode.PARAMS_ERROR.getCode();
         }
         return status;
     }

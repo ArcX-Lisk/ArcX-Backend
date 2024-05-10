@@ -8,7 +8,7 @@ import avatar.util.system.StrUtil;
 import java.util.List;
 
 /**
- * NFT市场列表
+
  */
 public class NftMarketListDao {
     private static final NftMarketListDao instance = new NftMarketListDao();
@@ -17,13 +17,13 @@ public class NftMarketListDao {
     }
 
     /**
-     * 查询缓存信息
+
      */
     public List<String> loadMsg(){
         List<String> list = loadCache();
         if(list==null){
             list = loadDbList();
-            //设置缓存
+            
             setCache(list);
         }
         return list;
@@ -32,7 +32,7 @@ public class NftMarketListDao {
     //=========================cache===========================
 
     /**
-     * 查询缓存
+
      */
     private List<String> loadCache(){
         return (List<String>)
@@ -40,14 +40,14 @@ public class NftMarketListDao {
     }
 
     /**
-     * 添加缓存
+
      */
     private void setCache(List<String> list){
         GameData.getCache().set(NftPrefixMsg.NFT_MARKET_LIST, list);
     }
 
     /**
-     * 删除缓存
+
      */
     public void removeCache(){
         GameData.getCache().removeCache(NftPrefixMsg.NFT_MARKET_LIST);
@@ -56,7 +56,7 @@ public class NftMarketListDao {
     //=========================db===========================
 
     /**
-     * 查询列表
+
      */
     private List<String> loadDbList() {
         String sql = "select nft_code from sell_gold_machine_msg where status=? order by sale_num ";

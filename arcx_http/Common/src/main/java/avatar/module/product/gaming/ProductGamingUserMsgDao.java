@@ -6,7 +6,7 @@ import avatar.util.GameData;
 import avatar.util.product.ProductUtil;
 
 /**
- * 设备游戏中玩家信息数据接口
+
  */
 public class ProductGamingUserMsgDao {
     private static final ProductGamingUserMsgDao instance = new ProductGamingUserMsgDao();
@@ -15,14 +15,14 @@ public class ProductGamingUserMsgDao {
     }
 
     /**
-     * 查询缓存信息
+
      */
     public ProductGamingUserMsg loadByProductId(int productId){
         ProductGamingUserMsg msg = loadCache(productId);
         if(msg==null){
-            //初始化信息
+            
             msg = ProductUtil.initProductGamingUserMsg(productId);
-            //设置缓存
+            
             setCache(productId, msg);
         }
         return msg;
@@ -31,7 +31,7 @@ public class ProductGamingUserMsgDao {
     //=========================cache===========================
 
     /**
-     * 查询缓存
+
      */
     private ProductGamingUserMsg loadCache(int productId){
         return (ProductGamingUserMsg)
@@ -39,7 +39,7 @@ public class ProductGamingUserMsgDao {
     }
 
     /**
-     * 添加缓存
+
      */
     public void setCache(int productId, ProductGamingUserMsg msg){
         GameData.getCache().set(ProductPrefixMsg.PRODUCT_GAMING_USER+"_"+productId, msg);

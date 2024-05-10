@@ -10,20 +10,20 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * 跨服接口实现类
+
  */
 public class CrossServerService {
 
     /**
-     * 跨服玩家信息
+
      */
     public static void crossServerUserMsg(Map<String, Object> map, Session session) {
-        Map<String, Object> dataMap = new HashMap<>();//内容参数信息
-        int csUserId = ParamsUtil.intParmas(map, "csUserId");//跨服玩家ID
+        Map<String, Object> dataMap = new HashMap<>();
+        int csUserId = ParamsUtil.intParmas(map, "csUserId");
         if (csUserId > 0) {
-            dataMap.put("userMsg", CrossServerMsgUtil.initUserMsg(csUserId));//玩家信息
+            dataMap.put("userMsg", CrossServerMsgUtil.initUserMsg(csUserId));
         }
-        //推送结果
+        
         SendMsgUtil.sendCrossBySessionAndMap(session, ClientCode.SUCCESS.getCode(), dataMap);
     }
 

@@ -1,40 +1,40 @@
 package avatar.data.user.attribute;
 
 /**
- * 玩家属性信息
+
  */
 public class UserAttributeMsg {
-    //玩家属性类型
+    
     private int atbTp;
 
-    //等级
+    
     private int lv;
 
-    //下一等级
+    
     private int nxLv;
 
-    //是否可升级
+    
     private int upFlg;
 
-    //商品类型
+    
     private int cmdTp;
 
-    //商品数量
+    
     private long csAmt;
 
-    //当前等级数量
+    
     private String lvAmt;
 
-    //下一等级数量
+    
     private String nxLvAmt;
 
-    //下次刷新时间
+    
     private long lfTm;
 
-    //当前进度分子
+    
     private long sdNma;
 
-    //当前进度分母
+    
     private long sdDma;
 
     public int getAtbTp() {

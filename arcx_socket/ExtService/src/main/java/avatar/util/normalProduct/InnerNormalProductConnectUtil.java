@@ -13,11 +13,11 @@ import avatar.util.system.TimeUtil;
 import java.util.List;
 
 /**
- * 普通设备内部连接交互工具类
+
  */
 public class InnerNormalProductConnectUtil {
     /**
-     * 初始化设备服务端连接
+
      */
     public static void connectProductServer() {
         List<InnerNormalProductIpEntity> list = InnerNormalProductIpDao.getInstance().loadAll();
@@ -29,12 +29,12 @@ public class InnerNormalProductConnectUtil {
                 }
             });
         }else{
-            LogUtil.getLogger().info("初始化普通设备服务端的websocket的时候，查询不到设备服务器信息");
+
         }
     }
 
     /**
-     * 是否超时链接
+
      */
     public static boolean isOutTimeLink(String linkMsg) {
         boolean flag = false;
@@ -44,9 +44,9 @@ public class InnerNormalProductConnectUtil {
             if (lock.lock()) {
                 long time = ConnectSocketLinkDao.getInstance().loadByLinkMsg(linkMsg);
                 if((TimeUtil.getNowTime()-time)>2000){
-                    //连接超时时间5秒
+                    
                     flag = true;
-                    //重置连接时间
+                    
                     ConnectSocketLinkDao.getInstance().setCache(linkMsg, TimeUtil.getNowTime());
                 }
             }
@@ -59,7 +59,7 @@ public class InnerNormalProductConnectUtil {
     }
 
     /**
-     * 获取唯一ID
+
      */
     public static int loadUid(String host, int port) {
         int hostId = 0;

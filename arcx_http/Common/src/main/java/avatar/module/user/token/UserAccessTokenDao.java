@@ -7,7 +7,7 @@ import avatar.util.system.StrUtil;
 import java.util.List;
 
 /**
- * 玩家调用凭证
+
  */
 public class UserAccessTokenDao {
     private static final UserAccessTokenDao instance = new UserAccessTokenDao();
@@ -16,16 +16,16 @@ public class UserAccessTokenDao {
     }
 
     /**
-     * 查询缓存信息
+
      */
     public int loadByToken(String token){
-        //从缓存查找
+        
         int userId = loadCache(token);
         if(userId==0){
-            //查询数据库
+            
             userId = loadDbByAccessToken(token);
             if(userId>0){
-                //设置缓存
+                
                 setCache(token, userId);
             }
         }
@@ -35,7 +35,7 @@ public class UserAccessTokenDao {
     //=========================cache===========================
 
     /**
-     * 查询缓存
+
      */
     private int loadCache(String token){
         if(GameData.getCache().get(UserPrefixMsg.USER_ACCESS_TOKEN+"_"+token)==null){
@@ -46,14 +46,14 @@ public class UserAccessTokenDao {
     }
 
     /**
-     * 添加缓存
+
      */
     public void setCache(String token, int userId){
         GameData.getCache().set(UserPrefixMsg.USER_ACCESS_TOKEN+"_"+token, userId);
     }
 
     /**
-     * 删除缓存
+
      */
     public void removeCache(String token){
         GameData.getCache().removeCache(UserPrefixMsg.USER_ACCESS_TOKEN+"_"+token);
@@ -62,7 +62,7 @@ public class UserAccessTokenDao {
     //=========================db===========================
 
     /**
-     * 根据调用凭证查询
+
      */
     private int loadDbByAccessToken(String token) {
         String sql = "select user_id from user_token_msg where access_token=?";

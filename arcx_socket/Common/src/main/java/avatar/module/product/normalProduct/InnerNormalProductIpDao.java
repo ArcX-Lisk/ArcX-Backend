@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 普通设备内推IP
+
  */
 public class InnerNormalProductIpDao {
 
@@ -19,10 +19,10 @@ public class InnerNormalProductIpDao {
     }
 
     /**
-     * 查询信息
+
      */
     public List<InnerNormalProductIpEntity> loadAll() {
-        //从缓存获取
+        
         List<InnerNormalProductIpEntity> list = loadCache();
         if(list==null){
             list = loadDbMsg();
@@ -37,14 +37,14 @@ public class InnerNormalProductIpDao {
     //=========================cache===========================
 
     /**
-     * 查询缓存
+
      */
     private List<InnerNormalProductIpEntity> loadCache(){
         return (List<InnerNormalProductIpEntity>) GameData.getCache().get(ProductPrefixMsg.INNER_NORMAL_PRODUCT_IP);
     }
 
     /**
-     * 添加缓存
+
      */
     private void setCache(List<InnerNormalProductIpEntity> entity){
         GameData.getCache().set(ProductPrefixMsg.INNER_NORMAL_PRODUCT_IP, entity);
@@ -53,7 +53,7 @@ public class InnerNormalProductIpDao {
     //=========================db===========================
 
     /**
-     * 查询信息
+
      */
     private List<InnerNormalProductIpEntity> loadDbMsg() {
         String sql = SqlUtil.loadList("inner_normal_product_ip", new ArrayList<>()).toString();

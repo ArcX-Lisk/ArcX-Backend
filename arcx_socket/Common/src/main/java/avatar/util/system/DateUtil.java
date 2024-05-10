@@ -10,13 +10,13 @@ import java.util.Date;
 
 public class DateUtil {
 
-	// 最小单位为分钟
+	
 	private static long MINUTE_MILLIS = 1000 * 60;
 	private static long HOUR_MILLIS = MINUTE_MILLIS * 60;
 	private static long DAY_MILLIS = HOUR_MILLIS * 24;
 	private static long WEEK_MILLIS = DAY_MILLIS * 7;
 
-	// SimpleDateFormat线程不安全, so ThreadLocal
+	
 	private static final ThreadLocal<DateFormats> dateFormats = ThreadLocal.withInitial(DateFormats::new);
 
 	public static String formatYMD(Date date) {
@@ -74,7 +74,7 @@ public class DateUtil {
 	}
 
 	/**
-	 * 将字符串转换为Date类型
+
 	 * @param str
 	 * @return
 	 */
@@ -87,7 +87,7 @@ public class DateUtil {
 		return null;
 	}
 	/**
-	 * 格式化字符串，解决从MySql中查出来的数据后面多了0的问题
+
 	 * @param date
 	 * @return
 	 */
@@ -96,9 +96,9 @@ public class DateUtil {
 	}
 
 	/**
-	 * 返回星期日历的当前毫秒数
+
 	 *
-	 * @param dayOfWeek 星期几 hmsStr 12：00：00
+
 	 */
 	public static long parseMsDayOfWeekHMS(int dayOfWeek, String hmsStr) {
 		String ymdStr = formatYMD(new Date());
@@ -150,7 +150,7 @@ public class DateUtil {
 	}
 
 	/**
-	 * 获取当前是周几
+
 	 */
 	public static int getDayOfWeek() {
 		int dayOfWeek = Calendar.getInstance().get(Calendar.DAY_OF_WEEK) - 1;
@@ -161,14 +161,14 @@ public class DateUtil {
 	}
 
 	/**
-	 * 获取当前小时
+
 	 */
 	public static int getHourOfDay() {
 		return Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
 	}
 
 	/**
-	 * 获取当前分钟
+
 	 */
 	public static int getMinOfHour() {
 		return Calendar.getInstance().get(Calendar.MINUTE);
@@ -199,7 +199,7 @@ public class DateUtil {
 	}
 
 	/**
-	 * 两个日期相差的天数
+
 	 *
 	 * @param date1
 	 * @param date2
@@ -252,10 +252,10 @@ public class DateUtil {
 	}
 
 	/**
-	 * 格林威治标准时间 1970 年 1 月 1 日 是星期四
-	 * 1969 年 12 月 22 日 到 1969 年 12 月 28 日 返回-1
-	 * 1969 年 12 月 29 日 到 1970 年 1 月 4 日 返回1
-	 * 1970 年 1 月 5 日 到 1970 年 1 月 11 日 返回2
+
+
+
+
 	 */
 	public static short toWeeks(Date date) {
 		Calendar calendar = Calendar.getInstance();
@@ -264,10 +264,10 @@ public class DateUtil {
 	}
 
 	/**
-	 * 格林威治标准时间 1970 年 1 月 1 日 是星期四
-	 * 1969 年 12 月 22 日 到 1969 年 12 月 28 日 返回-1
-	 * 1969 年 12 月 29 日 到 1970 年 1 月 4 日 返回1
-	 * 1970 年 1 月 5 日 到 1970 年 1 月 11 日 返回2
+
+
+
+
 	 */
 	public static short toWeeks(Calendar date) {
 		final long offsetMillis = DAY_MILLIS * 3;
@@ -297,8 +297,8 @@ public class DateUtil {
 	}
 
 	/**
-	 * @param newSecondTime 一般是 当前时间
-	 * @param oldSecondTime 一般是 保存的旧时间数据
+
+
 	 * @return
 	 */
 	public static int secondTimeDiff(int newSecondTime, int oldSecondTime) {
@@ -306,7 +306,7 @@ public class DateUtil {
 	}
 
 	/**
-	 * @param HHmmss 格式为"HH:mm:ss"
+
 	 */
 	public static long getTodayMillisecond(String HHmmss) {
 		String[] elems = HHmmss.split(":");
@@ -318,14 +318,14 @@ public class DateUtil {
 		calendar.set(Calendar.DAY_OF_WEEK, Calendar.FRIDAY);
 		if (calendar.before(Calendar.getInstance())
 				|| formatYMD(calendar.getTime()).equals(formatYMD(Calendar.getInstance().getTime()))) {
-			// 是星期六 或者 星期五
+			
 			calendar.add(Calendar.DAY_OF_YEAR, 7);
 		}
 		return formatYMD(calendar.getTime());
 	}
 
 	/**
-	 * 某个毫秒时间 的 那天的零时毫秒数
+
 	 *
 	 * @param millisTime
 	 * @return
@@ -362,9 +362,9 @@ public class DateUtil {
 	}
 
 	/**
-	 * @param zeroTime1 为 00:00:00的秒数
-	 * @param zeroTime2 为 00:00:00的秒数
-	 * @return 两个时间相差的天数
+
+
+
 	 */
 	public static int dayDifNum(long zeroTime1, long zeroTime2) {
 		long abs = Math.abs(zeroTime1 - zeroTime2);
@@ -383,7 +383,7 @@ public class DateUtil {
 	/**
 	 * @param newDay
 	 * @param oldDay
-	 * @return true: newDay >= oldDay ; 两个时间在同一天 为true
+
 	 */
 	public static boolean afterDay(Date newDay, Date oldDay) {
 		long new_zeroTime = getZeroMillisTime(newDay.getTime());
@@ -400,10 +400,10 @@ public class DateUtil {
 	}
 
 	/**
-	 * actionTime （毫秒）是否 在 周五0时 到下周四24时 之间
+
 	 *
 	 * @param actionTime
-	 * @return true:在 false:不在
+
 	 */
 	public static boolean isInWeekOfDay(long actionTime) {
 		long curMillisTime = System.currentTimeMillis();
@@ -458,7 +458,7 @@ public class DateUtil {
 	}
 
 	/**
-	 * true:在本周内  false:不在本周内
+
 	 *
 	 * @param cmpDate
 	 * @return
@@ -473,7 +473,7 @@ public class DateUtil {
 	}
 
 	/**
-	 * true:在本月内   false:不在本月内
+
 	 *
 	 * @param cmpDate
 	 * @return
@@ -497,7 +497,7 @@ public class DateUtil {
 	}
 
 	/**
-	 * 是否是同一天的同一小时
+
 	 */
 	public static boolean isSameDateForHour(Date date1 , Date date2){
 		Calendar cal1 = Calendar.getInstance();
@@ -510,7 +510,7 @@ public class DateUtil {
 	}
 
 	/**
-	 * 是否是同一天的同一小时同一分钟
+
 	 */
 	public static boolean isSameDateForHourAndMin(Date date1 , Date date2){
 		Calendar cal1 = Calendar.getInstance();
@@ -525,9 +525,9 @@ public class DateUtil {
 	}
 
 	/**
-	 * 获取过去（或者将来）n天的时间
+
 	 *
-	 * @param day 负数表示过去多少天；正数表示将来多少天；0表示今天
+
 	 */
 	public static Date day(int day) {
 		Calendar c = Calendar.getInstance();
@@ -579,7 +579,7 @@ public class DateUtil {
 	}
 
 	/**
-	 * @return 周五（周五当天输出的是上周五）
+
 	 */
 	public static Date latestPublishDate() {
 		Calendar c = Calendar.getInstance();
@@ -598,7 +598,7 @@ public class DateUtil {
 	}
 
 	/**
-	 * @return 距报告日期最近的周五
+
 	 */
 	public static Date latestPublishDate(Date reportDate) {
 		Calendar c = Calendar.getInstance();
@@ -619,7 +619,7 @@ public class DateUtil {
 	private static final int[] days = new int[] { 6, 7, 1, 2, 3, 4, 5 };
 
 	/**
-	 * 获取本周一个周期开始的时间（每周五凌晨开始）
+
 	 */
 	public static Date getStartDateOfWeek() {
 		int dayOfWeek = DateUtil.getDayOfWeek();
@@ -659,7 +659,7 @@ public class DateUtil {
 		public final SimpleDateFormat y = new SimpleDateFormat("yyyy");
 		public final SimpleDateFormat ymd = new SimpleDateFormat("yyyy-MM-dd");
 		public final SimpleDateFormat ymdhms = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		public final SimpleDateFormat ymdChinese = new SimpleDateFormat("yyyy年MM月dd");
+
 		public final SimpleDateFormat ymdSlash = new SimpleDateFormat("yyyy/MM/dd");
 		public final SimpleDateFormat hms = new SimpleDateFormat("HH:mm:ss");
 		public final SimpleDateFormat yyyymmdd = new SimpleDateFormat("yyyyMMdd");

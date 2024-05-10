@@ -7,7 +7,7 @@ import avatar.util.utilDB.annotation.Table;
 import org.springframework.stereotype.Service;
 
 @Service
-@Table(name="ip_address" , comment = "ip对应地址")
+
 public class IpAddressEntity extends BaseEntity {
     public IpAddressEntity() {
         super(IpAddressEntity.class);
@@ -20,34 +20,34 @@ public class IpAddressEntity extends BaseEntity {
     @Column(name = "ip" , comment = "ip")
     private String ip;
 
-    @Column(name = "en_short" , comment = "英文简称")
+
     private String enShort;
 
-    @Column(name = "en_name" , comment = "英文名字")
+
     private String enName;
 
-    @Column(name = "global" , comment = "洲际")
+
     private String global;
 
-    @Column(name = "nation" , comment = "国家")
+
     private String nation;
 
-    @Column(name = "province" , comment = "省份")
+
     private String province;
 
-    @Column(name = "city" , comment = "城市")
+
     private String city;
 
-    @Column(name = "adcode" , comment = "地区码")
+
     private String adcode;
 
-    @Column(name = "lon" , comment = "经度")
+
     private double lon;
 
-    @Column(name = "lat" , comment = "纬度")
+
     private double lat;
 
-    @Column(name = "create_time" , comment = "创建时间")
+
     private String createTime;
 
     public int getId() {

@@ -11,7 +11,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 /**
- * 玩家登录
+
  */
 @Service
 public class UserLoginApi extends SystemEventHttpHandler<Session> {
@@ -23,7 +23,7 @@ public class UserLoginApi extends SystemEventHttpHandler<Session> {
     public void method(Session session, Map<String, Object> map) throws Exception {
         ExecutorService cachedPool = Executors.newCachedThreadPool();
         cachedPool.execute(() -> LoginDealService.userLogin(map, session));
-        //关闭线程
+        
         cachedPool.shutdown();
     }
 }

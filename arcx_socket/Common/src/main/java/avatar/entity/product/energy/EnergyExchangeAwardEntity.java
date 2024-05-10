@@ -7,7 +7,7 @@ import avatar.util.utilDB.annotation.Table;
 import org.springframework.stereotype.Service;
 
 @Service
-@Table(name="energy_exchange_award" , comment = "能量兑换奖励")
+
 public class EnergyExchangeAwardEntity extends BaseEntity {
     public EnergyExchangeAwardEntity() {
         super(EnergyExchangeAwardEntity.class);
@@ -17,40 +17,40 @@ public class EnergyExchangeAwardEntity extends BaseEntity {
     @Column(name = "id" , comment = "id" )
     private int id;
 
-    @Column(name = "config_id" , comment = "配置ID" )
+
     private int configId;
 
-    @Column(name = "award_type" , comment = "奖励类型" )
+
     private int awardType;
 
-    @Column(name = "award_id" , comment = "奖励ID" )
+
     private int awardId;
 
-    @Column(name = "award_img_id" , comment = "奖励图片" )
+
     private int awardImgId;
 
-    @Column(name = "min_num" , comment = "奖励最小值" )
+
     private int minNum;
 
-    @Column(name = "max_num" , comment = "奖励最大值" )
+
     private int maxNum;
 
-    @Column(name = "award_probability" , comment = "中奖概率" )
+
     private int awardProbability;
 
-    @Column(name = "total_probability" , comment = "总概率" )
+
     private int totalProbability;
 
-    @Column(name = "max_time" , comment = "上限次数" )
+
     private long maxTime;
 
-    @Column(name = "trigger_time" , comment = "已触发次数" )
+
     private long triggerTime;
 
-    @Column(name = "create_time" , comment = "创建时间")
+
     private String createTime;
 
-    @Column(name = "update_time" , comment = "更新时间")
+
     private String updateTime;
 
     public int getId() {

@@ -58,7 +58,7 @@ public class ExcelResultSet {
 	}
 
 	/**
-	 * @param columnIndex 从0开始，比如第一列是 columnIndex = 0
+
 	 * @return
 	 */
 	public boolean getBoolean(int columnIndex) {

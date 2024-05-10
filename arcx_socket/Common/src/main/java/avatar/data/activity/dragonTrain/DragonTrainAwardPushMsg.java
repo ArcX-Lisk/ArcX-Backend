@@ -5,16 +5,16 @@ import avatar.data.basic.award.GeneralAwardMsg;
 import java.util.List;
 
 /**
- * 龙珠玛丽机中奖推送信息
+
  */
 public class DragonTrainAwardPushMsg {
-    //图标列表
+    
     private List<String> icTbln;
 
-    //中奖图标列表
+    
     private List<DragonTrainAwardIndexMsg> icAwdTbln;
 
-    //最终奖励信息
+    
     private List<GeneralAwardMsg> awdTbln;
 
     public List<String> getIcTbln() {

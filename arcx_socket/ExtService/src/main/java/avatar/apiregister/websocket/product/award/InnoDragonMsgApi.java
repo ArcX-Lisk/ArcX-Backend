@@ -15,7 +15,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 /**
- * 自研设备龙珠信息
+
  */
 @Service
 public class InnoDragonMsgApi extends SystemEventHandler2<Session> {
@@ -27,12 +27,12 @@ public class InnoDragonMsgApi extends SystemEventHandler2<Session> {
     public void method(Session session, byte[] bytes) throws Exception {
         ExecutorService cachedPool = Executors.newCachedThreadPool();
         cachedPool.execute(() -> {
-            String accessToken = session.getAccessToken();//玩家通行证
-            //前端传递的参数
+            String accessToken = session.getAccessToken();
+            
             JSONObject jsonObject = JsonUtil.bytesToJson(bytes);
             int status = WebsocketEncodeUtil.checkEncode(accessToken, true, jsonObject);
             if(ParamsUtil.isSuccess(status)) {
-                //推送龙珠信息
+                
                 ProductWebsocketService.innoDragonMsg(UserUtil.loadUserIdByToken(accessToken));
             }
         });

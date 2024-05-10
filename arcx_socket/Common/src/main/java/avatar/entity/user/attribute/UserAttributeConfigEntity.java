@@ -7,50 +7,50 @@ import avatar.util.utilDB.annotation.Table;
 import org.springframework.stereotype.Service;
 
 @Service
-@Table(name="user_attribute_config" , comment = "玩家属性配置")
+
 public class UserAttributeConfigEntity extends BaseEntity {
     public UserAttributeConfigEntity() {
         super(UserAttributeConfigEntity.class);
     }
 
     @Pk
-    @Column(name = "id" , comment = "玩家id" )
+
     private int id;
 
-    @Column(name = "lv" , comment = "等级" )
+
     private int lv;
 
-    @Column(name = "lv_exp" , comment = "等级经验" )
+
     private long lvExp;
 
-    @Column(name = "energy_max" , comment = "能量上限" )
+
     private long energyMax;
 
-    @Column(name = "energy_axc" , comment = "能量升级axc" )
+
     private long energyAxc;
 
-    @Column(name = "charging_second" , comment = "充能秒数" )
+
     private long chargingSecond;
 
-    @Column(name = "charging_axc" , comment = "充能升级axc" )
+
     private long chargingAxc;
 
-    @Column(name = "airdrop_coin" , comment = "每日空投游戏币(0.5h)" )
+
     private long airdropCoin;
 
-    @Column(name = "airdrop_axc" , comment = "空投升级axc" )
+
     private long airdropAxc;
 
-    @Column(name = "lucky_probability" , comment = "幸运概率" )
+
     private double luckyProbability;
 
-    @Column(name = "lucky_axc" , comment = "幸运升级axc" )
+
     private long luckyAxc;
 
-    @Column(name = "charm_addition" , comment = "魅力加成百分比" )
+
     private double charmAddition;
 
-    @Column(name = "charm_axc" , comment = "幸运升级axc" )
+
     private long charmAxc;
 
     public int getId() {

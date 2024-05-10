@@ -7,7 +7,7 @@ import avatar.util.utilDB.annotation.Table;
 import org.springframework.stereotype.Service;
 
 @Service
-@Table(name="recharge_gold_info" , comment = "充值金币信息")
+
 public class RechargeGoldInfoEntity extends BaseEntity {
     public RechargeGoldInfoEntity() {
         super(RechargeGoldInfoEntity.class);
@@ -17,25 +17,25 @@ public class RechargeGoldInfoEntity extends BaseEntity {
     @Column(name = "id" , comment = "id" )
     private int id;
 
-    @Column(name = "product_name" , comment = "商品名称" )
+
     private String productName;
 
-    @Column(name = "price" , comment = "价格(USDT)" )
+
     private int price;
 
-    @Column(name = "img_url" , comment = "商品图片")
+
     private String imgUrl;
 
-    @Column(name = "sequence" , comment = "排序" )
+
     private int sequence;
 
-    @Column(name = "active_flag" , comment = "是否激活" )
+
     private int activeFlag;
 
-    @Column(name = "create_time" , comment = "创建时间")
+
     private String createTime;
 
-    @Column(name = "update_time" , comment = "更新时间")
+
     private String updateTime;
 
     public int getId() {

@@ -3,11 +3,11 @@ package avatar.global.enumMsg.basic.system;
 import java.util.*;
 
 /**
- * 手机平台类型
+
  */
 public enum MobilePlatformTypeEnum {
-    APPLE(1,"苹果"),
-    ANDROID(2,"安卓"),
+
+
     WEB(3,"web"),
     ;
 
@@ -28,7 +28,7 @@ public enum MobilePlatformTypeEnum {
     }
 
     /**
-     * 获取所有枚举
+
      */
     public static List<MobilePlatformTypeEnum> loadAll(){
         MobilePlatformTypeEnum[] enumArr = MobilePlatformTypeEnum.values();
@@ -36,7 +36,7 @@ public enum MobilePlatformTypeEnum {
     }
 
     /**
-     * 转换成对象
+
      */
     public static Map<Integer, String> toMap() {
         Map<Integer, String> map = new HashMap<Integer, String>();
@@ -47,7 +47,7 @@ public enum MobilePlatformTypeEnum {
     }
 
     /**
-     * 根据code获取名称
+
      */
     public static String getNameByCode(int code){
         return toMap().get(code);

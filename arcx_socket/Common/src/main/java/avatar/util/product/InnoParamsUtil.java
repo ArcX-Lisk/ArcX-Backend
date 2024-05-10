@@ -24,148 +24,148 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * 自研设备参数信息工具类
+
  */
 public class InnoParamsUtil {
     /**
-     * 填充推送自研设备的开始游戏参数
+
      */
     public static InnoStartGameMsg initInnoStartGameMsg(int productId, String alias, int userId) {
         InnoStartGameMsg msg = new InnoStartGameMsg();
-        msg.setProductId(productId);//设备ID
-        msg.setAlias(alias);//设备号
-        msg.setUserId(userId);//玩家ID
-        //查询玩家信息
+        msg.setProductId(productId);
+        msg.setAlias(alias);
+        msg.setUserId(userId);
+        
         UserInfoEntity userInfoEntity = UserInfoDao.getInstance().loadByUserId(userId);
-        msg.setUserName(userInfoEntity==null?"":userInfoEntity.getNickName());//玩家昵称
-        msg.setImgUrl(userInfoEntity==null?"": MediaUtil.getMediaUrl(userInfoEntity.getImgUrl()));//玩家头像
-        msg.setServerSideType(CrossServerMsgUtil.arcxServer());//服务端类型
-        msg.setRequestTime(TimeUtil.getNowTime());//请求时间
+        msg.setUserName(userInfoEntity==null?"":userInfoEntity.getNickName());
+        msg.setImgUrl(userInfoEntity==null?"": MediaUtil.getMediaUrl(userInfoEntity.getImgUrl()));
+        msg.setServerSideType(CrossServerMsgUtil.arcxServer());
+        msg.setRequestTime(TimeUtil.getNowTime());
         return msg;
     }
 
     /**
-     * 填充开始游戏信息
+
      */
     public static Map<Object, Object> initStartGameMsg(InnoStartGameMsg startGameMsg) {
-        Map<Object, Object> paramsMap = new HashMap<>();//参数信息
-        paramsMap.put("alias", startGameMsg.getAlias());//设备号
-        int userId = startGameMsg.getUserId();//玩家ID
-        paramsMap.put("userId", userId);//玩家ID
-        paramsMap.put("userName", startGameMsg.getUserName());//玩家昵称
-        paramsMap.put("imgUrl", startGameMsg.getImgUrl());//玩家头像
-        paramsMap.put("serverSideType", startGameMsg.getServerSideType());//服务端类型
-        paramsMap.put("coinLevelWeight", InnoProductUtil.userCoinWeight(userId, startGameMsg.getProductId()));//游戏币权重
-        paramsMap.put("requestTime", startGameMsg.getRequestTime());//请求时间
+        Map<Object, Object> paramsMap = new HashMap<>();
+        paramsMap.put("alias", startGameMsg.getAlias());
+        int userId = startGameMsg.getUserId();
+        paramsMap.put("userId", userId);
+        paramsMap.put("userName", startGameMsg.getUserName());
+        paramsMap.put("imgUrl", startGameMsg.getImgUrl());
+        paramsMap.put("serverSideType", startGameMsg.getServerSideType());
+        paramsMap.put("coinLevelWeight", InnoProductUtil.userCoinWeight(userId, startGameMsg.getProductId()));
+        paramsMap.put("requestTime", startGameMsg.getRequestTime());
         return paramsMap;
     }
 
     /**
-     * 将自研设备的设备操作类型转换成对应的设备操作类型
+
      */
     public static int loadProductOperateType(int operateType) {
         int retOperateType = -1;
         if(operateType==InnoProductOperateTypeEnum.PUSH_COIN.getCode()){
-            //投币
+            
             retOperateType = ProductOperationEnum.PUSH_COIN.getCode();
         }else if(operateType==InnoProductOperateTypeEnum.WIPER.getCode()){
-            //雨刷
+            
             retOperateType = ProductOperationEnum.ROCK.getCode();
         }else if(operateType==InnoProductOperateTypeEnum.AUTO_PUSH_COIN.getCode()){
-            //自动投币
+            
             retOperateType = ProductOperationEnum.AUTO_SHOOT.getCode();
         }else if(operateType==InnoProductOperateTypeEnum.CANCEL_AUTO_PUSH_COIN.getCode()){
-            //取消自动投币
+            
             retOperateType = ProductOperationEnum.CANCEL_AUTO_SHOOT.getCode();
         }
         return retOperateType;
     }
 
     /**
-     * 填充自研设备设备操作信息
+
      */
     public static InnoProductOperateMsg initInnoProductOperateMsg(int productId, String alias, int userId,
             long onProductTime, int operateType, boolean innoFreeLink) {
         InnoProductOperateMsg msg = new InnoProductOperateMsg();
-        msg.setProductId(productId);//设备ID
-        msg.setAlias(alias);//设备号
-        msg.setUserId(userId);//玩家ID
-        //查询玩家信息
+        msg.setProductId(productId);
+        msg.setAlias(alias);
+        msg.setUserId(userId);
+        
         UserInfoEntity userInfoEntity = UserInfoDao.getInstance().loadByUserId(userId);
-        msg.setUserName(userInfoEntity==null?"":userInfoEntity.getNickName());//玩家昵称
-        msg.setImgUrl(userInfoEntity==null?"": MediaUtil.getMediaUrl(userInfoEntity.getImgUrl()));//玩家头像
-        msg.setServerSideType(CrossServerMsgUtil.arcxServer());//服务端类型
-        msg.setRequestTime(TimeUtil.getNowTime());//请求时间
-        msg.setOnProductTime(onProductTime);//上机时间
-        msg.setInnoProductOperateType(operateType);//自研设备操作类型
-        msg.setProductCost(ProductUtil.productCost(productId));//设备币值
-        int secondType = ProductUtil.loadSecondType(productId);//设备二级分类
+        msg.setUserName(userInfoEntity==null?"":userInfoEntity.getNickName());
+        msg.setImgUrl(userInfoEntity==null?"": MediaUtil.getMediaUrl(userInfoEntity.getImgUrl()));
+        msg.setServerSideType(CrossServerMsgUtil.arcxServer());
+        msg.setRequestTime(TimeUtil.getNowTime());
+        msg.setOnProductTime(onProductTime);
+        msg.setInnoProductOperateType(operateType);
+        msg.setProductCost(ProductUtil.productCost(productId));
+        int secondType = ProductUtil.loadSecondType(productId);
         msg.setAgyptOpenBox((innoFreeLink && secondType== ProductSecondTypeEnum.AGYPT.getCode())
-                ? YesOrNoEnum.YES.getCode(): YesOrNoEnum.NO.getCode());//埃及开箱子
+                ? YesOrNoEnum.YES.getCode(): YesOrNoEnum.NO.getCode());
         msg.setClownCircusFerrule((innoFreeLink && secondType== ProductSecondTypeEnum.CLOWN_CIRCUS.getCode())
-                ? YesOrNoEnum.YES.getCode(): YesOrNoEnum.NO.getCode());//小丑动物套圈
+                ? YesOrNoEnum.YES.getCode(): YesOrNoEnum.NO.getCode());
         msg.setPirateCannon((innoFreeLink && secondType== ProductSecondTypeEnum.PIRATE.getCode())
-                ? YesOrNoEnum.YES.getCode(): YesOrNoEnum.NO.getCode());//海盗开炮
-        msg.setCoinLevelWeight(InnoProductUtil.userCoinWeight(userId, productId));//权重等级
-        msg.setPayFlag(InnoNaPayUtil.isPay(userId)? YesOrNoEnum.YES.getCode(): YesOrNoEnum.NO.getCode());//是否付费
+                ? YesOrNoEnum.YES.getCode(): YesOrNoEnum.NO.getCode());
+        msg.setCoinLevelWeight(InnoProductUtil.userCoinWeight(userId, productId));
+        msg.setPayFlag(InnoNaPayUtil.isPay(userId)? YesOrNoEnum.YES.getCode(): YesOrNoEnum.NO.getCode());
         return msg;
     }
 
     /**
-     * 填充推送自研设备的退出设备参数
+
      */
     public static InnoEndGameMsg initInnoEndGameMsg(int productId, String alias, int userId) {
         InnoEndGameMsg msg = new InnoEndGameMsg();
-        msg.setProductId(productId);//设备ID
-        msg.setAlias(alias);//设备号
-        msg.setUserId(userId);//玩家ID
-        //查询玩家信息
+        msg.setProductId(productId);
+        msg.setAlias(alias);
+        msg.setUserId(userId);
+        
         UserInfoEntity userInfoEntity = UserInfoDao.getInstance().loadByUserId(userId);
-        msg.setUserName(userInfoEntity==null?"":userInfoEntity.getNickName());//玩家昵称
-        msg.setImgUrl(userInfoEntity==null?"": MediaUtil.getMediaUrl(userInfoEntity.getImgUrl()));//玩家头像
-        msg.setServerSideType(CrossServerMsgUtil.arcxServer());//服务端类型
-        msg.setRequestTime(TimeUtil.getNowTime());//请求时间
+        msg.setUserName(userInfoEntity==null?"":userInfoEntity.getNickName());
+        msg.setImgUrl(userInfoEntity==null?"": MediaUtil.getMediaUrl(userInfoEntity.getImgUrl()));
+        msg.setServerSideType(CrossServerMsgUtil.arcxServer());
+        msg.setRequestTime(TimeUtil.getNowTime());
         msg.setProductMulti(ProductGamingUtil.loadMultiLevel(productId));
         return msg;
     }
 
     /**
-     * 填充结束游戏信息
+
      */
     public static Map<Object, Object> initEndGameMsg(InnoEndGameMsg endGameMsg) {
-        Map<Object, Object> paramsMap = new HashMap<>();//参数信息
-        paramsMap.put("alias", endGameMsg.getAlias());//设备号
-        paramsMap.put("userId", endGameMsg.getUserId());//玩家ID
-        paramsMap.put("userName", endGameMsg.getUserName());//玩家昵称
-        paramsMap.put("imgUrl", endGameMsg.getImgUrl());//玩家头像
-        paramsMap.put("serverSideType", endGameMsg.getServerSideType());//服务端类型
-        paramsMap.put("requestTime", endGameMsg.getRequestTime());//请求时间
-        paramsMap.put("productMulti", endGameMsg.getProductMulti());//设备倍率
+        Map<Object, Object> paramsMap = new HashMap<>();
+        paramsMap.put("alias", endGameMsg.getAlias());
+        paramsMap.put("userId", endGameMsg.getUserId());
+        paramsMap.put("userName", endGameMsg.getUserName());
+        paramsMap.put("imgUrl", endGameMsg.getImgUrl());
+        paramsMap.put("serverSideType", endGameMsg.getServerSideType());
+        paramsMap.put("requestTime", endGameMsg.getRequestTime());
+        paramsMap.put("productMulti", endGameMsg.getProductMulti());
         return paramsMap;
     }
 
     /**
-     * 填充设备操作信息
+
      */
     public static Map<Object, Object> initProductOperateMsg(InnoProductOperateMsg productOperateMsg) {
-        Map<Object, Object> paramsMap = new HashMap<>();//参数信息
+        Map<Object, Object> paramsMap = new HashMap<>();
         try {
-            int userId = productOperateMsg.getUserId();//玩家ID
-            String alias = productOperateMsg.getAlias();//设备号
-            paramsMap.put("alias", productOperateMsg.getAlias());//设备号
-            paramsMap.put("userId", userId);//玩家ID
-            paramsMap.put("userName", productOperateMsg.getUserName());//玩家昵称
-            paramsMap.put("imgUrl", productOperateMsg.getImgUrl());//玩家头像
-            paramsMap.put("serverSideType", productOperateMsg.getServerSideType());//服务端类型
-            paramsMap.put("requestTime", productOperateMsg.getRequestTime());//请求时间
-            paramsMap.put("innoProductOperateType", productOperateMsg.getInnoProductOperateType());//自研设备操作类型
-            paramsMap.put("onProductTime", productOperateMsg.getOnProductTime());//上机时间
-            paramsMap.put("productCost", productOperateMsg.getProductCost());//设备币值
-            paramsMap.put("agyptOpenBox", productOperateMsg.getAgyptOpenBox());//埃及开箱子
-            paramsMap.put("clownCircusFerrule", productOperateMsg.getClownCircusFerrule());//小丑动物套圈
-            paramsMap.put("pirateCannon", productOperateMsg.getPirateCannon());//海盗开炮
+            int userId = productOperateMsg.getUserId();
+            String alias = productOperateMsg.getAlias();
+            paramsMap.put("alias", productOperateMsg.getAlias());
+            paramsMap.put("userId", userId);
+            paramsMap.put("userName", productOperateMsg.getUserName());
+            paramsMap.put("imgUrl", productOperateMsg.getImgUrl());
+            paramsMap.put("serverSideType", productOperateMsg.getServerSideType());
+            paramsMap.put("requestTime", productOperateMsg.getRequestTime());
+            paramsMap.put("innoProductOperateType", productOperateMsg.getInnoProductOperateType());
+            paramsMap.put("onProductTime", productOperateMsg.getOnProductTime());
+            paramsMap.put("productCost", productOperateMsg.getProductCost());
+            paramsMap.put("agyptOpenBox", productOperateMsg.getAgyptOpenBox());
+            paramsMap.put("clownCircusFerrule", productOperateMsg.getClownCircusFerrule());
+            paramsMap.put("pirateCannon", productOperateMsg.getPirateCannon());
             if (productOperateMsg.getInnoProductOperateType() == InnoProductOperateTypeEnum.PUSH_COIN.getCode()) {
-                paramsMap.put("coinLevelWeight", productOperateMsg.getCoinLevelWeight());//权重等级
+                paramsMap.put("coinLevelWeight", productOperateMsg.getCoinLevelWeight());
             }
         }catch (Exception e){
             ErrorDealUtil.printError(e);
@@ -174,285 +174,285 @@ public class InnoParamsUtil {
     }
 
     /**
-     * 填充开始游戏占用中玩家校验返回的参数
+
      */
     public static Map<Object, Object> initStartGameOccupyMsg(InnoStartGameOccupyMsg startGameOccupyMsg) {
-        Map<Object, Object> paramsMap = new HashMap<>();//参数信息
-        paramsMap.put("alias", startGameOccupyMsg.getAlias());//设备号
-        paramsMap.put("requestTime", TimeUtil.getNowTime());//请求时间
-        paramsMap.put("onProductTime", startGameOccupyMsg.getOnProductTime());//上机时间
+        Map<Object, Object> paramsMap = new HashMap<>();
+        paramsMap.put("alias", startGameOccupyMsg.getAlias());
+        paramsMap.put("requestTime", TimeUtil.getNowTime());
+        paramsMap.put("onProductTime", startGameOccupyMsg.getOnProductTime());
         return paramsMap;
     }
 
     /**
-     * 填充变更权重等级信息
+
      */
     public static Map<Object, Object> initChangeCoinWeightMsg(InnoChangeCoinWeightMsg changeCoinWeightMsg) {
-        Map<Object, Object> paramsMap = new HashMap<>();//参数信息
-        paramsMap.put("alias", changeCoinWeightMsg.getAlias());//设备号
-        paramsMap.put("userId", changeCoinWeightMsg.getUserId());//玩家ID
-        paramsMap.put("userName", changeCoinWeightMsg.getUserName());//玩家昵称
-        paramsMap.put("imgUrl", changeCoinWeightMsg.getImgUrl());//玩家头像
-        paramsMap.put("serverSideType", changeCoinWeightMsg.getServerSideType());//服务端类型
-        paramsMap.put("requestTime", changeCoinWeightMsg.getRequestTime());//请求时间
-        paramsMap.put("coinLevelWeight", changeCoinWeightMsg.getCoinLevelWeight());//游戏币权重
+        Map<Object, Object> paramsMap = new HashMap<>();
+        paramsMap.put("alias", changeCoinWeightMsg.getAlias());
+        paramsMap.put("userId", changeCoinWeightMsg.getUserId());
+        paramsMap.put("userName", changeCoinWeightMsg.getUserName());
+        paramsMap.put("imgUrl", changeCoinWeightMsg.getImgUrl());
+        paramsMap.put("serverSideType", changeCoinWeightMsg.getServerSideType());
+        paramsMap.put("requestTime", changeCoinWeightMsg.getRequestTime());
+        paramsMap.put("coinLevelWeight", changeCoinWeightMsg.getCoinLevelWeight());
         return paramsMap;
     }
 
     /**
-     * 变更游戏币权重的参数信息
+
      */
     public static InnoChangeCoinWeightMsg initInnoChangeCoinWeightMsg(int productId, String alias, int userId,
             int coinWeight) {
         InnoChangeCoinWeightMsg msg = new InnoChangeCoinWeightMsg();
-        msg.setProductId(productId);//设备ID
-        msg.setAlias(alias);//设备号
-        msg.setUserId(userId);//玩家ID
-        //查询玩家信息
+        msg.setProductId(productId);
+        msg.setAlias(alias);
+        msg.setUserId(userId);
+        
         UserInfoEntity userInfoEntity = UserInfoDao.getInstance().loadByUserId(userId);
-        msg.setUserName(userInfoEntity==null?"":userInfoEntity.getNickName());//玩家昵称
-        msg.setImgUrl(userInfoEntity==null?"": MediaUtil.getMediaUrl(userInfoEntity.getImgUrl()));//玩家头像
-        msg.setServerSideType(CrossServerMsgUtil.arcxServer());//服务端类型
-        msg.setRequestTime(TimeUtil.getNowTime());//请求时间
-        msg.setCoinLevelWeight(coinWeight);//权重等级
+        msg.setUserName(userInfoEntity==null?"":userInfoEntity.getNickName());
+        msg.setImgUrl(userInfoEntity==null?"": MediaUtil.getMediaUrl(userInfoEntity.getImgUrl()));
+        msg.setServerSideType(CrossServerMsgUtil.arcxServer());
+        msg.setRequestTime(TimeUtil.getNowTime());
+        msg.setCoinLevelWeight(coinWeight);
         return msg;
     }
 
     /**
-     * 将自研设备的错误码转换成系统的错误码
+
      */
     public static int loadClientCode(int status) {
         if(status==InnoClientCode.PRODUCT_EXCEPTION.getCode()){
-            //设备异常
+            
             status = ClientCode.PRODUCT_EXCEPTION.getCode();
         }else if(status==InnoClientCode.PRODUCT_OCCUPY.getCode()){
-            //设备占用中
-            status = ClientCode.PRODUCT_OCCUPY.getCode();//设备占用中
+            
+            status = ClientCode.PRODUCT_OCCUPY.getCode();
         }
         return status;
     }
 
     /**
-     * 开始游戏的参数
+
      */
     public static InnoReceiveStartGameMsg startGameMsg(Map<String, Object> jsonMap) {
         InnoReceiveStartGameMsg msg = new InnoReceiveStartGameMsg();
         try{
-            msg.setStatus((int)jsonMap.get("status"));//错误码
-            msg.setAlias(jsonMap.get("alias").toString());//设备号
-            msg.setUserId((int)jsonMap.get("userId"));//玩家ID
+            msg.setStatus((int)jsonMap.get("status"));
+            msg.setAlias(jsonMap.get("alias").toString());
+            msg.setUserId((int)jsonMap.get("userId"));
         }catch (Exception e){
             ErrorDealUtil.printError(e);
             msg = null;
-            LogUtil.getLogger().info("解析自研设备服务器推送开始游戏的参数失败----------");
+
         }
         return msg;
     }
 
     /**
-     * 设备操作的参数
+
      */
     public static InnoReceiveProductOperateMsg productOperateMsg(Map<String, Object> jsonMap) {
         InnoReceiveProductOperateMsg msg = new InnoReceiveProductOperateMsg();
         try{
-            msg.setStatus((int)jsonMap.get("status"));//错误码
-            msg.setAlias(jsonMap.get("alias").toString());//设备号
-            msg.setUserId((int)jsonMap.get("userId"));//玩家ID
-            msg.setUserName((String)jsonMap.get("userName"));//玩家昵称
-            msg.setImgUrl((String)jsonMap.get("imgUrl"));//玩家头像
-            msg.setServerSideType((int)jsonMap.get("serverSideType"));//服务端类型
-            msg.setInnoProductOperateType((int)jsonMap.get("innoProductOperateType"));//自研设备操作类型
-            msg.setOnProductTime(Long.parseLong(jsonMap.get("onProductTime").toString()));//上机时间
-            //设备中奖类型
+            msg.setStatus((int)jsonMap.get("status"));
+            msg.setAlias(jsonMap.get("alias").toString());
+            msg.setUserId((int)jsonMap.get("userId"));
+            msg.setUserName((String)jsonMap.get("userName"));
+            msg.setImgUrl((String)jsonMap.get("imgUrl"));
+            msg.setServerSideType((int)jsonMap.get("serverSideType"));
+            msg.setInnoProductOperateType((int)jsonMap.get("innoProductOperateType"));
+            msg.setOnProductTime(Long.parseLong(jsonMap.get("onProductTime").toString()));
+            
             if(jsonMap.get("awardType")!=null){
                 msg.setAwardType((int)jsonMap.get("awardType"));
             }
-            //设备故障类型
+            
             if(jsonMap.get("breakType")!=null){
                 msg.setBreakType((int)jsonMap.get("breakType"));
             }
-            //获得币数量
+            
             if(jsonMap.get("coinNum")!=null){
                 msg.setCoinNum((int)jsonMap.get("coinNum"));
             }
-            //设备显示奖励游戏币
+            
             if(jsonMap.get("awardNum")!=null){
                 msg.setAwardNum((int)jsonMap.get("awardNum"));
             }
-            //设备显示是否开始中奖
+            
             if(jsonMap.get("isStart")!=null){
                 msg.setIsStart((int)jsonMap.get("isStart"));
             }
         }catch (Exception e){
             ErrorDealUtil.printError(e);
             msg = null;
-            LogUtil.getLogger().info("解析自研设备服务器推送设备操作的参数失败----------");
+
         }
         return msg;
     }
 
     /**
-     * 开始游戏占用中玩家校验的参数
+
      */
     public static InnoStartGameOccupyMsg startGameOccupyMsg(Map<String, Object> jsonMap) {
         InnoStartGameOccupyMsg msg = new InnoStartGameOccupyMsg();
         try{
-            msg.setAlias(jsonMap.get("alias").toString());//设备号
-            msg.setUserId((int)jsonMap.get("userId"));//玩家ID
-            msg.setUserName((String)jsonMap.get("userName"));//玩家昵称
-            msg.setImgUrl((String)jsonMap.get("imgUrl"));//玩家头像
-            msg.setServerSideType((int)jsonMap.get("serverSideType"));//服务端类型
-            msg.setOnProductTime(Long.parseLong(jsonMap.get("onProductTime").toString()));//上机时间
+            msg.setAlias(jsonMap.get("alias").toString());
+            msg.setUserId((int)jsonMap.get("userId"));
+            msg.setUserName((String)jsonMap.get("userName"));
+            msg.setImgUrl((String)jsonMap.get("imgUrl"));
+            msg.setServerSideType((int)jsonMap.get("serverSideType"));
+            msg.setOnProductTime(Long.parseLong(jsonMap.get("onProductTime").toString()));
         }catch (Exception e){
             ErrorDealUtil.printError(e);
             msg = null;
-            LogUtil.getLogger().info("解析自研设备服务器推送设备开始游戏占用中玩家校验的参数失败----------");
+
         }
         return msg;
     }
 
     /**
-     * 填充设备信息
+
      */
     public static InnoProductMsg initInnoProductMsg(Map<String, Object> jsonMap) {
         InnoProductMsg msg = new InnoProductMsg();
-        msg.setAlias((String) jsonMap.get("alias"));//设备号
-        msg.setUserId((int) jsonMap.get("userId"));//玩家ID
-        msg.setUserName((String) jsonMap.get("userName"));//玩家昵称
-        msg.setImgUrl((String) jsonMap.get("imgUrl"));//玩家头像
-        msg.setServerSideType((int) jsonMap.get("serverSideType"));//服务端类型
+        msg.setAlias((String) jsonMap.get("alias"));
+        msg.setUserId((int) jsonMap.get("userId"));
+        msg.setUserName((String) jsonMap.get("userName"));
+        msg.setImgUrl((String) jsonMap.get("imgUrl"));
+        msg.setServerSideType((int) jsonMap.get("serverSideType"));
         msg.setProductMulti(jsonMap.containsKey("productMulti")?
-                (int)jsonMap.get("productMulti"):0);//设备倍率
+                (int)jsonMap.get("productMulti"):0);
         return msg;
     }
 
     /**
-     * 填充设备信息
+
      */
     public static ResponseGeneralMsg initResponseGeneralMsg(String alias, int userId) {
         ResponseGeneralMsg msg = new ResponseGeneralMsg();
-        msg.setAlias(alias);//设备号
-        msg.setUserId(userId);//玩家ID
-        //查询玩家信息
+        msg.setAlias(alias);
+        msg.setUserId(userId);
+        
         UserInfoEntity userInfoEntity = UserInfoDao.getInstance().loadByUserId(userId);
-        msg.setUserName(userInfoEntity==null?"":userInfoEntity.getNickName());//玩家昵称
-        msg.setImgUrl(userInfoEntity==null?"": MediaUtil.getMediaUrl(userInfoEntity.getImgUrl()));//玩家头像
-        msg.setServerSideType(CrossServerMsgUtil.arcxServer());//服务端类型
+        msg.setUserName(userInfoEntity==null?"":userInfoEntity.getNickName());
+        msg.setImgUrl(userInfoEntity==null?"": MediaUtil.getMediaUrl(userInfoEntity.getImgUrl()));
+        msg.setServerSideType(CrossServerMsgUtil.arcxServer());
         return msg;
     }
 
     /**
-     * 填充获得币信息
+
      */
     public static InnoGetCoinMsg initInnoGetCoinMsg(JSONObject jsonObject) {
         InnoGetCoinMsg msg = new InnoGetCoinMsg();
-        msg.setAlias(jsonObject.getString("alias"));//设备号
-        msg.setUserId(jsonObject.getInteger("userId"));//玩家ID
-        msg.setUserName(jsonObject.getString("userName"));//玩家昵称
-        msg.setImgUrl(jsonObject.getString("imgUrl"));//玩家头像
-        msg.setServerSideType(jsonObject.getInteger("serverSideType"));//服务端类型
-        msg.setRetNum(jsonObject.getInteger("retNum"));//获得游戏币数
+        msg.setAlias(jsonObject.getString("alias"));
+        msg.setUserId(jsonObject.getInteger("userId"));
+        msg.setUserName(jsonObject.getString("userName"));
+        msg.setImgUrl(jsonObject.getString("imgUrl"));
+        msg.setServerSideType(jsonObject.getInteger("serverSideType"));
+        msg.setRetNum(jsonObject.getInteger("retNum"));
         return msg;
     }
 
     /**
-     * 填充中奖锁信息
+
      */
     public static InnoAwardLockMsg initInnoAwardLockMsg(Map<String, Object> jsonMap) {
         InnoAwardLockMsg msg = new InnoAwardLockMsg();
-        msg.setAlias(jsonMap.get("alias").toString());//设备号
-        msg.setUserId((int)jsonMap.get("userId"));//玩家ID
-        msg.setServerSideType((int)jsonMap.get("serverSideType"));//服务端类型
-        msg.setIsStart((int)jsonMap.get("isStart"));//填充中奖锁信息
+        msg.setAlias(jsonMap.get("alias").toString());
+        msg.setUserId((int)jsonMap.get("userId"));
+        msg.setServerSideType((int)jsonMap.get("serverSideType"));
+        msg.setIsStart((int)jsonMap.get("isStart"));
         return msg;
     }
 
     /**
-     * 填充自动投币信息
+
      */
     public static Map<Object, Object> initAutoPushCoinMsg(InnoAutoPushCoinMsg autoPushCoinMsg) {
-        Map<Object, Object> paramsMap = new HashMap<>();//参数信息
-        paramsMap.put("alias", autoPushCoinMsg.getAlias());//设备号
-        paramsMap.put("userId", autoPushCoinMsg.getUserId());//玩家ID
-        paramsMap.put("userName", autoPushCoinMsg.getUserName());//玩家昵称
-        paramsMap.put("imgUrl", autoPushCoinMsg.getImgUrl());//玩家头像
-        paramsMap.put("serverSideType", autoPushCoinMsg.getServerSideType());//服务端类型
-        paramsMap.put("requestTime", autoPushCoinMsg.getRequestTime());//请求时间
-        paramsMap.put("isStart", autoPushCoinMsg.getIsStart());//是否开始自动投币
+        Map<Object, Object> paramsMap = new HashMap<>();
+        paramsMap.put("alias", autoPushCoinMsg.getAlias());
+        paramsMap.put("userId", autoPushCoinMsg.getUserId());
+        paramsMap.put("userName", autoPushCoinMsg.getUserName());
+        paramsMap.put("imgUrl", autoPushCoinMsg.getImgUrl());
+        paramsMap.put("serverSideType", autoPushCoinMsg.getServerSideType());
+        paramsMap.put("requestTime", autoPushCoinMsg.getRequestTime());
+        paramsMap.put("isStart", autoPushCoinMsg.getIsStart());
         return paramsMap;
     }
 
     /**
-     * 自动投币的参数信息
+
      */
     public static InnoAutoPushCoinMsg initInnoAutoPushCoinMsg(int productId, String alias, int userId, int isStart) {
         InnoAutoPushCoinMsg msg = new InnoAutoPushCoinMsg();
-        msg.setProductId(productId);//设备ID
-        msg.setAlias(alias);//设备号
-        msg.setUserId(userId);//玩家ID
-        //查询玩家信息
+        msg.setProductId(productId);
+        msg.setAlias(alias);
+        msg.setUserId(userId);
+        
         UserInfoEntity userInfoEntity = UserInfoDao.getInstance().loadByUserId(userId);
-        msg.setUserName(userInfoEntity==null?"":userInfoEntity.getNickName());//玩家昵称
-        msg.setImgUrl(userInfoEntity==null?"": MediaUtil.getMediaUrl(userInfoEntity.getImgUrl()));//玩家头像
-        msg.setServerSideType(CrossServerMsgUtil.arcxServer());//服务端类型
-        msg.setRequestTime(TimeUtil.getNowTime());//请求时间
-        msg.setIsStart(isStart);//是否开始自动投币
+        msg.setUserName(userInfoEntity==null?"":userInfoEntity.getNickName());
+        msg.setImgUrl(userInfoEntity==null?"": MediaUtil.getMediaUrl(userInfoEntity.getImgUrl()));
+        msg.setServerSideType(CrossServerMsgUtil.arcxServer());
+        msg.setRequestTime(TimeUtil.getNowTime());
+        msg.setIsStart(isStart);
         return msg;
     }
 
     /**
-     * 填充结算窗口信息
+
      */
     public static InnoSettlementWindowMsg initInnoSettlementWindowMsg(Map<String, Object> jsonMap) {
         InnoSettlementWindowMsg msg = new InnoSettlementWindowMsg();
-        msg.setAlias(jsonMap.get("alias").toString());//设备号
-        msg.setUserId((int)jsonMap.get("userId"));//玩家ID
-        msg.setServerSideType((int)jsonMap.get("serverSideType"));//服务端类型
+        msg.setAlias(jsonMap.get("alias").toString());
+        msg.setUserId((int)jsonMap.get("userId"));
+        msg.setServerSideType((int)jsonMap.get("serverSideType"));
         return msg;
     }
 
     /**
-     * 填充中奖得分倍数信息
+
      */
     public static InnoAwardScoreMultiMsg initInnoAwardScoreMultiMsg(Map<String, Object> jsonMap) {
         InnoAwardScoreMultiMsg msg = new InnoAwardScoreMultiMsg();
-        msg.setAlias(jsonMap.get("alias").toString());//设备号
-        msg.setUserId((int)jsonMap.get("userId"));//玩家ID
-        msg.setServerSideType((int)jsonMap.get("serverSideType"));//服务端类型
-        msg.setAwardMulti((int)jsonMap.get("awardMulti"));//中奖得分倍数
+        msg.setAlias(jsonMap.get("alias").toString());
+        msg.setUserId((int)jsonMap.get("userId"));
+        msg.setServerSideType((int)jsonMap.get("serverSideType"));
+        msg.setAwardMulti((int)jsonMap.get("awardMulti"));
         return msg;
     }
 
     /**
-     * 填充设备声音通知信息
+
      */
     public static InnoVoiceNoticeMsg initInnoVoiceNoticeMsg(Map<String, Object> jsonMap) {
         InnoVoiceNoticeMsg msg = new InnoVoiceNoticeMsg();
-        msg.setAlias(jsonMap.get("alias").toString());//设备号
-        msg.setUserId((int)jsonMap.get("userId"));//玩家ID
-        msg.setServerSideType((int)jsonMap.get("serverSideType"));//服务端类型
-        msg.setVoiceType((int)jsonMap.get("voiceType"));//声音类型
-        msg.setIsStart((int)jsonMap.get("isStart"));//是否开始播放音效
-        msg.setIsEndSwitch((int)jsonMap.get("isStart"));//是否有开始结束
+        msg.setAlias(jsonMap.get("alias").toString());
+        msg.setUserId((int)jsonMap.get("userId"));
+        msg.setServerSideType((int)jsonMap.get("serverSideType"));
+        msg.setVoiceType((int)jsonMap.get("voiceType"));
+        msg.setIsStart((int)jsonMap.get("isStart"));
+        msg.setIsEndSwitch((int)jsonMap.get("isStart"));
         return msg;
     }
 
     /**
-     * 获取string类型的参数
+
      */
     public static String loadStringParams(Map<String, Object> jsonMap, String paramsName) {
         return jsonMap.containsKey(paramsName)? jsonMap.get(paramsName).toString():"";
     }
 
     /**
-     * 获取int类型的参数
+
      */
     public static int intParams(Map<String, Object> jsonMap, String paramsName) {
         return jsonMap.containsKey(paramsName)?Integer.parseInt(jsonMap.get(paramsName).toString()):0;
     }
 
     /**
-     * 获取直连的参数信息
+
      */
     public static JSONObject loadClientDirectMsg(JSONObject jsonMap) {
         JSONObject retMsg = new JSONObject();
@@ -466,47 +466,47 @@ public class InnoParamsUtil {
     }
 
     /**
-     * 填充中奖订阅通知信息
+
      */
     public static InnoProductAwardMsg initInnoProductAwardMsg(JSONObject jsonObject) {
         InnoProductAwardMsg msg = new InnoProductAwardMsg();
-        msg.setAlias(jsonObject.getString("alias"));//设备号
-        msg.setUserId(jsonObject.getInteger("userId"));//玩家ID
-        msg.setUserName(jsonObject.getString("userName"));//玩家昵称
-        msg.setImgUrl(jsonObject.getString("imgUrl"));//玩家头像
-        msg.setServerSideType(jsonObject.getInteger("serverSideType"));//服务端类型
-        msg.setAwardType(jsonObject.getInteger("awardType"));//中奖类型
+        msg.setAlias(jsonObject.getString("alias"));
+        msg.setUserId(jsonObject.getInteger("userId"));
+        msg.setUserName(jsonObject.getString("userName"));
+        msg.setImgUrl(jsonObject.getString("imgUrl"));
+        msg.setServerSideType(jsonObject.getInteger("serverSideType"));
+        msg.setAwardType(jsonObject.getInteger("awardType"));
         return msg;
     }
 
     /**
-     * 填充龙珠订阅通知信息
+
      */
     public static InnoDragonMsg initInnoDragonMsg(JSONObject jsonObject) {
         InnoDragonMsg msg = new InnoDragonMsg();
-        msg.setAlias(jsonObject.getString("alias"));//设备号
+        msg.setAlias(jsonObject.getString("alias"));
         return msg;
     }
 
     /**
-     * 填充设备操作信息
+
      */
     public static Map<Object, Object> initProductOperateMsg(int productId, ProductInfoEntity productInfoEntity,
             int userId, int awardType) {
         ProductRoomMsg productRoomMsg = ProductRoomDao.getInstance().loadByProductId(productId);
         InnoProductOperateMsg productOperateMsg = InnoParamsUtil.initInnoProductOperateMsg(productId, productInfoEntity.getAlias(), userId,
                 productRoomMsg.getOnProductTime(), InnoProductOperateTypeEnum.PUSH_COIN.getCode(), false);
-        Map<Object, Object> paramsMap = new HashMap<>();//参数信息
-        paramsMap.put("alias", productOperateMsg.getAlias());//设备号
-        paramsMap.put("userId", userId);//玩家ID
-        paramsMap.put("userName", productOperateMsg.getUserName());//玩家昵称
-        paramsMap.put("imgUrl", productOperateMsg.getImgUrl());//玩家头像
-        paramsMap.put("serverSideType", productOperateMsg.getServerSideType());//服务端类型
-        paramsMap.put("requestTime", productOperateMsg.getRequestTime());//请求时间
-        paramsMap.put("innoProductOperateType", productOperateMsg.getInnoProductOperateType());//自研设备操作类型
-        paramsMap.put("onProductTime", productOperateMsg.getOnProductTime());//上机时间
-        paramsMap.put("productCost", productOperateMsg.getProductCost());//设备币值
-        paramsMap.put("productAwardType",awardType);//设备中奖类型
+        Map<Object, Object> paramsMap = new HashMap<>();
+        paramsMap.put("alias", productOperateMsg.getAlias());
+        paramsMap.put("userId", userId);
+        paramsMap.put("userName", productOperateMsg.getUserName());
+        paramsMap.put("imgUrl", productOperateMsg.getImgUrl());
+        paramsMap.put("serverSideType", productOperateMsg.getServerSideType());
+        paramsMap.put("requestTime", productOperateMsg.getRequestTime());
+        paramsMap.put("innoProductOperateType", productOperateMsg.getInnoProductOperateType());
+        paramsMap.put("onProductTime", productOperateMsg.getOnProductTime());
+        paramsMap.put("productCost", productOperateMsg.getProductCost());
+        paramsMap.put("productAwardType",awardType);
         return paramsMap;
     }
 }

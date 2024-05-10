@@ -7,7 +7,7 @@ import avatar.util.utilDB.annotation.Table;
 import org.springframework.stereotype.Service;
 
 @Service
-@Table(name="product_pile_tower_config" , comment = "设备炼金塔堆塔配置")
+
 public class ProductPileTowerConfigEntity extends BaseEntity {
     public ProductPileTowerConfigEntity() {
         super(ProductPileTowerConfigEntity.class);
@@ -17,22 +17,22 @@ public class ProductPileTowerConfigEntity extends BaseEntity {
     @Column(name = "id" , comment = "id" )
     private int id;
 
-    @Column(name = "min_num" , comment = "最小值" )
+
     private int minNum;
 
-    @Column(name = "max_num" , comment = "最大值" )
+
     private int maxNum;
 
-    @Column(name = "interval_time" , comment = "间隔时间（秒）" )
+
     private int intervalTime;
 
-    @Column(name = "award_img_id" , comment = "奖励图片ID" )
+
     private int awardImgId;
 
-    @Column(name = "create_time" , comment = "创建时间")
+
     private String createTime;
 
-    @Column(name = "update_time" , comment = "更新时间")
+
     private String updateTime;
 
     public int getId() {

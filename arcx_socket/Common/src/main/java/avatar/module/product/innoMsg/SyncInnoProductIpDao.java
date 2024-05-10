@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 自研设备内推IP数据接口
+
  */
 public class SyncInnoProductIpDao {
 
@@ -18,10 +18,10 @@ public class SyncInnoProductIpDao {
     }
 
     /**
-     * 查询信息
+
      */
     public List<SyncInnoProductIpEntity> loadAll() {
-        //从缓存获取
+        
         List<SyncInnoProductIpEntity> list = loadCache();
         if(list==null){
             list = loadDbMsg();
@@ -36,14 +36,14 @@ public class SyncInnoProductIpDao {
     //=========================cache===========================
 
     /**
-     * 查询缓存
+
      */
     private List<SyncInnoProductIpEntity> loadCache(){
         return (List<SyncInnoProductIpEntity>) GameData.getCache().get(ProductPrefixMsg.SYNC_INNO_PRODUCT_IP);
     }
 
     /**
-     * 添加缓存
+
      */
     private void setCache(List<SyncInnoProductIpEntity> entity){
         GameData.getCache().set(ProductPrefixMsg.SYNC_INNO_PRODUCT_IP, entity);
@@ -52,7 +52,7 @@ public class SyncInnoProductIpDao {
     //=========================db===========================
 
     /**
-     * 查询信息
+
      */
     private List<SyncInnoProductIpEntity> loadDbMsg() {
         String sql = "select * from sync_inno_product_ip";

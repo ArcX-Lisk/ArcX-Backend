@@ -5,12 +5,12 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * 能量兑换获得类型
+
  */
 public enum EnergyExchangeGetTypeEnum {
-    DRAGON_BALL(1,"龙珠"),
-    DOLL_MACHINE(2,"娃娃机"),
-    PRESENT_MACHINE(3,"礼品机"),
+
+
+
     ;
 
     private int code;
@@ -30,7 +30,7 @@ public enum EnergyExchangeGetTypeEnum {
     }
 
     /**
-     * 获取所有枚举
+
      */
     public static List<EnergyExchangeGetTypeEnum> loadAll(){
         EnergyExchangeGetTypeEnum[] enumArr = EnergyExchangeGetTypeEnum.values();
@@ -38,7 +38,7 @@ public enum EnergyExchangeGetTypeEnum {
     }
     
     /**
-     * 根据code获取名称
+
      */
     public static String loadNameByCode(int code){
         EnergyExchangeGetTypeEnum[] msgArr = EnergyExchangeGetTypeEnum.values();

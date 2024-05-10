@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * 枚举：代币类型
+
  */
 public enum TokensTypeEnum {
     SOLANA(1,"solana"),
@@ -29,7 +29,7 @@ public enum TokensTypeEnum {
     }
 
     /**
-     * 转换成对象
+
      */
     public static Map<Integer, String> toMap() {
         Map<Integer, String> map = new HashMap<Integer, String>();
@@ -40,7 +40,7 @@ public enum TokensTypeEnum {
     }
 
     /**
-     * 根据code获取名称
+
      */
     public static String getNameByCode(int code){
         return toMap().get(code);

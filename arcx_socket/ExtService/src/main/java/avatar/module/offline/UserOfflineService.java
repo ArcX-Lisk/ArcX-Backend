@@ -14,7 +14,7 @@ import avatar.util.user.UserUtil;
 import org.springframework.stereotype.Service;
 
 /**
- * 处理玩家下线后的事件操作
+
  */
 @Service
 public class UserOfflineService {
@@ -34,14 +34,14 @@ public class UserOfflineService {
         if(!StrUtil.checkEmpty(accessToken) && !accessToken.equals(ConfigMsg.touristAccessToken)) {
             int userId = UserUtil.loadUserIdByToken(accessToken);
             if(userId>0) {
-                //判断是否在游戏中
-                LogUtil.getLogger().info("玩家{}退出socket了-----------", userId);
+                
+
                 if (UserInfoDao.getInstance().loadByUserId(userId) != null) {
-                    //把该玩家的socket全干掉
+                    
                     SendWebsocketMsgUtil.closeSocket(userId);
-                    //设备在线信息
+                    
                     ProductDealUtil.socketOffDeal(userId);
-                    //处理设备session信息
+                    
                     ProductSocketUtil.dealOffLineSession(userId);
                 }
             }

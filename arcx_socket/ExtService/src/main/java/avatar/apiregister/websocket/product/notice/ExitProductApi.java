@@ -20,7 +20,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 /**
- * 退出设备
+
  */
 @Service
 public class ExitProductApi extends SystemEventHandler2<Session> {
@@ -30,25 +30,25 @@ public class ExitProductApi extends SystemEventHandler2<Session> {
 
     @Override
     public void method(Session session, byte[] bytes) throws Exception {
-        //逻辑处理
+        
         ExecutorService cachedPool = Executors.newCachedThreadPool();
         cachedPool.execute(() -> {
-            //逻辑处理
-            String accessToken = session.getAccessToken();//玩家通行证
-            //前端传递的参数
+            
+            String accessToken = session.getAccessToken();
+            
             JSONObject jsonObject = JsonUtil.bytesToJson(bytes);
             int status = WebsocketEncodeUtil.checkEncode(accessToken, false, jsonObject);
             if(ParamsUtil.isSuccess(status)) {
-                int userId = UserUtil.loadUserIdByToken(accessToken);//玩家ID
-                int productId = jsonObject.getInteger("devId");//设备ID
+                int userId = UserUtil.loadUserIdByToken(accessToken);
+                int productId = jsonObject.getInteger("devId");
                 if(userId>0) {
-                    int pId = UserOnlineUtil.loadOnlineProduct(userId);//玩家所在设备
+                    int pId = UserOnlineUtil.loadOnlineProduct(userId);
                     if (pId == productId) {
-                        //退出设备
+                        
                         ProductWebsocketService.exitProduct(userId, productId);
                     }
                 }
-                //处理退出设备（公共处理）
+                
                 dealExitProduct(productId, session);
             }
         });
@@ -56,7 +56,7 @@ public class ExitProductApi extends SystemEventHandler2<Session> {
     }
 
     /**
-     * 处理退出设备
+
      */
     private void dealExitProduct(int productId, Session session) {
         RedisLock lock = new RedisLock(RedisLock.loadCache(), LockMsg.PRODUCT_SESSION_LOCK+"_"+productId,

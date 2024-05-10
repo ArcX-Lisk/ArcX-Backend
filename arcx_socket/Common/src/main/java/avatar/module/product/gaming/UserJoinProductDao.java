@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 玩家加入设备数据接口
+
  */
 public class UserJoinProductDao {
     private static final UserJoinProductDao instance = new UserJoinProductDao();
@@ -16,13 +16,13 @@ public class UserJoinProductDao {
     }
 
     /**
-     * 查询信息
+
      */
     public List<Integer> loadByMsg(int userId) {
         List<Integer> list = loadCache(userId);
         if(list==null){
             list = new ArrayList<>();
-            //设置缓存
+            
             setCache(userId, list);
         }
         return list;
@@ -31,7 +31,7 @@ public class UserJoinProductDao {
     //=========================cache===========================
 
     /**
-     * 查询缓存
+
      */
     private List<Integer> loadCache(int userId){
         return (List<Integer>) GameData.getCache().get(
@@ -39,14 +39,14 @@ public class UserJoinProductDao {
     }
 
     /**
-     * 设置缓存
+
      */
     public void setCache(int userId, List<Integer> list){
         GameData.getCache().set(ProductPrefixMsg.USER_SESSION_JOIN_PRODUCT_MSG+"_"+userId, list);
     }
 
     /**
-     * 删除缓存
+
      */
     public void removeCache(int userId){
         GameData.getCache().removeCache(ProductPrefixMsg.USER_SESSION_JOIN_PRODUCT_MSG+"_"+userId);

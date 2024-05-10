@@ -7,7 +7,7 @@ import avatar.util.utilDB.annotation.Table;
 import org.springframework.stereotype.Service;
 
 @Service
-@Table(name="user_grand_prize_msg" , comment = "玩家设备大奖信息")
+
 public class UserGrandPrizeMsgEntity extends BaseEntity {
     public UserGrandPrizeMsgEntity() {
         super(UserGrandPrizeMsgEntity.class);
@@ -17,64 +17,64 @@ public class UserGrandPrizeMsgEntity extends BaseEntity {
     @Column(name = "id" , comment = "id" )
     private int id;
 
-    @Column(name = "user_id" , comment = "玩家ID")
+
     private int userId;
 
-    @Column(name = "pile_tower" , comment = "炼金塔堆塔")
+
     private int pileTower;
 
-    @Column(name = "dragon_ball" , comment = "龙珠")
+
     private int dragonBall;
 
-    @Column(name = "room_rank_first" , comment = "房间排行榜第一名")
+
     private int roomRankFirst;
 
-    @Column(name = "room_rank_second" , comment = "房间排行榜第二名")
+
     private int roomRankSecond;
 
-    @Column(name = "room_rank_third" , comment = "房间排行榜第三名")
+
     private int roomRankThird;
 
-    @Column(name = "free_game" , comment = "免费游戏")
+
     private int freeGame;
 
-    @Column(name = "gem" , comment = "宝石游戏")
+
     private int gem;
 
-    @Column(name = "prize_wheel_grand" , comment = "大奖转盘-grand奖池")
+
     private int prizeWheelGrand;
 
-    @Column(name = "prize_wheel_major" , comment = "大奖转盘-major奖池")
+
     private int prizeWheelMajor;
 
-    @Column(name = "prize_wheel_minor" , comment = "大奖转盘-grand奖池")
+
     private int prizeWheelMinor;
 
-    @Column(name = "agypt_box" , comment = "埃及开箱子")
+
     private int agyptBox;
 
-    @Column(name = "gossip" , comment = "八卦")
+
     private int gossip;
 
-    @Column(name = "hero_battle" , comment = "三国战斗")
+
     private int heroBattle;
 
-    @Column(name = "thunder" , comment = "闪电")
+
     private int thunder;
 
-    @Column(name = "jackpot_kingkong" , comment = "金刚大奖转盘")
+
     private int jackpotKingkong;
 
-    @Column(name = "jackpot_hero" , comment = "三国大奖转盘")
+
     private int jackpotHero;
 
-    @Column(name = "whistle" , comment = "口哨")
+
     private int whistle;
 
-    @Column(name = "create_time" , comment = "创建时间")
+
     private String createTime;
 
-    @Column(name = "update_time" , comment = "更新时间")
+
     private String updateTime;
 
     public int getId() {

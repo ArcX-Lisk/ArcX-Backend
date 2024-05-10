@@ -1,19 +1,19 @@
 package avatar.data.crossServer;
 
 /**
- * 简易服务端玩家信息
+
  */
 public class ConciseServerUserMsg {
-    //玩家ID
+    
     private int plyId;
 
-    //玩家名称
+    
     private String plyNm;
 
-    //玩家头像
+    
     private String plyPct;
 
-    //服务端类型
+    
     private int svTp;
 
     public int getPlyId() {

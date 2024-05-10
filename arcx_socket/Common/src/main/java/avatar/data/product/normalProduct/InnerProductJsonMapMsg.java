@@ -5,34 +5,34 @@ import avatar.data.product.general.ResponseGeneralMsg;
 import java.util.Map;
 
 /**
- * 设备内部操作json map信息
+
  */
 public class InnerProductJsonMapMsg {
-    //内部操作协议号
+    
     private int cmd;
 
-    //当前通信的服务端ID
+    
     private int hostId;
 
-    //具体的内容参数
+    
     private Map<String, Object> dataMap;
 
-    //操作结果
+    
     private int status;
 
-    //服务器时间
+    
     private String time;
 
-    //设备ID
+    
     private int productId;
 
-    //设备玩家
+    
     private int userId;
 
-    //返回通用信息
+    
     private ResponseGeneralMsg responseGeneralMsg;
 
-    //设备信息通用参数
+    
     private ProductGeneralParamsMsg productGeneralParamsMsg;
 
     public int getCmd() {

@@ -3,7 +3,7 @@ package avatar.util.excel;
 import avatar.global.Config;
 
 /**
- * excel 配置表操作类
+
  */
 public class ExcelManager {
     private static final ExcelManager instance = new ExcelManager();
@@ -20,7 +20,7 @@ public class ExcelManager {
     }
 
     /**
-     * 获得一个Excel读取器，特别注意，一定要释放（就是读取完后要调用close）
+
      */
     public MyXlsReader buildReader(String fileName){
         fileName = String.format("%s%s", getPath() , fileName);

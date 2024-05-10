@@ -7,44 +7,44 @@ import avatar.util.utilDB.annotation.Table;
 import org.springframework.stereotype.Service;
 
 @Service
-@Table(name="user_info" , comment = "用户信息表")
+
 public class UserInfoEntity extends BaseEntity {
     public UserInfoEntity() {
         super(UserInfoEntity.class);
     }
 
     @Pk
-    @Column(name = "id" , comment = "玩家id" )
+
     private int id;
 
-    @Column(name = "nick_name" , comment = "玩家昵称")
+
     private String nickName;
 
-    @Column(name = "sex" , comment = "性别")
+
     private int sex;
 
-    @Column(name = "img_url" , comment = "头像地址")
+
     private String imgUrl;
 
-    @Column(name = "signature" , comment = "个性签名")
+
     private String signature;
 
     @Column(name = "ip" , comment = "ip")
     private String ip;
 
-    @Column(name = "login_way" , comment = "最近登录方式")
+
     private int loginWay;
 
-    @Column(name = "mobile_platform_type" , comment = "手机平台类型")
+
     private int mobilePlatformType;
 
-    @Column(name = "status" , comment = "状态")
+
     private int status;
 
-    @Column(name = "create_time" , comment = "创建时间")
+
     private String createTime;
 
-    @Column(name = "update_time" , comment = "更新时间")
+
     private String updateTime;
 
     public int getId() {

@@ -11,7 +11,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 /**
- * 兑换NFT的金币
+
  */
 @Service
 public class ExchangeNftGoldApi extends SystemEventHttpHandler<Session> {

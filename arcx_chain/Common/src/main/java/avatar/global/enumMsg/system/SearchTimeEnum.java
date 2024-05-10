@@ -1,13 +1,13 @@
 package avatar.global.enumMsg.system;
 
 /**
- * 枚举：时间范围
+
  */
 public enum SearchTimeEnum {
-    ALL(0,"全部", 0),
-    ONE_MONTH(1,"一个月", 1),
-    THREE_MONTH(2,"三个月", 3),
-    HALF_YEAR(3, "近半年", 6),
+
+
+
+
     ;
 
     private int code;

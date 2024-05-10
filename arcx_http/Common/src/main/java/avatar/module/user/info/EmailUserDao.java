@@ -7,7 +7,7 @@ import avatar.util.system.StrUtil;
 import java.util.List;
 
 /**
- * 邮箱玩家
+
  */
 public class EmailUserDao {
     private static final EmailUserDao instance = new EmailUserDao();
@@ -16,15 +16,15 @@ public class EmailUserDao {
     }
 
     /**
-     * 查询信息
+
      */
     public int loadMsg(String email){
-        //从缓存查找
+        
         int userId = loadCache(email);
         if(userId==-1){
-            //查询数据库
+            
             userId = loadDbByEmail(email);
-            //设置缓存
+            
             setCache(email, userId);
         }
         return userId;
@@ -33,7 +33,7 @@ public class EmailUserDao {
     //=========================cache===========================
 
     /**
-     * 查询缓存
+
      */
     private int loadCache(String email){
         Object obj = GameData.getCache().get(UserPrefixMsg.EMAIL_USER+"_"+email);
@@ -41,7 +41,7 @@ public class EmailUserDao {
     }
 
     /**
-     * 添加缓存
+
      */
     public void setCache(String email, int userId){
         GameData.getCache().set(UserPrefixMsg.EMAIL_USER+"_"+email, userId);
@@ -50,7 +50,7 @@ public class EmailUserDao {
     //=========================db===========================
 
     /**
-     * 根据邮件查询
+
      */
     private int loadDbByEmail(String email) {
         String sql = "select id from user_info where email=?";

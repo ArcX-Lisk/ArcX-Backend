@@ -7,7 +7,7 @@ import avatar.util.utilDB.annotation.Table;
 import org.springframework.stereotype.Service;
 
 @Service
-@Table(name="agent_area_nation_msg" , comment = "代理区域国家信息")
+
 public class AgentAreaNationMsgEntity extends BaseEntity {
     public AgentAreaNationMsgEntity() {
         super(AgentAreaNationMsgEntity.class);
@@ -17,13 +17,13 @@ public class AgentAreaNationMsgEntity extends BaseEntity {
     @Column(name = "id" , comment = "id" )
     private int id;
 
-    @Column(name = "area_id" , comment = "区域ID" )
+
     private int areaId;
 
-    @Column(name = "nation_name" , comment = "国家名称" )
+
     private String nationName;
 
-    @Column(name = "create_time" , comment = "创建时间" )
+
     private String createTime;
 
     public int getId() {

@@ -14,31 +14,31 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * 测试接口实现类
+
  */
 public class TestService {
     /**
-     * 清除签到信息
+
      */
     public static void clearSignMsg(Map<String, Object> map, Session session) {
-        Map<String, Object> dataMap = new HashMap<>();//内容参数信息
+        Map<String, Object> dataMap = new HashMap<>();
         if(CheckUtil.isTestEnv()) {
-            int userId = ParamsUtil.intParmasNotNull(map, "dealUserId");//玩家ID
-            int continueDay = ParamsUtil.intParmas(map, "continueDay");//持续天数
-            //签到奖励
+            int userId = ParamsUtil.intParmasNotNull(map, "dealUserId");
+            int continueDay = ParamsUtil.intParmas(map, "continueDay");
+            
             WelfareUtil.resetUserSignMsg(userId, continueDay);
         }else{
-            LogUtil.getLogger().info("线上无法调用清除福利奖励玩家信息处理--------");
+
         }
-        //推送结果
+        
         SendMsgUtil.sendBySessionAndMap(session, ClientCode.SUCCESS.getCode(), dataMap);
     }
 
     /**
-     * 服务测试
+
      */
     public static void serverTest(Map<String, Object> map, Session session) {
-        //推送结果
+        
         SendMsgUtil.sendBySessionAndMap(session, ClientCode.SUCCESS.getCode(), new HashMap<>());
 //        GameShiftUtil.register(1000004,"7856176776@qq.com");
 //        GameShiftUtil.loadWalletAddress(100003);

@@ -24,124 +24,124 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 钱包接口实现类
+
  */
 public class WalletService {
     /**
-     * 钱包开销
+
      */
     public static void walletSpending(Map<String, Object> map, Session session) {
-        Map<String, Object> dataMap = new HashMap<>();//内容参数信息
-        //检测参数
+        Map<String, Object> dataMap = new HashMap<>();
+        
         int status = CheckParamsUtil.checkAccessToken(map);
         if(ParamsUtil.isSuccess(status)) {
-            int userId = ParamsUtil.userId(map);//玩家ID
-            //UDST代币
+            int userId = ParamsUtil.userId(map);
+            
             dataMap.put("usdt", UserUsdtUtil.usdtBalance(userId));
-            //AXC代币
+            
             dataMap.put("axc", UserBalanceUtil.getUserBalance(userId, CommodityUtil.axc()));
         }
-        //推送结果
+        
         SendMsgUtil.sendBySessionAndMap(session, status, dataMap);
     }
 
     /**
-     * 链上钱包
+
      */
     public static void chainWallet(Map<String, Object> map, Session session) {
-        Map<String, Object> dataMap = new HashMap<>();//内容参数信息
-        //检测参数
+        Map<String, Object> dataMap = new HashMap<>();
+        
         int status = UserCheckParamsUtil.chainWallet(map);
         if(ParamsUtil.isSuccess(status)) {
-            int userId = ParamsUtil.userId(map);//玩家ID
-            //查询账号信息
+            int userId = ParamsUtil.userId(map);
+            
             Web3GameShiftAccountEntity accountEntity = Web3GameShiftAccountDao.getInstance().loadByMsg(userId);
-            dataMap.put("wlAds", accountEntity.getWallet());//钱包地址
-            //UDST代币
+            dataMap.put("wlAds", accountEntity.getWallet());
+            
             dataMap.put("usdt", SolanaUtil.accountBalance(accountEntity.getUsdtAccount()));
-            //AXC代币
+            
             dataMap.put("axc", SolanaUtil.accountBalance(accountEntity.getAxcAccount()));
-            //solana代币
+            
             dataMap.put("sol", GameShiftUtil.getBalance(userId));
         }
-        //推送结果
+        
         SendMsgUtil.sendBySessionAndMap(session, status, dataMap);
     }
 
     /**
-     * 钱包提现
+
      */
     public static void walletWithdraw(Map<String, Object> map, Session session) {
-        Map<String, Object> dataMap = new HashMap<>();//内容参数信息
-        //检测参数
+        Map<String, Object> dataMap = new HashMap<>();
+        
         int status = UserCheckParamsUtil.walletWithdraw(map);
         if(ParamsUtil.isSuccess(status)) {
-            int userId = ParamsUtil.userId(map);//玩家ID
-            int tokenType = ParamsUtil.intParmasNotNull(map, "tkTp");//代币类型
-            int amount = ParamsUtil.intParmasNotNull(map, "amt");//转移代币数
-            //扣掉对应的币
+            int userId = ParamsUtil.userId(map);
+            int tokenType = ParamsUtil.intParmasNotNull(map, "tkTp");
+            int amount = ParamsUtil.intParmasNotNull(map, "amt");
+            
             boolean flag = UserCostLogUtil.costWalletWithdraw(userId, tokenType, amount);
             if(flag) {
-                //处理提现
+                
                 WalletUtil.walletWithdraw(tokenType, amount, userId);
             }else{
-                status = ClientCode.BALANCE_NO_ENOUGH.getCode();//余额不足
+                status = ClientCode.BALANCE_NO_ENOUGH.getCode();
             }
         }
-        //推送结果
+        
         SendMsgUtil.sendBySessionAndMap(session, status, dataMap);
     }
 
     /**
-     * 钱包充值
+
      */
     public static void walletRecharge(Map<String, Object> map, Session session) {
-        Map<String, Object> dataMap = new HashMap<>();//内容参数信息
-        //检测参数
+        Map<String, Object> dataMap = new HashMap<>();
+        
         int status = UserCheckParamsUtil.walletRecharge(map);
         if(ParamsUtil.isSuccess(status)) {
-            int userId = ParamsUtil.userId(map);//玩家ID
-            int tokenType = ParamsUtil.intParmasNotNull(map, "tkTp");//代币类型
-            int amount = ParamsUtil.intParmasNotNull(map, "amt");//转入代币数
-            dataMap.put("url", WalletUtil.walletRecharge(tokenType, amount, userId));//确认地址
+            int userId = ParamsUtil.userId(map);
+            int tokenType = ParamsUtil.intParmasNotNull(map, "tkTp");
+            int amount = ParamsUtil.intParmasNotNull(map, "amt");
+            dataMap.put("url", WalletUtil.walletRecharge(tokenType, amount, userId));
         }
-        //推送结果
+        
         SendMsgUtil.sendBySessionAndMap(session, status, dataMap);
     }
 
     /**
-     * 代币转移
+
      */
     public static void transferTokens(Map<String, Object> map, Session session) {
-        Map<String, Object> dataMap = new HashMap<>();//内容参数信息
-        //检测参数
+        Map<String, Object> dataMap = new HashMap<>();
+        
         int status = UserCheckParamsUtil.transferTokens(map);
         if(ParamsUtil.isSuccess(status)) {
-            int userId = ParamsUtil.userId(map);//玩家ID
-            int tokenType = ParamsUtil.intParmasNotNull(map, "tkTp");//代币类型
-            double amount = StrUtil.truncateNmDecimal(ParamsUtil.doubleParmasNotNull(map, "amt"), 9);//转移代币数
-            String address = ParamsUtil.stringParmasNotNull(map, "ads");//转移的代币地址
-            String tokenAccount = WalletUtil.loadTransferTokens(tokenType, address);//获取代币token
+            int userId = ParamsUtil.userId(map);
+            int tokenType = ParamsUtil.intParmasNotNull(map, "tkTp");
+            double amount = StrUtil.truncateNmDecimal(ParamsUtil.doubleParmasNotNull(map, "amt"), 9);
+            String address = ParamsUtil.stringParmasNotNull(map, "ads");
+            String tokenAccount = WalletUtil.loadTransferTokens(tokenType, address);
             if(!StrUtil.checkEmpty(tokenAccount)){
-                dataMap.put("url", WalletUtil.transferTokens(tokenType, amount, userId, tokenAccount));//确认地址
+                dataMap.put("url", WalletUtil.transferTokens(tokenType, amount, userId, tokenAccount));
             }else{
-                status = ClientCode.FAIL.getCode();//失败
+                status = ClientCode.FAIL.getCode();
             }
         }
-        //推送结果
+        
         SendMsgUtil.sendBySessionAndMap(session, status, dataMap);
     }
 
     /**
-     * 钱包配置
+
      */
     public static void walletConfig(Session session) {
-        Map<String, Object> dataMap = new HashMap<>();//内容参数信息
-        dataMap.put("minIfo", WalletUtil.minInfo());//最小信息
-        dataMap.put("maxIfo", WalletUtil.maxIfo());//上限信息
-        dataMap.put("feeIfo", WalletUtil.feeIfo());//手续费信息
-        dataMap.put("exFee", WalletConfigMsg.extraFee);//外部费用
-        //推送结果
+        Map<String, Object> dataMap = new HashMap<>();
+        dataMap.put("minIfo", WalletUtil.minInfo());
+        dataMap.put("maxIfo", WalletUtil.maxIfo());
+        dataMap.put("feeIfo", WalletUtil.feeIfo());
+        dataMap.put("exFee", WalletConfigMsg.extraFee);
+        
         SendMsgUtil.sendBySessionAndMap(session, ClientCode.SUCCESS.getCode(), dataMap);
     }
 }

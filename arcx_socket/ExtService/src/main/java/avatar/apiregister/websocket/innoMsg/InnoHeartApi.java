@@ -6,7 +6,7 @@ import avatar.net.session.Session;
 import org.springframework.stereotype.Service;
 
 /**
- * 自研设备心跳
+
  */
 @Service
 public class InnoHeartApi extends SystemEventHandler2<Session> {

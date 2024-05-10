@@ -33,145 +33,145 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 设备接口实现类
+
  */
 public class ProductService {
     /**
-     * 设备信息
+
      */
     public static void productMsg(Map<String, Object> map, Session session) {
-        Map<String, Object> dataMap = new HashMap<>();//内容参数信息
-        //检测参数
+        Map<String, Object> dataMap = new HashMap<>();
+        
         int status = ProductCheckParamsUtil.checkProductStatus(map);
         if (ParamsUtil.isSuccess(status)) {
-            int productId = ParamsUtil.productId(map);//设备ID
-            int userId = ParamsUtil.userId(map);//玩家ID
-            String versionCode = ParamsUtil.versionCode(map);//版本号
-            //查询设备信息
+            int productId = ParamsUtil.productId(map);
+            int userId = ParamsUtil.userId(map);
+            String versionCode = ParamsUtil.versionCode(map);
+            
             ProductInfoEntity entity = ProductInfoDao.getInstance().loadByProductId(productId);
-            dataMap.put("devId", productId);//设备ID
-            dataMap.put("devNm", entity.getProductName());//设备名称
-            //设备类型
-            int productType = entity.getProductType();//设备类型
-            dataMap.put("devTp", productType);//设备类型
-            dataMap.put("sndTp", entity.getSecondType());//设备二级分类
-            dataMap.put("devIdx", ProductUtil.productIndex(productId, entity.getLiveUrl()));//设备位置
-            dataMap.put("devPct", ImgUtil.loadProductImg(entity.getImgProductId()));//图标路径
-            dataMap.put("lvTp", entity.getLiveType());//播流类型
-            dataMap.put("lvAds", entity.getLiveUrl());//视频流路径
-            dataMap.put("wbLvAds", StrUtil.checkEmpty(entity.getWebLiveUrl())?entity.getLiveUrl():entity.getWebLiveUrl());//web播流地址
-            dataMap.put("cmdTp", entity.getCostCommodityType());//消耗商品类型
-            dataMap.put("csAmt", entity.getCost());//游戏价格
+            dataMap.put("devId", productId);
+            dataMap.put("devNm", entity.getProductName());
+            
+            int productType = entity.getProductType();
+            dataMap.put("devTp", productType);
+            dataMap.put("sndTp", entity.getSecondType());
+            dataMap.put("devIdx", ProductUtil.productIndex(productId, entity.getLiveUrl()));
+            dataMap.put("devPct", ImgUtil.loadProductImg(entity.getImgProductId()));
+            dataMap.put("lvTp", entity.getLiveType());
+            dataMap.put("lvAds", entity.getLiveUrl());
+            dataMap.put("wbLvAds", StrUtil.checkEmpty(entity.getWebLiveUrl())?entity.getLiveUrl():entity.getWebLiveUrl());
+            dataMap.put("cmdTp", entity.getCostCommodityType());
+            dataMap.put("csAmt", entity.getCost());
             dataMap.put("devSts", ProductUtil.loadGamingUser(productId).getUserId()>0?
-                    YesOrNoEnum.YES.getCode():YesOrNoEnum.NO.getCode());//设备占用状态
-            dataMap.put("devDtPct", ImgUtil.loadProductDetailImg(entity.getImgProductDetailId()));//设备详情URL
-            ProductGamingUserMsg gamingUserMsg = ProductUtil.loadGamingUser(productId);//游戏中玩家ID
-            //游戏玩家信息
+                    YesOrNoEnum.YES.getCode():YesOrNoEnum.NO.getCode());
+            dataMap.put("devDtPct", ImgUtil.loadProductDetailImg(entity.getImgProductDetailId()));
+            ProductGamingUserMsg gamingUserMsg = ProductUtil.loadGamingUser(productId);
+            
             if(gamingUserMsg.getUserId()>0) {
-                dataMap.put("gmPly", CrossServerMsgUtil.initConciseServerUserMsg(gamingUserMsg));//游戏中玩家信息
+                dataMap.put("gmPly", CrossServerMsgUtil.initConciseServerUserMsg(gamingUserMsg));
             }
-            //投币倍率信息
+            
             ProductUtil.coinMultiMsg(userId, productId, versionCode, dataMap);
         }
-        //推送结果
+        
         SendMsgUtil.sendBySessionAndMap(session, status, dataMap);
     }
 
     /**
-     * 设备列表
+
      */
     public static void productList(Map<String, Object> map, Session session) {
         List<ProductMsg> retList = new ArrayList<>();
         int status = ProductCheckParamsUtil.productList(map);
         if(ParamsUtil.isSuccess(status)) {
-            int productType = ParamsUtil.intParmasNotNull(map, "devTp");//设备类型
-            //查询设备分类列表列表
+            int productType = ParamsUtil.intParmasNotNull(map, "devTp");
+            
             List<Integer> productList = ProductTypeFordingListDao.getInstance().loadList(productType);
             if(productList.size()>0) {
-                //获取分页信息
+                
                 List<Integer> loadList = ListUtil.getPageList(ParamsUtil.pageNum(map),
                         ParamsUtil.pageSize(map), productList);
                 loadList.forEach(pId -> retList.add(ProductUtil.ProductMsg(pId)));
             }
         }
-        //传输的jsonMap，先填充list
+        
         Map<String,Object> jsonMap = new HashMap<>();
         jsonMap.put("serverTbln", retList);
-        //推送结果
+        
         SendMsgUtil.sendBySessionAndList(session, status, jsonMap);
     }
 
     /**
-     * 快速加入的设备
+
      */
     public static void fastJoinProduct(Map<String, Object> map, Session session) {
-        Map<String, Object> dataMap = new HashMap<>();//内容参数信息
-        //检测参数
+        Map<String, Object> dataMap = new HashMap<>();
+        
         int status = ProductCheckParamsUtil.fastJoinProduct(map);
         if (ParamsUtil.isSuccess(status)) {
-            int productType = ParamsUtil.intParmasNotNull(map, "devTp");//设备类型
+            int productType = ParamsUtil.intParmasNotNull(map, "devTp");
             ProductMsg productMsg = null;
-            int retProductId = ProductUtil.loadFastJoinProduct(productType, dataMap);//返回的设备ID
-            //返回的设备信息
+            int retProductId = ProductUtil.loadFastJoinProduct(productType, dataMap);
+            
             if (retProductId > 0) {
                 productMsg = ProductUtil.ProductMsg(retProductId);
             }
             dataMap.put("devIfo", productMsg);
         }
-        //推送结果
+        
         SendMsgUtil.sendBySessionAndMap(session, status, dataMap);
     }
 
     /**
-     * 游戏中的设备
+
      */
     public static void gamingProduct(Map<String, Object> map, Session session) {
-        Map<String, Object> dataMap = new HashMap<>();//内容参数信息
-        //检测参数
+        Map<String, Object> dataMap = new HashMap<>();
+        
         int status = CheckParamsUtil.checkAccessToken(map);
         if (ParamsUtil.isSuccess(status)) {
-            int userId = ParamsUtil.userId(map);//玩家ID
-            dataMap.put("devId", UserOnlineUtil.loadGamingProduct(userId));//设备ID
+            int userId = ParamsUtil.userId(map);
+            dataMap.put("devId", UserOnlineUtil.loadGamingProduct(userId));
         }
-        //推送结果
+        
         SendMsgUtil.sendBySessionAndMap(session, status, dataMap);
     }
 
     /**
-     * 设备报修
+
      */
     public static void repairProduct(Map<String, Object> map, Session session) {
-        Map<String, Object> dataMap = new HashMap<>();//内容参数信息
-        //检测参数
+        Map<String, Object> dataMap = new HashMap<>();
+        
         int status = ProductCheckParamsUtil.repairProduct(map);
-        int productId = 0;//设备ID
-        int userId = 0;//玩家ID
+        int productId = 0;
+        int userId = 0;
         if(ParamsUtil.isSuccess(status)){
-            userId = ParamsUtil.userId(map);//玩家ID
-            productId = ParamsUtil.productId(map);//设备ID
-            //查询维修信息
+            userId = ParamsUtil.userId(map);
+            productId = ParamsUtil.productId(map);
+            
             ProductRepairEntity entity = ProductRepairDao.getInstance().loadByProductId(productId);
             if(entity!=null && (TimeUtil.getNowTime()-TimeUtil.strToLong(entity.getCreateTime()))
                     < ProductConfigMsg.productRepairIntervalTime*1000){
-                status = ClientCode.REPAIR_MSG_EXIST.getCode();//报修信息已经存在
+                status = ClientCode.REPAIR_MSG_EXIST.getCode();
             }else{
-                //添加报修数据
+                
                 boolean flag = ProductRepairDao.getInstance().insert(ProductUtil.
                         initProductRepairEntity(userId, productId, 0));
                 if(!flag){
-                    status = ClientCode.FAIL.getCode();//失败
+                    status = ClientCode.FAIL.getCode();
                 }
             }
-            //添加操作日志
+            
             if(ParamsUtil.isSuccess(status)){
                 UserOperateLogUtil.repairProduct(userId, productId);
             }
         }
-        //推送结果
+        
         if(ParamsUtil.isSuccess(status)){
-            //报修单独返回
+            
             SendMsgUtil.sendBySessionAndMap(session, ClientCode.SUCCESS_REPAIR.getCode(), dataMap);
-            //添加后续处理定时器
+            
             SchedulerSample.delayed(10, new RepairProductDealTask(productId, userId));
         }else {
             SendMsgUtil.sendBySessionAndMap(session, status, dataMap);

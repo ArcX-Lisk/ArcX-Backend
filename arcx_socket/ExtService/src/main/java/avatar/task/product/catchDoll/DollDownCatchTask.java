@@ -13,19 +13,19 @@ import avatar.util.checkParams.ErrorDealUtil;
 import com.yaowan.game.common.scheduler.ScheduledTask;
 
 /**
- * 抓娃娃下爪定时器
+
  */
 public class DollDownCatchTask extends ScheduledTask {
-    private int userId;//玩家ID
+    private int userId;
 
-    private int productId;//设备ID
+    private int productId;
 
-    private int time;//次数
+    private int time;
 
-    private long onProductTime;//上机时间
+    private long onProductTime;
 
     public DollDownCatchTask(int userId, int productId, int time, long onProductTime) {
-        super("抓娃娃定时下爪");
+
         this.userId = userId;
         this.productId = productId;
         this.time = time;
@@ -34,8 +34,8 @@ public class DollDownCatchTask extends ScheduledTask {
 
     @Override
     public void run() {
-        LogUtil.getLogger().info("玩家{}在设备{}上抓娃娃定时下爪---------",userId,productId);
-        //获取设备锁
+
+        
         RedisLock lock = new RedisLock(RedisLock.loadCache(), LockMsg.PRODUCT_ROOM_DEAL_LOCK+"_"+productId,
                 2000);
         try {
@@ -43,14 +43,14 @@ public class DollDownCatchTask extends ScheduledTask {
                 ProductRoomMsg roomMsg = ProductRoomDao.getInstance().loadByProductId(productId);
                 DollGamingMsg gamingMsg = DollGamingMsgDao.getInstance().loadByProductId(productId);
                 if(roomMsg!=null && gamingMsg!=null){
-                    //是当前玩家并且是当前本次操作
+                    
                     if(roomMsg.getGamingUserId()==userId && gamingMsg.getTime()==time && !gamingMsg.isCatch()
                             && roomMsg.getOnProductTime()==onProductTime){
-                        LogUtil.getLogger().info("玩家{}在设备{}上抓娃娃成功定时操作下爪---------",userId,productId);
-                        //设备操作
+
+                        
                         ProductSocketOperateService.catchDollOperate(productId, ProductOperationEnum.CATCH.getCode(),userId);
                     }else{
-                        LogUtil.getLogger().info("娃娃机下爪定时器失败，次数对比{}:{}，是否下爪中{}，设备时间{}:{}-------",
+
                                 gamingMsg.getTime(), time, gamingMsg.isCatch(), roomMsg.getOnProductTime(), onProductTime);
                     }
                 }

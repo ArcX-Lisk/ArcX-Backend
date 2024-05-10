@@ -6,7 +6,7 @@ import avatar.util.GameData;
 import avatar.util.user.UserUtil;
 
 /**
- * 服务端玩家信息
+
  */
 public class ServerSideUserMsgDao {
     private static final ServerSideUserMsgDao instance = new ServerSideUserMsgDao();
@@ -15,17 +15,17 @@ public class ServerSideUserMsgDao {
     }
 
     /**
-     * 根据
+
      */
     public ProductGamingUserMsg loadByMsg(int userId, int serverSideType){
-        //从缓存获取
+        
         return loadCache(userId, serverSideType);
     }
 
     //=========================cache===========================
 
     /**
-     * 查询缓存
+
      */
     private ProductGamingUserMsg loadCache(int userId, int serverSideType) {
         return GameData.getCache().get(ProductPrefixMsg.SERVER_SIDE_USER_MSG+"_"+userId+"_"+serverSideType)==null?
@@ -34,7 +34,7 @@ public class ServerSideUserMsgDao {
     }
 
     /**
-     * 设置缓存
+
      */
     public void setCache(int userId, int serverSideType, ProductGamingUserMsg userMsg) {
         GameData.getCache().set(ProductPrefixMsg.SERVER_SIDE_USER_MSG+"_"+userId+"_"+serverSideType, userMsg);

@@ -3,25 +3,25 @@ package avatar.data.nft;
 import java.util.List;
 
 /**
- * NFT背包信息
+
  */
 public class NftKnapsackMsg {
-    //NFT编号
+    
     private String nftCd;
 
-    //名称
+    
     private String nm;
 
-    //图片
+    
     private String pct;
 
-    //NFT类型
+    
     private int nftTp;
 
-    //状态
+    
     private int stat;
 
-    //属性列表
+    
     private List<ConciseNftAttributeMsg> atbTbln;
 
     public String getNftCd() {

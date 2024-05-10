@@ -5,7 +5,7 @@ import avatar.global.prefixMsg.RechargePrefixMsg;
 import avatar.util.GameData;
 
 /**
- * 金币USDT兑比配置数据接口
+
  */
 public class GoldUsdtConfigDao {
     private static final GoldUsdtConfigDao instance = new GoldUsdtConfigDao();
@@ -14,15 +14,15 @@ public class GoldUsdtConfigDao {
     }
 
     /**
-     * 查询信息
+
      */
     public long loadMsg() {
-        //从缓存获取
+        
         long proportion = loadCache();
         if(proportion==-1){
             GoldUsdtConfigEntity entity = loadDbMsg();
             proportion = entity==null?0:entity.getProportion();
-            //设置缓存
+            
             setCache(proportion);
         }
         return proportion;
@@ -31,7 +31,7 @@ public class GoldUsdtConfigDao {
     //=========================cache===========================
 
     /**
-     * 查询缓存
+
      */
     private long loadCache(){
         Object obj = GameData.getCache().get(RechargePrefixMsg.GOLD_USDT_CONFIG);
@@ -39,7 +39,7 @@ public class GoldUsdtConfigDao {
     }
 
     /**
-     * 添加缓存
+
      */
     private void setCache(long proportion){
         GameData.getCache().set(RechargePrefixMsg.GOLD_USDT_CONFIG, proportion);
@@ -48,7 +48,7 @@ public class GoldUsdtConfigDao {
     //=========================db===========================
 
     /**
-     * 查询信息
+
      */
     public GoldUsdtConfigEntity loadDbMsg() {
         String sql = "select * from gold_usdt_config";

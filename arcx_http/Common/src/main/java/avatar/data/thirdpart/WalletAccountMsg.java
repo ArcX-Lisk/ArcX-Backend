@@ -1,13 +1,13 @@
 package avatar.data.thirdpart;
 
 /**
- * solana钱包信息
+
  */
 public class WalletAccountMsg {
-    //公钥
+    
     private String pk;
 
-    //私钥
+    
     private String sk;
 
     public String getPk() {

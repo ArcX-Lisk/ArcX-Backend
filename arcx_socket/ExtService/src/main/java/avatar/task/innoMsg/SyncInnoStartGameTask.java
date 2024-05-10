@@ -7,17 +7,17 @@ import avatar.util.innoMsg.*;
 import com.yaowan.game.common.scheduler.ScheduledTask;
 
 /**
- * 推送自研设备服务器开始游戏定时器
+
  */
 public class SyncInnoStartGameTask extends ScheduledTask {
-    private String host;//连接的服务器IP
+    private String host;
 
-    private int port;//端口
+    private int port;
 
     private InnoStartGameMsg startGameMsg;
 
     public SyncInnoStartGameTask(String host, int port, InnoStartGameMsg startGameMsg) {
-        super("推送自研设备服务器开始游戏定时器");
+
         this.host = host;
         this.port = port;
         this.startGameMsg = startGameMsg;
@@ -25,11 +25,11 @@ public class SyncInnoStartGameTask extends ScheduledTask {
 
     @Override
     public void run() {
-        String linkMsg = SyncInnoConnectUtil.linkMsg(host, port);//连接信息
-        //发送心跳
+        String linkMsg = SyncInnoConnectUtil.linkMsg(host, port);
+        
         SyncInnoClient client = SyncInnoOperateUtil.loadClient(host, port, linkMsg);
         if (client != null && client.isOpen()) {
-            //推送开始游戏请求
+            
             SyncInnoUtil.startGame(client, startGameMsg);
         }else{
             InnoSendWebsocketUtil.sendWebsocketMsg(startGameMsg.getUserId(),

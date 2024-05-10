@@ -7,7 +7,7 @@ import avatar.util.utilDB.annotation.Table;
 import org.springframework.stereotype.Service;
 
 @Service
-@Table(name="sell_gold_machine_operate_history" , comment = "售币机经营记录")
+
 public class SellGoldMachineOperateHistoryEntity extends BaseEntity {
     public SellGoldMachineOperateHistoryEntity() {
         super(SellGoldMachineOperateHistoryEntity.class);
@@ -17,16 +17,16 @@ public class SellGoldMachineOperateHistoryEntity extends BaseEntity {
     @Column(name = "id" , comment = "id" )
     private int id;
 
-    @Column(name = "nft_code" , comment = "NFT编号")
+
     private String nftCode;
 
-    @Column(name = "user_id" , comment = "玩家ID" )
+
     private int userId;
 
-    @Column(name = "create_time" , comment = "创建时间")
+
     private String createTime;
 
-    @Column(name = "update_time" , comment = "更新时间")
+
     private String updateTime;
 
     public int getId() {

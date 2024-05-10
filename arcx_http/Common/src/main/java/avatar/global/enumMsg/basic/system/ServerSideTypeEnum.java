@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * 服务端类型枚举
+
  */
 public enum ServerSideTypeEnum {
     CLAWER(1,"clawer"),
@@ -12,7 +12,7 @@ public enum ServerSideTypeEnum {
     DAYLONG(3,"Pusher+"),
     META_PUSHER(4,"Metapusher"),
     METARCADE(5,"Metarcade"),
-    TIDE_PLAY(7,"潮玩街机"),
+
     ARCX(8,"Arcx"),
     ;
 
@@ -33,7 +33,7 @@ public enum ServerSideTypeEnum {
     }
 
     /**
-     * 获取列表
+
      */
     public static Map<Integer, String> toMap() {
         Map<Integer, String> map = new HashMap<Integer, String>();
@@ -44,7 +44,7 @@ public enum ServerSideTypeEnum {
     }
 
     /**
-     * 根据code获取名称
+
      */
     public static String getNameByCode(int code){
         return toMap().get(code);

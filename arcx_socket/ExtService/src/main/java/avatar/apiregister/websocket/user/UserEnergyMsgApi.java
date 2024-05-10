@@ -15,7 +15,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 /**
- * 能量信息
+
  */
 @Service
 public class UserEnergyMsgApi extends SystemEventHandler2<Session> {
@@ -25,15 +25,15 @@ public class UserEnergyMsgApi extends SystemEventHandler2<Session> {
 
     @Override
     public void method(Session session, byte[] bytes) throws Exception {
-        //逻辑处理
+        
         ExecutorService cachedPool = Executors.newCachedThreadPool();
         cachedPool.execute(() -> {
-            String accessToken = session.getAccessToken();//玩家通行证
-            //前端传递的参数
+            String accessToken = session.getAccessToken();
+            
             JSONObject jsonObject = JsonUtil.bytesToJson(bytes);
             int status = WebsocketEncodeUtil.checkEncode(accessToken, true, jsonObject);
             if(ParamsUtil.isSuccess(status)) {
-                //能量信息
+                
                 UserNoticePushUtil.userEnergyMsg(UserUtil.loadUserIdByToken(accessToken), 0);
             }
         });

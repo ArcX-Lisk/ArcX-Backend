@@ -7,7 +7,7 @@ import avatar.util.utilDB.annotation.Table;
 import org.springframework.stereotype.Service;
 
 @Service
-@Table(name="user_operate_log" , comment = "玩家操作日志")
+
 public class UserOperateLogEntity extends BaseEntity {
     public UserOperateLogEntity() {
         super(UserOperateLogEntity.class);
@@ -17,19 +17,19 @@ public class UserOperateLogEntity extends BaseEntity {
     @Column(name = "id" , comment = "id" )
     private long id;
 
-    @Column(name = "user_id" , comment = "玩家ID" )
+
     private int userId;
 
-    @Column(name = "operate_type" , comment = "操作类型" )
+
     private int operateType;
 
-    @Column(name = "operate_log" , comment = "操作日志")
+
     private String operateLog;
 
-    @Column(name = "operate_ip" , comment = "操作IP")
+
     private String operateIp;
 
-    @Column(name = "create_time" , comment = "创建时间")
+
     private String createTime;
 
     public long getId() {

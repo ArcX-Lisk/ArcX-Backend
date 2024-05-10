@@ -1,14 +1,14 @@
 package avatar.data.product.innoMsg;
 
 /**
- * 自研设备结算窗口信息
+
  */
 public class InnoSettlementWindowMsg {
-    private String alias;//设备号
+    private String alias;
 
-    private int userId;//玩家ID
+    private int userId;
 
-    private int serverSideType;//服务端类型
+    private int serverSideType;
 
     public String getAlias() {
         return alias;

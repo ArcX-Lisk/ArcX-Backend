@@ -7,7 +7,7 @@ import avatar.util.utilDB.annotation.Table;
 import org.springframework.stereotype.Service;
 
 @Service
-@Table(name="dragon_train_ball_user_get_history" , comment = "龙珠玛丽机龙珠玩家获得历史")
+
 public class DragonTrainBallUserGetHistoryEntity extends BaseEntity {
     public DragonTrainBallUserGetHistoryEntity() {
         super(DragonTrainBallUserGetHistoryEntity.class);
@@ -17,22 +17,22 @@ public class DragonTrainBallUserGetHistoryEntity extends BaseEntity {
     @Column(name = "id" , comment = "id" )
     private int id;
 
-    @Column(name = "user_id" , comment = "玩家ID" )
+
     private int userId;
 
-    @Column(name = "product_id" , comment = "设备ID" )
+
     private int productId;
 
-    @Column(name = "current_num" , comment = "当前数量" )
+
     private int currentNum;
 
-    @Column(name = "award_coin" , comment = "奖励游戏币数" )
+
     private int awardCoin;
 
-    @Column(name = "is_trigger" , comment = "是否触发玛丽机" )
+
     private int isTrigger;
 
-    @Column(name = "create_time" , comment = "创建时间" )
+
     private String createTime;
 
     public int getId() {

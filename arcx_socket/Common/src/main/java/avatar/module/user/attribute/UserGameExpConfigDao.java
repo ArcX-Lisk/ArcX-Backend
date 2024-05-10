@@ -7,7 +7,7 @@ import avatar.util.system.StrUtil;
 import java.util.List;
 
 /**
- * 玩家属性配置数据接口
+
  */
 public class UserGameExpConfigDao {
     private static final UserGameExpConfigDao instance = new UserGameExpConfigDao();
@@ -16,7 +16,7 @@ public class UserGameExpConfigDao {
     }
 
     /**
-     * 查询缓存信息
+
      */
     public long loadMsg(){
         long coinNum = loadCache();
@@ -30,7 +30,7 @@ public class UserGameExpConfigDao {
     //=========================cache===========================
 
     /**
-     * 查询缓存
+
      */
     private long loadCache(){
         Object obj = GameData.getCache().get(UserPrefixMsg.USER_GAME_EXP_CONFIG);
@@ -38,7 +38,7 @@ public class UserGameExpConfigDao {
     }
 
     /**
-     * 添加缓存
+
      */
     private void setCache(long coinNum){
         GameData.getCache().set(UserPrefixMsg.USER_GAME_EXP_CONFIG, coinNum);
@@ -47,7 +47,7 @@ public class UserGameExpConfigDao {
     //=========================db===========================
 
     /**
-     * 查询信息
+
      */
     private long loadDbCoinNum() {
         String sql = "select coin_num from user_game_exp_config";

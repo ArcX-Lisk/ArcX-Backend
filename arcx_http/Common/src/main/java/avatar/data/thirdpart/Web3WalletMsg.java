@@ -1,13 +1,13 @@
 package avatar.data.thirdpart;
 
 /**
- * solana钱包信息
+
  */
 public class Web3WalletMsg {
-    //账号信息
+    
     private WalletAccountMsg account;
 
-    //ACX账号
+    
     private String ata;
 
     public WalletAccountMsg getAccount() {

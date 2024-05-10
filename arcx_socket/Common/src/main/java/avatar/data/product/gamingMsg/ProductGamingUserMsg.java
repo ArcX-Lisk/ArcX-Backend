@@ -3,22 +3,22 @@ package avatar.data.product.gamingMsg;
 import java.io.Serializable;
 
 /**
- * 设备游戏中玩家信息
+
  */
 public class ProductGamingUserMsg implements Serializable {
-    //服务端类型
+    
     private int serverSideType;
 
-    //设备ID
+    
     private int productId;
 
-    //玩家ID
+    
     private int userId;
 
-    //玩家昵称
+    
     private String userName;
 
-    //玩家头像
+    
     private String imgUrl;
 
     public int getServerSideType() {

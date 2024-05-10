@@ -192,7 +192,7 @@ public class HttpServerHandler extends BaseHandler {
                             String key = "tidePlayBack@20231114~!";
                             String str = timestamp + "+" + key + "+" + jsonStr + "+" + platform;
                             String encodeStr = MD5Util.MD5(str);
-                            LogUtil.getLogger().info("接口{}的参数为：{},key为：{},platform为：{}，收到的加密为：{}，加密的字符串为：{}，加密后的密码为：{}---", new Object[]{uri, jsonStr, key, platform, code, str, encodeStr});
+
                             if (!code.equals(encodeStr)) {
                                 flag = false;
                             }
@@ -225,7 +225,7 @@ public class HttpServerHandler extends BaseHandler {
                         SystemEvent systemEvent = new SystemEvent(httpPacket, session);
                         GameData.getSessionManager().addNetEvent(systemEvent);
                     } else {
-                        LogUtil.getLogger().info("检测http的post接收参数的时候参数验证错误，报错接口{}，平台{}------", uri, platform);
+
                         SendMsgUtil.sendBySessionAndMap(session, ClientCode.VERIFY_SIGN_ERROR.getCode(), new HashMap());
                     }
                 } else if (HttpMethod.OPTIONS.equals(m)) {

@@ -7,23 +7,23 @@ import avatar.util.utilDB.annotation.Table;
 import org.springframework.stereotype.Service;
 
 @Service
-@Table(name="user_game_exp_config" , comment = "玩家游戏经验配置")
+
 public class UserGameExpConfigEntity extends BaseEntity {
     public UserGameExpConfigEntity() {
         super(UserGameExpConfigEntity.class);
     }
 
     @Pk
-    @Column(name = "id" , comment = "玩家id" )
+
     private int id;
 
-    @Column(name = "coin_num" , comment = "游戏币" )
+
     private long coinNum;
 
-    @Column(name = "create_time" , comment = "创建时间")
+
     private String createTime;
 
-    @Column(name = "update_time" , comment = "更新时间")
+
     private String updateTime;
 
     public int getId() {

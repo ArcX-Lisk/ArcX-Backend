@@ -7,7 +7,7 @@ import avatar.util.utilDB.annotation.Table;
 import org.springframework.stereotype.Service;
 
 @Service
-@Table(name="product_repair_user_offical" , comment = "设备维护玩家公众号信息")
+
 public class ProductRepairUserOfficalEntity extends BaseEntity {
     public ProductRepairUserOfficalEntity() {
         super(ProductRepairUserOfficalEntity.class);
@@ -17,19 +17,19 @@ public class ProductRepairUserOfficalEntity extends BaseEntity {
     @Column(name = "id" , comment = "id" )
     private int id;
 
-    @Column(name = "note" , comment = "备注")
+
     private String note;
 
-    @Column(name = "openid" , comment = "微信openid")
+
     private String openid;
 
-    @Column(name = "status" , comment = "是否绑定(0-否;1-是)" )
+
     private int status;
 
-    @Column(name = "create_time" , comment = "创建时间")
+
     private String createTime;
 
-    @Column(name = "update_time" , comment = "更新时间")
+
     private String updateTime;
 
     public int getId() {

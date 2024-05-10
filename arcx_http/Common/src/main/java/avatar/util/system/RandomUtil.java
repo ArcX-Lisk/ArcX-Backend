@@ -77,7 +77,7 @@ public class RandomUtil {
 
 	/**
 	 * @param rates
-	 * @return 返回随机到的下标 从[0,rates.length-1]
+
 	 */
 	public static int randomInRate(float... rates) {
 		float randomRate = getRandom().nextFloat();
@@ -95,7 +95,7 @@ public class RandomUtil {
 
 	/**
 	 * @param rates
-	 * @return 返回随机到的下标 从[0,rates.length-1]
+
 	 */
 	public static int randomInRate(Float... rates) {
 		float randomRate = getRandom().nextFloat();
@@ -113,7 +113,7 @@ public class RandomUtil {
 
 	/**
 	 * @param rates
-	 * @return 返回随机到的下标 从[0,rates.size()-1]
+
 	 */
 	public static int randomInRate(Collection<Float> rates) {
 		Float[] array = new Float[rates.size()];

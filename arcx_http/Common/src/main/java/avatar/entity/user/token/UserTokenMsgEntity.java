@@ -7,7 +7,7 @@ import avatar.util.utilDB.annotation.Table;
 import org.springframework.stereotype.Service;
 
 @Service
-@Table(name="user_token_msg" , comment = "玩家token信息")
+
 public class UserTokenMsgEntity extends BaseEntity {
     public UserTokenMsgEntity() {
         super(UserTokenMsgEntity.class);
@@ -17,19 +17,19 @@ public class UserTokenMsgEntity extends BaseEntity {
     @Column(name = "id" , comment = "id" )
     private int id;
 
-    @Column(name = "user_id" , comment = "玩家ID" )
+
     private int userId;
 
-    @Column(name = "access_token" , comment = "调用凭证" )
+
     private String accessToken;
 
-    @Column(name = "access_out_time" , comment = "调用凭证过期时间" )
+
     private long accessOutTime;
 
-    @Column(name = "refresh_token" , comment = "刷新凭证" )
+
     private String refreshToken;
 
-    @Column(name = "refresh_out_time" , comment = "刷新凭证过期时间" )
+
     private long refreshOutTime;
 
     public int getId() {

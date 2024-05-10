@@ -4,19 +4,19 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
- * 玩家充值道具信息
+
  */
 public class UserRechargePropertyMsg implements Serializable {
-    //玩家ID
+    
     private int userId;
 
-    //刷新时间
+    
     private long refreshTime;
 
-    //道具列表
+    
     private List<Integer> propertyList;
 
-    //已购买的道具
+    
     private List<Integer> buyList;
 
     public int getUserId() {

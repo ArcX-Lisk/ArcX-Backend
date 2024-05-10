@@ -15,11 +15,11 @@ import com.squareup.okhttp.*;
 import java.util.Map;
 
 /**
- * gameShift工具类
+
  */
 public class GameShiftUtil {
     /**
-     * 获取请求域名
+
      */
     private static String loadDomain(){
         if(CheckUtil.isTestEnv()){
@@ -30,7 +30,7 @@ public class GameShiftUtil {
     }
 
     /**
-     * 注册账号
+
      */
     private static boolean register(int userId, String email){
         boolean flag = false;
@@ -50,8 +50,8 @@ public class GameShiftUtil {
             if(code==200 || code==201){
                 flag = true;
             }
-            LogUtil.getLogger().error("玩家{}注册gameShift账号，返回{}，结果{}---------", userId, response.body().string(),
-                    flag?"成功":"失败");
+
+
         }catch (Exception e){
             ErrorDealUtil.printError(e);
         }
@@ -59,7 +59,7 @@ public class GameShiftUtil {
     }
 
     /**
-     * 获取主钱包地址
+
      */
     private static String loadWalletAddress(int userId){
         String address = "";
@@ -77,7 +77,7 @@ public class GameShiftUtil {
             if(response.code()==200) {
                 ResponseBody responseBody = response.body();
                 address = responseBody.string();
-                LogUtil.getLogger().error("玩家{}通过gameshift获取钱包地址，返回码{}，返回内容{}---------", userId,
+
                         response.code(), address);
             }
         }catch (Exception e){
@@ -87,10 +87,10 @@ public class GameShiftUtil {
     }
 
     /**
-     * 获取余额
+
      */
     public static double getBalance(int userId){
-        double balance = 0;//余额
+        double balance = 0;
         try {
             OkHttpClient client = new OkHttpClient();
             Request request = new Request.Builder()
@@ -101,10 +101,10 @@ public class GameShiftUtil {
 
             Response response = client.newCall(request).execute();
             int code = response.code();
-            String jsonStr = response.body().string();//返回结果
-//            LogUtil.getLogger().error("玩家{}获取solana余额，结果{}---------", userId, jsonStr);
+            String jsonStr = response.body().string();
+
             if(code==200){
-                //处理余额返回
+                
                 balance = dealBalanceResponse(jsonStr);
             }
         }catch (Exception e){
@@ -114,7 +114,7 @@ public class GameShiftUtil {
     }
 
     /**
-     * 余额返回处理
+
      */
     private static double dealBalanceResponse(String jsonStr) {
         double balance = 0;
@@ -135,27 +135,27 @@ public class GameShiftUtil {
     }
 
     /**
-     * 添加gameshift账号
+
      */
     public static void addGameShiftAccount(int userId, String email) {
-        //查询玩家账号信息
+        
         Web3GameShiftAccountEntity entity = Web3GameShiftAccountDao.getInstance().loadByMsg(userId);
         if(entity==null) {
-            //注册gameshift账号
+            
             boolean flag = GameShiftUtil.register(userId, email);
-            String wallet;//钱包地址
+            String wallet;
             if(flag){
-                //查询钱包地址
+                
                 wallet = GameShiftUtil.loadWalletAddress(userId);
             }else{
-                LogUtil.getLogger().error("玩家{}通过email{}创建gameshift账号失败------", userId, email);
+
                 wallet = GameShiftUtil.loadWalletAddress(userId);
             }
             if (!StrUtil.checkEmpty(wallet)) {
-                //创建axc代币账号
+                
                 Web3WalletMsg walletMsg = SolanaUtil.createAccount(wallet, SolanaUtil.axcMintPubkey());
                 String axcAccount = walletMsg.getAta();
-                //创建USDT代币账号
+                
                 walletMsg = SolanaUtil.createAccount(wallet, SolanaUtil.usdtMintPubkey());
                 String usdtAccount = walletMsg.getAta();
                 Web3GameShiftAccountDao.getInstance().insert(initWeb3GameShiftAccountEntity(
@@ -165,21 +165,21 @@ public class GameShiftUtil {
     }
 
     /**
-     * 填充web3 gameShift账号实体信息
+
      */
     private static Web3GameShiftAccountEntity initWeb3GameShiftAccountEntity(int userId, String wallet,
             String axcAccount, String usdtAccount) {
         Web3GameShiftAccountEntity entity = new Web3GameShiftAccountEntity();
-        entity.setUserId(userId);//玩家ID
-        entity.setWallet(wallet);//钱包
-        entity.setAxcAccount(axcAccount);//axc账号
-        entity.setUsdtAccount(usdtAccount);//usdt账号
-        entity.setCreateTime(TimeUtil.getNowTimeStr());//创建时间
+        entity.setUserId(userId);
+        entity.setWallet(wallet);
+        entity.setAxcAccount(axcAccount);
+        entity.setUsdtAccount(usdtAccount);
+        entity.setCreateTime(TimeUtil.getNowTimeStr());
         return entity;
     }
 
     /**
-     * 交易签名url
+
      */
     public static String signTransaction(int userId, String transaction){
         String url = "";
@@ -197,7 +197,7 @@ public class GameShiftUtil {
             Response response = client.newCall(request).execute();
             int code = response.code();
             if(code==200 || code==201){
-                //处理返回
+                
                 String responseMsg = response.body().string();
                 if(!StrUtil.checkEmpty(responseMsg) && responseMsg.contains("url")){
                     Map<String, Object> responseMap = JsonUtil.strToMap(responseMsg);
@@ -206,7 +206,7 @@ public class GameShiftUtil {
                     }
                 }
             }
-            LogUtil.getLogger().error("玩家{}获取交易签名url，结果{}---------", userId, url);
+
 
         }catch (Exception e){
             ErrorDealUtil.printError(e);

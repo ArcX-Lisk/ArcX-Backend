@@ -5,7 +5,7 @@ import avatar.global.prefixMsg.NftPrefixMsg;
 import avatar.util.GameData;
 
 /**
- * 售币机等级配置信息数据接口
+
  */
 public class SellGoldMachineUpConfigDao {
     private static final SellGoldMachineUpConfigDao instance = new SellGoldMachineUpConfigDao();
@@ -14,7 +14,7 @@ public class SellGoldMachineUpConfigDao {
     }
 
     /**
-     * 查询缓存信息
+
      */
     public SellGoldMachineUpConfigEntity loadMsg(int lv){
         SellGoldMachineUpConfigEntity entity = loadCache(lv);
@@ -30,7 +30,7 @@ public class SellGoldMachineUpConfigDao {
     //=========================cache===========================
 
     /**
-     * 查询缓存
+
      */
     private SellGoldMachineUpConfigEntity loadCache(int lv){
         return (SellGoldMachineUpConfigEntity)
@@ -38,7 +38,7 @@ public class SellGoldMachineUpConfigDao {
     }
 
     /**
-     * 添加缓存
+
      */
     private void setCache(int lv, SellGoldMachineUpConfigEntity entity){
         GameData.getCache().set(NftPrefixMsg.SELL_GOLD_MACHINE_LV_CONFIG+"_"+lv, entity);
@@ -47,7 +47,7 @@ public class SellGoldMachineUpConfigDao {
     //=========================db===========================
 
     /**
-     * 根据等级查询
+
      */
     private SellGoldMachineUpConfigEntity loadDbByLv(int lv) {
         String sql = "select * from sell_gold_machine_up_config where lv=?";

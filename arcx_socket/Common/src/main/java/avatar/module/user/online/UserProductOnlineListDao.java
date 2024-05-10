@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 设备玩家在线列表信息
+
  */
 public class UserProductOnlineListDao {
     private static final UserProductOnlineListDao instance = new UserProductOnlineListDao();
@@ -17,12 +17,12 @@ public class UserProductOnlineListDao {
     }
 
     /**
-     * 查询缓存信息
+
      */
     public List<Integer> loadByProductId(int productId){
         List<Integer> list = loadCache(productId);
         if(list==null){
-            //查询数据库
+            
             list = loadDbByProductId(productId);
             setCache(productId, list);
         }
@@ -32,7 +32,7 @@ public class UserProductOnlineListDao {
     //=========================cache===========================
 
     /**
-     * 查询缓存
+
      */
     private List<Integer> loadCache(int productId){
         return (List<Integer>)
@@ -40,14 +40,14 @@ public class UserProductOnlineListDao {
     }
 
     /**
-     * 添加缓存
+
      */
     private void setCache(int productId, List<Integer> list){
         GameData.getCache().set(UserPrefixMsg.USER_PRODUCT_ONLINE_LIST+"_"+productId, list);
     }
 
     /**
-     * 删除缓存
+
      */
     public void removeCache(int productId){
         GameData.getCache().removeCache(UserPrefixMsg.USER_PRODUCT_ONLINE_LIST+"_"+productId);
@@ -56,7 +56,7 @@ public class UserProductOnlineListDao {
     //=========================db===========================
 
     /**
-     * 查询信息
+
      */
     private List<Integer> loadDbByProductId(int productId) {
         String sql = "select user_id from user_online_msg where product_id=? order by create_time";

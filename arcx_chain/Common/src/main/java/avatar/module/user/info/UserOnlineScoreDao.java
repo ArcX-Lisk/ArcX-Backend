@@ -6,7 +6,7 @@ import avatar.util.GameData;
 import avatar.util.user.UserBalanceUtil;
 
 /**
- * 玩家在线分数信息数据接口
+
  */
 public class UserOnlineScoreDao {
     private static final UserOnlineScoreDao instance = new UserOnlineScoreDao();
@@ -15,12 +15,12 @@ public class UserOnlineScoreDao {
     }
 
     /**
-     * 查询缓存信息
+
      */
     public UserOnlineScoreMsg loadByMsg(int userId, int commodityType){
         UserOnlineScoreMsg msg = loadCache(userId, commodityType);
         if(msg==null){
-            //查询数据库
+            
             msg = UserBalanceUtil.initUserOnlineScoreMsg(userId, commodityType);
             setCache(userId, commodityType, msg);
         }
@@ -30,7 +30,7 @@ public class UserOnlineScoreDao {
     //=========================cache===========================
 
     /**
-     * 查询缓存
+
      */
     private UserOnlineScoreMsg loadCache(int userId, int commodityType){
         return (UserOnlineScoreMsg)
@@ -38,7 +38,7 @@ public class UserOnlineScoreDao {
     }
 
     /**
-     * 添加缓存
+
      */
     public void setCache(int userId, int commodityType, UserOnlineScoreMsg msg){
         GameData.getCache().set(UserPrefixMsg.USER_ONLINE_SCORE+"_"+userId+"_"+commodityType, msg);

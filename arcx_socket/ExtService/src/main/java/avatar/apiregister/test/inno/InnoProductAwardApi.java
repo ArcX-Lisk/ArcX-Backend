@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 自研设备中奖
+
  */
 @Service
 public class InnoProductAwardApi extends SystemEventHttpHandler<Session> {
@@ -27,16 +27,16 @@ public class InnoProductAwardApi extends SystemEventHttpHandler<Session> {
 
     @Override
     public void method(Session session, Map<String, Object> map) throws Exception {
-        int userId = ParamsUtil.intParmasNotNull(map, "dealUserId");//玩家ID
-        int awardType = ParamsUtil.intParmasNotNull(map, "awardType");//设备奖励类型
+        int userId = ParamsUtil.intParmasNotNull(map, "dealUserId");
+        int awardType = ParamsUtil.intParmasNotNull(map, "awardType");
         if(CheckUtil.isTestEnv()) {
-            //查询在线设备
+            
             List<UserOnlineMsgEntity> list = UserOnlineMsgDao.getInstance().loadByUserId(userId);
             if(list.size()>0){
                 UserOnlineMsgEntity entity = list.get(0);
-                int productId = entity.getProductId();//设备ID
+                int productId = entity.getProductId();
                 if(productId>0) {
-                    //自研
+                    
                     InnoProductSpecialUtil.specialAward(userId, productId, awardType);
                 }
             }

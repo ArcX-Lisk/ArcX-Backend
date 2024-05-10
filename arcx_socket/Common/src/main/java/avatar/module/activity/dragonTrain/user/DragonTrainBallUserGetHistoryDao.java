@@ -4,7 +4,7 @@ import avatar.entity.activity.dragonTrain.user.DragonTrainBallUserGetHistoryEnti
 import avatar.util.GameData;
 
 /**
- * 龙珠玛丽机龙珠玩家获得历史数据接口
+
  */
 public class DragonTrainBallUserGetHistoryDao {
     private static final DragonTrainBallUserGetHistoryDao instance = new DragonTrainBallUserGetHistoryDao();
@@ -15,7 +15,7 @@ public class DragonTrainBallUserGetHistoryDao {
     //=========================db===========================
 
     /**
-     * 添加
+
      */
     public boolean insert(DragonTrainBallUserGetHistoryEntity entity){
         return GameData.getDB().insert(entity);

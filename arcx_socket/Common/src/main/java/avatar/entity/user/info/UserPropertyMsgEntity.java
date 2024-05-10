@@ -7,7 +7,7 @@ import avatar.util.utilDB.annotation.Table;
 import org.springframework.stereotype.Service;
 
 @Service
-@Table(name="user_property_msg" , comment = "玩家道具信息")
+
 public class UserPropertyMsgEntity extends BaseEntity {
     public UserPropertyMsgEntity() {
         super(UserPropertyMsgEntity.class);
@@ -17,19 +17,19 @@ public class UserPropertyMsgEntity extends BaseEntity {
     @Column(name = "id" , comment = "id" )
     private int id;
 
-    @Column(name = "user_id" , comment = "玩家ID")
+
     private int userId;
 
-    @Column(name = "property_type" , comment = "道具类型")
+
     private int propertyType;
 
-    @Column(name = "num" , comment = "道具数量")
+
     private long num;
 
-    @Column(name = "create_time" , comment = "创建时间")
+
     private String createTime;
 
-    @Column(name = "update_time" , comment = "更新时间")
+
     private String updateTime;
 
     public int getId() {

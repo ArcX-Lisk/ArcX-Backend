@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * 自研中奖得分倍数数据字典
+
  */
 public enum InnoAwardScoreMultiEnum {
     BIG_WIN(1,"big win"),
@@ -29,7 +29,7 @@ public enum InnoAwardScoreMultiEnum {
     }
 
     /**
-     * 转换成对象
+
      */
     public static Map<Integer, String> toMap() {
         Map<Integer, String> map = new HashMap<Integer, String>();
@@ -40,7 +40,7 @@ public enum InnoAwardScoreMultiEnum {
     }
 
     /**
-     * 根据code获取名称
+
      */
     public static String getNameByCode(int code){
         return toMap().get(code);

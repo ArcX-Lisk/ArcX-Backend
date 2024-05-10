@@ -4,10 +4,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * 服务端类型枚举
+
  */
 public enum ServerSideTypeEnum {
-    MAIN_SERVER(1,"主服务"),
+
     ;
 
     private int code;
@@ -27,7 +27,7 @@ public enum ServerSideTypeEnum {
     }
 
     /**
-     * 获取列表
+
      */
     public static Map<Integer, String> toMap() {
         Map<Integer, String> map = new HashMap<Integer, String>();
@@ -38,7 +38,7 @@ public enum ServerSideTypeEnum {
     }
 
     /**
-     * 根据code获取名称
+
      */
     public static String getNameByCode(int code){
         return toMap().get(code);

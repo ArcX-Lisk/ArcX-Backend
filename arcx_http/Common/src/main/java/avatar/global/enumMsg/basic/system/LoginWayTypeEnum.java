@@ -3,12 +3,12 @@ package avatar.global.enumMsg.basic.system;
 import java.util.*;
 
 /**
- * 登录方式
+
  */
 public enum LoginWayTypeEnum {
-    TOURIST(1, "游客登录"),
-    APPLE(2,"苹果登录"),
-    EMAIL(3,"邮箱登录"),
+
+
+
     ;
 
     private int code;
@@ -28,7 +28,7 @@ public enum LoginWayTypeEnum {
     }
 
     /**
-     * 获取所有枚举
+
      */
     public static List<LoginWayTypeEnum> loadAll(){
         LoginWayTypeEnum[] enumArr = LoginWayTypeEnum.values();
@@ -36,7 +36,7 @@ public enum LoginWayTypeEnum {
     }
     
     /**
-     * 转换成对象
+
      */
     public static Map<Integer, String> toMap() {
         Map<Integer, String> map = new HashMap<Integer, String>();
@@ -47,7 +47,7 @@ public enum LoginWayTypeEnum {
     }
 
     /**
-     * 根据code获取名称
+
      */
     public static String getNameByCode(int code){
         return toMap().get(code);

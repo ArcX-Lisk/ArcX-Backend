@@ -11,7 +11,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 /**
- * 售币机停止营业
+
  */
 @Service
 public class SellGoldMachineStopOperateApi extends SystemEventHttpHandler<Session> {

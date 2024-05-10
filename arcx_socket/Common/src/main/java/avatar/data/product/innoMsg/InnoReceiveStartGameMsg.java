@@ -1,14 +1,14 @@
 package avatar.data.product.innoMsg;
 
 /**
- * 接收自研设备开始游戏信息
+
  */
 public class InnoReceiveStartGameMsg {
-    private int status;//状态
+    private int status;
 
-    private String alias;//设备号
+    private String alias;
 
-    private int userId;//玩家ID
+    private int userId;
 
     public int getStatus() {
         return status;

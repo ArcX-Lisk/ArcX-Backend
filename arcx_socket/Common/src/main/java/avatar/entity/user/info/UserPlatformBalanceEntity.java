@@ -7,7 +7,7 @@ import avatar.util.utilDB.annotation.Table;
 import org.springframework.stereotype.Service;
 
 @Service
-@Table(name="user_platform_balance" , comment = "玩家平台余额")
+
 public class UserPlatformBalanceEntity extends BaseEntity {
     public UserPlatformBalanceEntity() {
         super(UserPlatformBalanceEntity.class);
@@ -17,19 +17,19 @@ public class UserPlatformBalanceEntity extends BaseEntity {
     @Column(name = "id" , comment = "id" )
     private int id;
 
-    @Column(name = "user_id" , comment = "玩家ID")
+
     private int userId;
 
-    @Column(name = "commodity_type" , comment = "商品类型")
+
     private int commodityType;
 
-    @Column(name = "commodity_num" , comment = "商品余额")
+
     private long commodityNum;
 
-    @Column(name = "create_time" , comment = "创建时间")
+
     private String createTime;
 
-    @Column(name = "update_time" , comment = "更新时间")
+
     private String updateTime;
 
     public int getId() {

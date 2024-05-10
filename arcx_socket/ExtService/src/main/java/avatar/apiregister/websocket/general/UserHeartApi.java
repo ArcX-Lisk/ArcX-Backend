@@ -17,7 +17,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 /**
- * 心跳包
+
  */
 @Service
 public class UserHeartApi extends SystemEventHandler2<Session> {
@@ -29,15 +29,15 @@ public class UserHeartApi extends SystemEventHandler2<Session> {
     public void method(Session session, byte[] bytes) throws Exception {
         ExecutorService cachedPool = Executors.newCachedThreadPool();
         cachedPool.execute(() -> {
-            //逻辑处理
-            String accessToken = session.getAccessToken();//玩家通行证
-            //前端传递的参数
+            
+            String accessToken = session.getAccessToken();
+            
             JSONObject jsonObject = JsonUtil.bytesToJson(bytes);
             int status = WebsocketEncodeUtil.checkEncode(accessToken, false, jsonObject);
             if(ParamsUtil.isSuccess(status)) {
                 int userId = UserUtil.loadUserIdByToken(session.getAccessToken());
                 if (userId > 0) {
-                    //处理在线信息
+                    
                     UserOnlineUtil.onlineMsgOnline(userId, Config.getInstance().getLocalAddr(),
                             Config.getInstance().getWebSocketPort());
                 }

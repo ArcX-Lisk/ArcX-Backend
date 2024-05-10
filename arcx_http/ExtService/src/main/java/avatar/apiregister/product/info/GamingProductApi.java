@@ -11,7 +11,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 /**
- * 游戏中的设备
+
  */
 @Service
 public class GamingProductApi extends SystemEventHttpHandler<Session> {

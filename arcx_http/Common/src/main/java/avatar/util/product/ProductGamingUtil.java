@@ -15,17 +15,17 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * 设备游戏信息
+
  */
 public class ProductGamingUtil {
     /**
-     * 获取最近倍率
+
      */
     public static int loadInnoLastMultiLevel(int productId){
         int multiLevel = 0;
-        long coolingTime = loadMultiCollingTime(productId);//设备冷却时间
+        long coolingTime = loadMultiCollingTime(productId);
         if(coolingTime>0) {
-            //获取自研设备下机信息
+            
             InnoProductOffLineMsg msg = ProductSettlementMsgDao.getInstance().loadByProductId(productId);
             if(msg!=null && (TimeUtil.getNowTime()-msg.getOffLineTime())<coolingTime){
                 multiLevel = msg.getMulti();
@@ -35,13 +35,13 @@ public class ProductGamingUtil {
     }
 
     /**
-     * 获取倍率冷却时间
+
      */
     private static long loadMultiCollingTime(int productId) {
         long collTime = 0;
         int secondType = ProductUtil.loadSecondType(productId);
         if(secondType>0){
-            //查询倍率窗口
+            
             InnoPushCoinWindowMsgEntity entity = InnoPushCoinWindowDao.getInstance().loadBySecondType(secondType);
             collTime = entity==null?0:entity.getMultiCoolingTime();
         }
@@ -49,25 +49,25 @@ public class ProductGamingUtil {
     }
 
     /**
-     * 填充自研设备最近下线信息
+
      */
     public static InnoProductOffLineMsg initInnoProductOffLineMsg(int productId) {
         InnoProductOffLineMsg msg = new InnoProductOffLineMsg();
-        msg.setProductId(productId);//设备ID
-        msg.setOffLineTime(0);//最近下线时间
-        msg.setMulti(loadMultiLevel(productId));//倍率等级
+        msg.setProductId(productId);
+        msg.setOffLineTime(0);
+        msg.setMulti(loadMultiLevel(productId));
         return msg;
     }
 
     /**
-     * 查询投币倍率等级
+
      */
     public static int loadMultiLevel(int productId) {
-        int multiLevel = 1;//倍率等级：默认1
+        int multiLevel = 1;
         ProductAwardLockMsg msg = ProductAwardLockDao.getInstance().loadByProductId(productId);
-        int coinMul = msg.getCoinMulti();//投币倍率
+        int coinMul = msg.getCoinMulti();
         if(coinMul>0){
-            //查询倍率信息
+            
             List<Integer> multiList = InnoPushCoinMultiDao.getInstance().loadBySecondType(
                     ProductUtil.loadSecondType(productId));
             if(multiList.size()>0){
@@ -80,20 +80,20 @@ public class ProductGamingUtil {
                 }
             }
         }
-        //最大倍率处理
+        
         multiLevel = Math.min(multiLevel, ProductConfigMsg.maxCoinMultiLevel);
         return multiLevel;
     }
 
     /**
-     * 初始化设备中奖锁定信息
+
      */
     public static ProductAwardLockMsg initProductAwardLockMsg(int productId) {
         ProductAwardLockMsg msg = new ProductAwardLockMsg();
-        msg.setProductId(productId);//设备ID
-        msg.setCoinMulti(0);//投币倍率
-        msg.setIsAwardLock(YesOrNoEnum.NO.getCode());//是否中奖锁定
-        msg.setLockTime(0);//锁定时间
+        msg.setProductId(productId);
+        msg.setCoinMulti(0);
+        msg.setIsAwardLock(YesOrNoEnum.NO.getCode());
+        msg.setLockTime(0);
         return msg;
     }
 

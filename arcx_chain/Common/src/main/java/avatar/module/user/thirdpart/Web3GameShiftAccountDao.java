@@ -8,7 +8,7 @@ import com.sun.org.apache.regexp.internal.RE;
 import java.util.List;
 
 /**
- * web3 gameShift账号数据接口
+
  */
 public class Web3GameShiftAccountDao {
     private static final Web3GameShiftAccountDao instance = new Web3GameShiftAccountDao();
@@ -19,7 +19,7 @@ public class Web3GameShiftAccountDao {
     //=========================db===========================
 
     /**
-     * 查询玩家信息
+
      */
     public int loadDbUser(int accountType, String accountMsg){
         String sql = "select user_id from web3_game_shift_account where ";

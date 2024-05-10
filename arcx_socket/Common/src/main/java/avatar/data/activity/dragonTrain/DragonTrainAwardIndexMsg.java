@@ -1,13 +1,13 @@
 package avatar.data.activity.dragonTrain;
 
 /**
- * 龙珠玛丽机中奖位置信息
+
  */
 public class DragonTrainAwardIndexMsg {
-    //奖励类型
+    
     private int cmdTp;
 
-    //中奖图标位置
+    
     private int awdInx;
 
     public int getCmdTp() {

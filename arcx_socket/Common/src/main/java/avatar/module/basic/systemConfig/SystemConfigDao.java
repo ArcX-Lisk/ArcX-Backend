@@ -8,7 +8,7 @@ import avatar.util.system.SqlUtil;
 import java.util.HashMap;
 
 /**
- * 系统配置信息数据接口
+
  */
 public class SystemConfigDao {
     private static final SystemConfigDao instance = new SystemConfigDao();
@@ -17,15 +17,15 @@ public class SystemConfigDao {
     }
 
     /**
-     * 查询系统配置信息
+
      */
     public SystemConfigEntity loadMsg() {
-        //从缓存获取
+        
         SystemConfigEntity entity = loadCache();
         if (entity==null) {
-            //查询数据库
+            
             entity = loadDbMsg();
-            //设置缓存
+            
             if (entity != null) {
                 setCache(entity);
             }
@@ -36,7 +36,7 @@ public class SystemConfigDao {
     //=========================cache===========================
 
     /**
-     * 查询缓存
+
      */
     private SystemConfigEntity loadCache() {
         return (SystemConfigEntity)
@@ -44,7 +44,7 @@ public class SystemConfigDao {
     }
 
     /**
-     * 设置缓存
+
      *
      */
     private void setCache(SystemConfigEntity entity) {
@@ -54,7 +54,7 @@ public class SystemConfigDao {
     //=========================db===========================
 
     /**
-     * 查询配置信息
+
      */
     private SystemConfigEntity loadDbMsg() {
         String sql = SqlUtil.getSql("system_config", new HashMap<>(), new HashMap<>(),

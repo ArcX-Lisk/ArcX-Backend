@@ -1,38 +1,38 @@
 package avatar.data.product.innoMsg;
 
 /**
- * 自研设备设备操作信息
+
  */
 public class InnoProductOperateMsg {
-    private int productId;//设备ID
+    private int productId;
 
-    private String alias;//设备号
+    private String alias;
 
-    private int userId;//玩家ID
+    private int userId;
 
-    private String userName;//玩家昵称
+    private String userName;
 
-    private String imgUrl;//玩家头像
+    private String imgUrl;
 
-    private int serverSideType;//服务端类型
+    private int serverSideType;
 
-    private long requestTime;//请求时间
+    private long requestTime;
 
-    private long onProductTime;//上机时间
+    private long onProductTime;
 
-    private int innoProductOperateType;//自研设备操作类型
+    private int innoProductOperateType;
 
-    private int productCost;//设备币值
+    private int productCost;
 
-    private int agyptOpenBox;//埃及开箱子
+    private int agyptOpenBox;
 
-    private int clownCircusFerrule;//小丑动物套圈
+    private int clownCircusFerrule;
 
-    private int pirateCannon;//海盗开炮
+    private int pirateCannon;
 
-    private int coinLevelWeight;//权重等级
+    private int coinLevelWeight;
 
-    private int payFlag;//是否付费
+    private int payFlag;
 
     public int getProductId() {
         return productId;

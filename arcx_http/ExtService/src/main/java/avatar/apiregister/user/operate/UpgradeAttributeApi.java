@@ -12,7 +12,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 /**
- * 属性升级
+
  */
 @Service
 public class UpgradeAttributeApi extends SystemEventHttpHandler<Session> {

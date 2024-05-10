@@ -1,16 +1,16 @@
 package avatar.data.user.info;
 
 /**
- * 简易玩家信息
+
  */
 public class ConciseUserMsg {
-    //玩家ID
+    
     private int plyId;
 
-    //玩家名称
+    
     private String plyNm;
 
-    //玩家头像
+    
     private String plyPct;
 
     public int getPlyId() {

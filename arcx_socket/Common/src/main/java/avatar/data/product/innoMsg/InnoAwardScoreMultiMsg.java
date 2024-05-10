@@ -1,16 +1,16 @@
 package avatar.data.product.innoMsg;
 
 /**
- * 自研设备中奖得分倍数信息
+
  */
 public class InnoAwardScoreMultiMsg {
-    private String alias;//设备号
+    private String alias;
 
-    private int userId;//玩家ID
+    private int userId;
 
-    private int serverSideType;//服务端类型
+    private int serverSideType;
 
-    private int awardMulti;//中奖得分倍数
+    private int awardMulti;
 
     public String getAlias() {
         return alias;

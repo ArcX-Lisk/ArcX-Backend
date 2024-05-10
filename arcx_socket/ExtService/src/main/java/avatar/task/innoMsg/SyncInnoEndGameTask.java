@@ -7,17 +7,17 @@ import avatar.util.innoMsg.*;
 import com.yaowan.game.common.scheduler.ScheduledTask;
 
 /**
- * 推送自研设备服务器退出游戏定时器
+
  */
 public class SyncInnoEndGameTask extends ScheduledTask {
-    private String host;//连接的服务器IP
+    private String host;
 
-    private int port;//端口
+    private int port;
 
-    private InnoEndGameMsg endGameMsg;//结束游戏信息
+    private InnoEndGameMsg endGameMsg;
 
     public SyncInnoEndGameTask(String host, int port, InnoEndGameMsg endGameMsg) {
-        super("推送自研设备服务器退出游戏定时器");
+
         this.host = host;
         this.port = port;
         this.endGameMsg = endGameMsg;
@@ -25,11 +25,11 @@ public class SyncInnoEndGameTask extends ScheduledTask {
 
     @Override
     public void run() {
-        //发送心跳
+        
         String linkMsg = SyncInnoConnectUtil.linkMsg(host, port);
         SyncInnoClient client = SyncInnoOperateUtil.loadClient(host, port, linkMsg);
         if (client != null && client.isOpen()) {
-            //推送结束游戏请求
+            
             SyncInnoUtil.endGame(client, endGameMsg);
         }else{
             InnoSendWebsocketUtil.sendWebsocketMsg(endGameMsg.getUserId(),

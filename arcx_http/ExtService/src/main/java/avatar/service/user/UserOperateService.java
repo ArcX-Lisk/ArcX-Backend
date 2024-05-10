@@ -14,19 +14,19 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * 玩家操作接口实现类
+
  */
 public class UserOperateService {
     /**
-     * 属性升级
+
      */
     public static void upgradeAttribute(Map<String, Object> map, Session session) {
-        Map<String, Object> dataMap = new HashMap<>();//内容参数信息
-        //检测参数
+        Map<String, Object> dataMap = new HashMap<>();
+        
         int status = UserCheckParamsUtil.upgradeAttribute(map);
         if(ParamsUtil.isSuccess(status)) {
-            int userId = ParamsUtil.userId(map);//玩家ID
-            int attributeType = ParamsUtil.intParmasNotNull(map, "atbTp");//属性类型
+            int userId = ParamsUtil.userId(map);
+            int attributeType = ParamsUtil.intParmasNotNull(map, "atbTp");
             RedisLock lock = new RedisLock(RedisLock.loadCache(), LockMsg.USER_ATTRIBUTE_LOCK + "_" + userId,
                     2000);
             try {
@@ -39,20 +39,20 @@ public class UserOperateService {
                 lock.unlock();
             }
         }
-        //推送结果
+        
         SendMsgUtil.sendBySessionAndMap(session, status, dataMap);
     }
 
     /**
-     * 使用道具
+
      */
     public static void useProperty(Map<String, Object> map, Session session) {
-        Map<String, Object> dataMap = new HashMap<>();//内容参数信息
-        //检测参数
+        Map<String, Object> dataMap = new HashMap<>();
+        
         int status = UserCheckParamsUtil.useProperty(map);
         if(ParamsUtil.isSuccess(status)) {
-            int userId = ParamsUtil.userId(map);//玩家ID
-            int propertyType = ParamsUtil.intParmasNotNull(map, "pptTp");//道具类型
+            int userId = ParamsUtil.userId(map);
+            int propertyType = ParamsUtil.intParmasNotNull(map, "pptTp");
             RedisLock lock = new RedisLock(RedisLock.loadCache(), LockMsg.PROPERTY_LOCK + "_" + userId,
                     2000);
             try {
@@ -65,7 +65,7 @@ public class UserOperateService {
                 lock.unlock();
             }
         }
-        //推送结果
+        
         SendMsgUtil.sendBySessionAndMap(session, status, dataMap);
     }
 }

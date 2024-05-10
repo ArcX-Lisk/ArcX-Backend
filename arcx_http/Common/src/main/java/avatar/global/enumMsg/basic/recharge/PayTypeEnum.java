@@ -3,14 +3,14 @@ package avatar.global.enumMsg.basic.recharge;
 import java.util.*;
 
 /**
- * 枚举：支付类型
+
  */
 public enum PayTypeEnum {
-    USDT(1,"USDT支付"),
+
     ;
 
     private int code;
-    private String name;//中文名称
+    private String name;
 
     PayTypeEnum(int code, String name){
         this.code = code;
@@ -24,7 +24,7 @@ public enum PayTypeEnum {
     public String getName(){return name;}
 
     /**
-     * 获取所有枚举
+
      */
     public static List<PayTypeEnum> loadAll(){
         PayTypeEnum[] enumArr = PayTypeEnum.values();
@@ -40,7 +40,7 @@ public enum PayTypeEnum {
     }
 
     /**
-     * 根据支付码获取支付信息
+
      */
     public static String getPayMsgByType(int payType){
         return toMap().get(payType);

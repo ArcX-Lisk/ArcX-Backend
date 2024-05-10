@@ -1,34 +1,34 @@
 package avatar.data.product.innoMsg;
 
 /**
- * 接收自研设备设备操作信息
+
  */
 public class InnoReceiveProductOperateMsg {
-    private int status;//状态
+    private int status;
 
-    private String alias;//设备号
+    private String alias;
 
-    private int userId;//玩家ID
+    private int userId;
 
-    private String userName;//玩家昵称
+    private String userName;
 
-    private String imgUrl;//玩家头像
+    private String imgUrl;
 
-    private int serverSideType;//服务端类型
+    private int serverSideType;
 
-    private int innoProductOperateType;//自研设备操作类型
+    private int innoProductOperateType;
 
-    private long onProductTime;//上机时间
+    private long onProductTime;
 
-    private int awardType;//设备中奖类型
+    private int awardType;
 
-    private int breakType;//设备故障类型
+    private int breakType;
 
-    private int coinNum;//获得币数量
+    private int coinNum;
 
-    private int awardNum;//设备显示奖励游戏币
+    private int awardNum;
 
-    private int isStart;//是否开始
+    private int isStart;
 
     public int getStatus() {
         return status;

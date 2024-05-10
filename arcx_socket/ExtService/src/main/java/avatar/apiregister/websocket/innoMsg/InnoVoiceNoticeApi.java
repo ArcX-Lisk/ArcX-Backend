@@ -13,7 +13,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 /**
- * 自研到设备声音通知信息（订阅）
+
  */
 @Service
 public class InnoVoiceNoticeApi extends SystemEventHandler2<Session> {
@@ -23,15 +23,15 @@ public class InnoVoiceNoticeApi extends SystemEventHandler2<Session> {
 
     @Override
     public void method(Session session, byte[] bytes) throws Exception {
-        //逻辑处理
+        
         ExecutorService cachedPool = Executors.newCachedThreadPool();
         cachedPool.execute(() -> {
-            //前端传递的参数
+            
             JSONObject jsonObject = JsonUtil.bytesToJson(bytes);
             if(InnerEnCodeUtil.checkEncode(jsonObject)) {
-                //转换参数
-//                LogUtil.getLogger().info("收到自研设备服务器发送的订阅声音信息{}--------", JsonUtil.mapToJson(jsonObject));
-                //流程处理
+                
+
+                
                 InnoProductService.voiceNotice(jsonObject);
             }
         });

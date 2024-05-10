@@ -15,7 +15,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 /**
- * 自研到设备中奖通知信息（订阅）
+
  */
 @Service
 public class InnoProductAwardNoticeApi extends SystemEventHandler2<Session> {
@@ -25,16 +25,16 @@ public class InnoProductAwardNoticeApi extends SystemEventHandler2<Session> {
 
     @Override
     public void method(Session session, byte[] bytes) throws Exception {
-        //逻辑处理
+        
         ExecutorService cachedPool = Executors.newCachedThreadPool();
         cachedPool.execute(() -> {
-            //前端传递的参数
+            
             JSONObject jsonObject = JsonUtil.bytesToJson(bytes);
             if(InnerEnCodeUtil.checkEncode(jsonObject)) {
-                //转换参数
-//                LogUtil.getLogger().info("收到自研设备服务器发送的设备中奖订阅信息{}--------", JsonUtil.mapToJson(jsonObject));
+                
+
                 InnoProductAwardMsg innoProductAwardMsg = InnoParamsUtil.initInnoProductAwardMsg(jsonObject);
-                //流程处理
+                
                 InnoProductService.describProductAwardMsg(innoProductAwardMsg);
             }
         });

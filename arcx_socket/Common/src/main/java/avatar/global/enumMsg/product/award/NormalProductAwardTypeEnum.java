@@ -3,10 +3,10 @@ package avatar.global.enumMsg.product.award;
 import java.util.*;
 
 /**
- * 普通设备奖励
+
  */
 public enum NormalProductAwardTypeEnum {
-    PILE_TOWER(1,"炼金塔堆塔"),;
+
 
     private int code;
     private String name;
@@ -25,7 +25,7 @@ public enum NormalProductAwardTypeEnum {
     }
 
     /**
-     * 获取所有枚举
+
      */
     public static List<NormalProductAwardTypeEnum> loadAll(){
         NormalProductAwardTypeEnum[] enumArr = NormalProductAwardTypeEnum.values();
@@ -33,7 +33,7 @@ public enum NormalProductAwardTypeEnum {
     }
 
     /**
-     * 转换成对象
+
      */
     public static Map<Integer, String> toMap() {
         Map<Integer, String> map = new HashMap<Integer, String>();
@@ -44,7 +44,7 @@ public enum NormalProductAwardTypeEnum {
     }
 
     /**
-     * 根据code获取名称
+
      */
     public static String getNameByCode(int code){
         return toMap().get(code);

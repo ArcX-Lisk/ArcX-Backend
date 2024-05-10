@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 import java.util.Map;
 
 /**
- * 道具背包
+
  */
 @Service
 public class PropertyKnapsackApi extends SystemEventHttpHandler<Session> {
@@ -20,7 +20,7 @@ public class PropertyKnapsackApi extends SystemEventHttpHandler<Session> {
 
     @Override
     public void method(Session session, Map<String, Object> map) throws Exception {
-        //逻辑处理
+        
         UserKnapsackService.propertyKnapsack(map, session);
     }
 }

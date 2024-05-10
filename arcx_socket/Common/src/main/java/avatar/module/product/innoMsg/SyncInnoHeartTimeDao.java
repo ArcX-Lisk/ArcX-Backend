@@ -4,7 +4,7 @@ import avatar.global.prefixMsg.ProductPrefixMsg;
 import avatar.util.GameData;
 
 /**
- * 自研设备心跳时间数据接口
+
  */
 public class SyncInnoHeartTimeDao {
     private static final SyncInnoHeartTimeDao instance = new SyncInnoHeartTimeDao();
@@ -13,10 +13,10 @@ public class SyncInnoHeartTimeDao {
     }
 
     /**
-     * 获取信息
+
      */
     public long loadTime(String linkMsg) {
-        //从缓存获取
+        
         long time = loadCache(linkMsg);
         if(time==-1){
             time = 0;
@@ -28,7 +28,7 @@ public class SyncInnoHeartTimeDao {
     //=========================cache===========================
 
     /**
-     * 查询缓存
+
      */
     public long loadCache(String linkMsg){
         Object obj = GameData.getCache().get(ProductPrefixMsg.SYNC_INNO_HEART_TIME+"_"+linkMsg);
@@ -36,7 +36,7 @@ public class SyncInnoHeartTimeDao {
     }
 
     /**
-     * 添加缓存
+
      */
     public void setCache(String linkMsg, long time){
         GameData.getCache().set(ProductPrefixMsg.SYNC_INNO_HEART_TIME+"_"+linkMsg, time);

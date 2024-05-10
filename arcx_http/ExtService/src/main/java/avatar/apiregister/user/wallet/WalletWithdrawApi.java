@@ -11,7 +11,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 /**
- * 钱包提现
+
  */
 @Service
 public class WalletWithdrawApi extends SystemEventHttpHandler<Session> {

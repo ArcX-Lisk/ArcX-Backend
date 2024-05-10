@@ -7,7 +7,7 @@ import avatar.util.utilDB.annotation.Table;
 import org.springframework.stereotype.Service;
 
 @Service
-@Table(name="dragon_train_wheel_icon_msg" , comment = "龙珠玛丽机转轮图标信息")
+
 public class DragonTrainWheelIconMsgEntity extends BaseEntity {
     public DragonTrainWheelIconMsgEntity() {
         super(DragonTrainWheelIconMsgEntity.class);
@@ -17,31 +17,31 @@ public class DragonTrainWheelIconMsgEntity extends BaseEntity {
     @Column(name = "id" , comment = "id" )
     private int id;
 
-    @Column(name = "award_img_id" , comment = "奖励图标ID" )
+
     private int awardImgId;
 
-    @Column(name = "commodity_type" , comment = "奖励类型" )
+
     private int commodityType;
 
-    @Column(name = "gift_id" , comment = "奖励ID" )
+
     private int giftId;
 
-    @Column(name = "award_min_num" , comment = "中奖最小值" )
+
     private int awardMinNum;
 
-    @Column(name = "award_max_num" , comment = "中奖最大值" )
+
     private int awardMaxNum;
 
-    @Column(name = "award_probability" , comment = "中奖几率" )
+
     private int awardProbability;
 
-    @Column(name = "total_probability" , comment = "总几率" )
+
     private int totalProbability;
 
-    @Column(name = "create_time" , comment = "创建时间" )
+
     private String createTime;
 
-    @Column(name = "update_time" , comment = "更新时间" )
+
     private String updateTime;
 
     public int getId() {

@@ -11,7 +11,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 /**
- * 获取玩家信息
+
  */
 @Service
 public class CrossServerUserMsgApi extends SystemEventHttpHandler<Session> {

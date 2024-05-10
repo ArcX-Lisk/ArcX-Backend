@@ -7,7 +7,7 @@ import avatar.util.utilDB.annotation.Table;
 import org.springframework.stereotype.Service;
 
 @Service
-@Table(name="img_product_detail" , comment = "设备详情信息文件")
+
 public class ImgProductDetailEntity extends BaseEntity {
     public ImgProductDetailEntity() {
         super(ImgProductDetailEntity.class);
@@ -17,16 +17,16 @@ public class ImgProductDetailEntity extends BaseEntity {
     @Column(name = "id" , comment = "id" )
     private int id;
 
-    @Column(name = "name" , comment = "名称")
+
     private String name;
 
-    @Column(name = "file_url" , comment = "文件url")
+
     private String fileUrl;
 
-    @Column(name = "create_time" , comment = "创建时间")
+
     private String createTime;
 
-    @Column(name = "update_time" , comment = "更新时间")
+
     private String updateTime;
 
     public int getId() {

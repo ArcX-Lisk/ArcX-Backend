@@ -7,50 +7,50 @@ import avatar.util.utilDB.annotation.Table;
 import org.springframework.stereotype.Service;
 
 @Service
-@Table(name="user_attribute_msg" , comment = "玩家属性信息")
+
 public class UserAttributeMsgEntity extends BaseEntity {
     public UserAttributeMsgEntity() {
         super(UserAttributeMsgEntity.class);
     }
 
     @Pk
-    @Column(name = "id" , comment = "玩家id" )
+
     private int id;
 
-    @Column(name = "user_id" , comment = "玩家ID" )
+
     private int userId;
 
-    @Column(name = "user_level" , comment = "玩家等级" )
+
     private int userLevel;
 
-    @Column(name = "user_level_exp" , comment = "玩家等级经验" )
+
     private long userLevelExp;
 
-    @Column(name = "energy_level" , comment = "能量等级" )
+
     private int energyLevel;
 
-    @Column(name = "energy_num" , comment = "能量数量" )
+
     private long energyNum;
 
-    @Column(name = "charging_level" , comment = "充能等级" )
+
     private int chargingLevel;
 
-    @Column(name = "charging_time" , comment = "充能时间")
+
     private String chargingTime;
 
-    @Column(name = "airdrop_level" , comment = "空投等级" )
+
     private int airdropLevel;
 
-    @Column(name = "lucky_level" , comment = "幸运等级" )
+
     private int luckyLevel;
 
-    @Column(name = "charm_level" , comment = "魅力等级" )
+
     private int charmLevel;
 
-    @Column(name = "create_time" , comment = "创建时间")
+
     private String createTime;
 
-    @Column(name = "update_time" , comment = "更新时间")
+
     private String updateTime;
 
     public int getId() {

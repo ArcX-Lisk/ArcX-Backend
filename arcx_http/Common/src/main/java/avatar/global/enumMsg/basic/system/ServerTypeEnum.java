@@ -1,12 +1,12 @@
 package avatar.global.enumMsg.basic.system;
 
 /**
- * 服务端类型枚举
+
  */
 public enum ServerTypeEnum {
-    LOCAL(1,"本地"),
-    TEST(2,"测试"),
-    ONLINE(3,"线上"),
+
+
+
     ;
 
     private int code;

@@ -7,7 +7,7 @@ import avatar.util.utilDB.annotation.Table;
 import org.springframework.stereotype.Service;
 
 @Service
-@Table(name="user_mac_msg" , comment = "玩家设备唯一ID信息")
+
 public class UserMacMsgEntity extends BaseEntity {
     public UserMacMsgEntity() {
         super(UserMacMsgEntity.class);
@@ -17,16 +17,16 @@ public class UserMacMsgEntity extends BaseEntity {
     @Column(name = "id" , comment = "id" )
     private int id;
 
-    @Column(name = "user_id" , comment = "玩家ID" )
+
     private int userId;
 
-    @Column(name = "mac" , comment = "设备唯一ID" )
+
     private String mac;
 
-    @Column(name = "is_register" , comment = "是否注册" )
+
     private int isRegister;
 
-    @Column(name = "create_time" , comment = "创建时间" )
+
     private String createTime;
 
     public int getId() {

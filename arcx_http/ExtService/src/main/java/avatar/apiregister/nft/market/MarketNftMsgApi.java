@@ -11,7 +11,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 /**
- * 市场NFT信息
+
  */
 @Service
 public class MarketNftMsgApi extends SystemEventHttpHandler<Session> {

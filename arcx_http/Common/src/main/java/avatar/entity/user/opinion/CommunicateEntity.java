@@ -7,7 +7,7 @@ import avatar.util.utilDB.annotation.Table;
 import org.springframework.stereotype.Service;
 
 @Service
-@Table(name="communicate_msg" , comment = "联系信息")
+
 public class CommunicateEntity extends BaseEntity {
     public CommunicateEntity() {
         super(CommunicateEntity.class);
@@ -17,22 +17,22 @@ public class CommunicateEntity extends BaseEntity {
     @Column(name = "id" , comment = "id" )
     private int id;
 
-    @Column(name = "email" , comment = "邮箱")
+
     private String email;
 
-    @Column(name = "deal_back_user_id" , comment = "后台处理用户ID" )
+
     private int dealBackUserId;
 
-    @Column(name = "deal_flag" , comment = "是否已处理" )
+
     private int dealFlag;
 
-    @Column(name = "comment_msg" , comment = "备注")
+
     private String commentMsg;
 
-    @Column(name = "create_time" , comment = "创建时间")
+
     private String createTime;
 
-    @Column(name = "update_time" , comment = "更新时间")
+
     private String updateTime;
 
     public int getId() {

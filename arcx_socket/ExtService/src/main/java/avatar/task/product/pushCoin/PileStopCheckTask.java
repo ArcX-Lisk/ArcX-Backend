@@ -16,18 +16,18 @@ import avatar.util.trigger.SchedulerSample;
 import com.yaowan.game.common.scheduler.ScheduledTask;
 
 /**
- * 堆塔停止检测定时器
+
  */
 public class PileStopCheckTask extends ScheduledTask {
 
-    private int productId;//设备ID
+    private int productId;
 
-    private int userId;//玩家ID
+    private int userId;
 
-    private long onProductTime;//操作时间
+    private long onProductTime;
 
     public PileStopCheckTask(int productId, int userId, long onProductTime) {
-        super("堆塔停止检测定时器");
+
         this.productId = productId;
         this.userId = userId;
         this.onProductTime = onProductTime;
@@ -35,25 +35,25 @@ public class PileStopCheckTask extends ScheduledTask {
 
     @Override
     public void run() {
-        //获取设备锁
+        
         RedisLock lock = new RedisLock(RedisLock.loadCache(), LockMsg.PRODUCT_ROOM_DEAL_LOCK+"_"+productId,
                 2000);
         try {
             if (lock.lock()) {
-                //查询设备信息
+                
                 ProductRoomMsg roomMsg = ProductRoomDao.getInstance().loadByProductId(productId);
                 if(roomMsg!=null && roomMsg.getGamingUserId()==userId &&
                         roomMsg.getOnProductTime()==onProductTime){
                     PileTowerMsg msg = PileTowerMsgDao.getInstance().loadByProductId(productId);
-                    long checkTime = TimeUtil.getNowTime()-msg.getPileTime();//检测时间
+                    long checkTime = TimeUtil.getNowTime()-msg.getPileTime();
                     if(checkTime>=ProductConfigMsg.pileStopTime && msg.getTillTime()>=ProductConfigMsg.pileTillTime){
-                        LogUtil.getLogger().info("炼金塔设备{}堆塔停止了，推送给玩家{}---------", productId, userId);
-                        //初始化缓存
+
+                        
                         ProductPileTowerUtil.initMsg(msg);
-                        //推送停止
+                        
                         SchedulerSample.delayed(100, new CoinPileTowerSendMsgTask(productId, YesOrNoEnum.YES.getCode()));
                     }else{
-                        //继续检测
+                        
                         SchedulerSample.delayed(ProductConfigMsg.pileStopTime-checkTime,
                                 new PileStopCheckTask(productId, userId, onProductTime));
                     }

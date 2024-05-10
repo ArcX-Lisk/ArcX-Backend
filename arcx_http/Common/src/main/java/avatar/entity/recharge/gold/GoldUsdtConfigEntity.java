@@ -7,7 +7,7 @@ import avatar.util.utilDB.annotation.Table;
 import org.springframework.stereotype.Service;
 
 @Service
-@Table(name="gold_usdt_config" , comment = "金币USDT兑比配置")
+
 public class GoldUsdtConfigEntity extends BaseEntity {
     public GoldUsdtConfigEntity() {
         super(GoldUsdtConfigEntity.class);
@@ -17,13 +17,13 @@ public class GoldUsdtConfigEntity extends BaseEntity {
     @Column(name = "id" , comment = "id" )
     private int id;
 
-    @Column(name = "proportion" , comment = "比例" )
+
     private long proportion;
 
-    @Column(name = "create_time" , comment = "创建时间")
+
     private String createTime;
 
-    @Column(name = "update_time" , comment = "更新时间")
+
     private String updateTime;
 
     public int getId() {

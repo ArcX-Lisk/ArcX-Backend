@@ -3,17 +3,17 @@ package avatar.global.enumMsg.basic.nft;
 import java.util.*;
 
 /**
- * 枚举：NFT状态
+
  */
 public enum NftStatusEnum {
-    UNUSED(1,"闲置"),
-    LISTING(2,"上架状态"),
-    ADVERTISING(3,"广告中"),
-    IN_OPERATION(4,"营业中"),
+
+
+
+
     ;
 
     private int code;
-    private String name;//中文名称
+    private String name;
 
     NftStatusEnum(int code, String name){
         this.code = code;
@@ -27,7 +27,7 @@ public enum NftStatusEnum {
     public String getName(){return name;}
 
     /**
-     * 获取所有枚举
+
      */
     public static List<NftStatusEnum> loadAll(){
         NftStatusEnum[] enumArr = NftStatusEnum.values();
@@ -43,7 +43,7 @@ public enum NftStatusEnum {
     }
 
     /**
-     * 根据类型获取名称
+
      */
     public static String getNameByCode(int code){
         return toMap().get(code);

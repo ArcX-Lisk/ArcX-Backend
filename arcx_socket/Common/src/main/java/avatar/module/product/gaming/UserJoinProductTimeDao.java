@@ -6,7 +6,7 @@ import avatar.util.GameData;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * 进群时间缓存
+
  */
 public class UserJoinProductTimeDao {
     private static final UserJoinProductTimeDao instance = new UserJoinProductTimeDao();
@@ -17,7 +17,7 @@ public class UserJoinProductTimeDao {
     //=========================cache===========================
 
     /**
-     * 查询缓存
+
      */
     public long loadCache(int userId, int productId) {
         ConcurrentHashMap<Integer, Long> map =
@@ -31,7 +31,7 @@ public class UserJoinProductTimeDao {
     }
 
     /**
-     * 设置缓存
+
      */
     public void setCache(int userId, int productId, long time) {
         ConcurrentHashMap<Integer, Long> map =

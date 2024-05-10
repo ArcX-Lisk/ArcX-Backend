@@ -7,7 +7,7 @@ import avatar.util.utilDB.annotation.Table;
 import org.springframework.stereotype.Service;
 
 @Service
-@Table(name="solana_sign_msg" , comment = "solana签名信息")
+
 public class SolanaSignMsgEntity extends BaseEntity {
     public SolanaSignMsgEntity() {
         super(SolanaSignMsgEntity.class);
@@ -17,10 +17,10 @@ public class SolanaSignMsgEntity extends BaseEntity {
     @Column(name = "id" , comment = "id" )
     private int id;
 
-    @Column(name = "signature" , comment = "签名" )
+
     private String signature;
 
-    @Column(name = "create_time" , comment = "创建时间" )
+
     private String createTime;
 
     public int getId() {

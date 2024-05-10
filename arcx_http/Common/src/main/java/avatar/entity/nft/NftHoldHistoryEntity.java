@@ -7,7 +7,7 @@ import avatar.util.utilDB.annotation.Table;
 import org.springframework.stereotype.Service;
 
 @Service
-@Table(name="nft_hold_history" , comment = "NFT持有记录")
+
 public class NftHoldHistoryEntity extends BaseEntity {
     public NftHoldHistoryEntity() {
         super(NftHoldHistoryEntity.class);
@@ -17,16 +17,16 @@ public class NftHoldHistoryEntity extends BaseEntity {
     @Column(name = "id" , comment = "id" )
     private int id;
 
-    @Column(name = "nft_type" , comment = "NFT类型" )
+
     private int nftType;
 
-    @Column(name = "nft_code" , comment = "NFT编号")
+
     private String nftCode;
 
-    @Column(name = "user_id" , comment = "玩家ID" )
+
     private int userId;
 
-    @Column(name = "create_time" , comment = "创建时间")
+
     private String createTime;
 
     public int getId() {

@@ -12,18 +12,18 @@ import avatar.util.product.ProductGamingUtil;
 import com.yaowan.game.common.scheduler.ScheduledTask;
 
 /**
- * 中奖锁处理定时器
+
  */
 public class InnoAwardLockDealTask extends ScheduledTask {
 
-    //中奖锁信息
+    
     private InnoAwardLockMsg innoAwardLockMsg;
 
-    //设备ID
+    
     private int productId;
 
     public InnoAwardLockDealTask(InnoAwardLockMsg innoAwardLockMsg, int productId) {
-        super("中奖锁处理定时器");
+
         this.innoAwardLockMsg = innoAwardLockMsg;
         this.productId = productId;
     }
@@ -37,11 +37,11 @@ public class InnoAwardLockDealTask extends ScheduledTask {
                 ProductRoomMsg roomMsg = ProductRoomDao.getInstance().loadByProductId(productId);
                 if(roomMsg.getGamingUserId()==innoAwardLockMsg.getUserId() &&
                         CrossServerMsgUtil.isArcxServer(innoAwardLockMsg.getServerSideType())){
-                    LogUtil.getLogger().info("更新设备{}更新中奖锁信息--------", productId);
-                    //更新中奖锁信息
+
+                    
                     ProductGamingUtil.updateProductAwardLockMsg(productId, innoAwardLockMsg.getIsStart());
                 }else{
-                    LogUtil.getLogger().error("设备{}中奖锁处理定时器关闭，接收到的信息不是当前上机玩家---------", productId);
+
                 }
             }
         }catch (Exception e){

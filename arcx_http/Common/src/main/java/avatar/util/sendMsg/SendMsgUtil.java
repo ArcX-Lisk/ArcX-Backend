@@ -19,44 +19,44 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 发送信息的工具类
+
  */
 public class SendMsgUtil {
     /**
-     * 发送信息
-     * @param session 会话ID
-     * @param status 状态
-     * @param data 核心数据
+
+
+
+
      */
     public static void sendBySessionAndMap(Session session, int status, Map<String,Object> data){
         Map<String,Object> map = new HashMap<>();
-        map.put("errorCode", status);//错误码
-        map.put("errorDesc", ClientCode.getErrorMsg(status));//错误信息
-        map.put("serverTime", TimeUtil.getNowTimeStr());//服务端时间
-        map.put("serverDate",(new Date()).getTime());//当前时间戳
-        map.put("serverMsg", data);//核心数据
-        //将Map转换成json
+        map.put("errorCode", status);
+        map.put("errorDesc", ClientCode.getErrorMsg(status));
+        map.put("serverTime", TimeUtil.getNowTimeStr());
+        map.put("serverDate",(new Date()).getTime());
+        map.put("serverMsg", data);
+        
         String jsonStr = JsonUtil.mapToJson(map);
-        //发送回客户端
+        
         sendHttpJson(session, jsonStr);
     }
 
     /**
-     * 发送包含list信息
+
      */
     public static void sendBySessionAndList(Session session, int status, Map<String,Object> jsonMap){
-        jsonMap.put("errorCode", status);//错误码
-        jsonMap.put("errorDesc", ClientCode.getErrorMsg(status));//错误信息
-        jsonMap.put("serverTime", TimeUtil.getNowTimeStr());//当前时间
-        jsonMap.put("serverDate", TimeUtil.getNowTime());//当前时间戳
-        //将Map转换成json
+        jsonMap.put("errorCode", status);
+        jsonMap.put("errorDesc", ClientCode.getErrorMsg(status));
+        jsonMap.put("serverTime", TimeUtil.getNowTimeStr());
+        jsonMap.put("serverDate", TimeUtil.getNowTime());
+        
         String jsonStr = JsonUtil.mapToJson(jsonMap);
-        //发送回客户端
+        
         sendHttpJson(session, jsonStr);
     }
 
     /**
-     * 推送客户端
+
      */
     public static void sendHttpJson(Session session, String jsonStr){
         Channel identity = (Channel) session.getIdentity();
@@ -75,20 +75,20 @@ public class SendMsgUtil {
     }
 
     /**
-     * 发送跨服信息
-     * @param session 会话ID
-     * @param status 状态
-     * @param data 核心数据
+
+
+
+
      */
     public static void sendCrossBySessionAndMap(Session session, int status, Map<String,Object> data){
         Map<String,Object> map = new HashMap<>();
-        map.put("status", status);//错误码
-        map.put("errorMsg", ClientCode.getErrorMsg(status));//错误信息
-        map.put("time",(new Date()).getTime());//当前时间戳
-        map.put("data", data);//核心数据
-        //将Map转换成json
+        map.put("status", status);
+        map.put("errorMsg", ClientCode.getErrorMsg(status));
+        map.put("time",(new Date()).getTime());
+        map.put("data", data);
+        
         String jsonStr = JsonUtil.mapToJson(map);
-        //发送回客户端
+        
         sendHttpJson(session, jsonStr);
     }
 

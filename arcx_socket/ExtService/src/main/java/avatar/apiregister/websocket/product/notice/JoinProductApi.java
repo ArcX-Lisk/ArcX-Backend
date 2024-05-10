@@ -17,7 +17,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 /**
- * 进入设备
+
  */
 @Service
 public class JoinProductApi extends SystemEventHandler2<Session> {
@@ -27,24 +27,24 @@ public class JoinProductApi extends SystemEventHandler2<Session> {
 
     @Override
     public void method(Session session, byte[] bytes) throws Exception {
-        //逻辑处理
+        
         ExecutorService cachedPool = Executors.newCachedThreadPool();
         cachedPool.execute(() -> {
-            String accessToken = session.getAccessToken();//玩家通行证
-            //前端传递的参数
+            String accessToken = session.getAccessToken();
+            
             JSONObject jsonObject = JsonUtil.bytesToJson(bytes);
             int status = WebsocketEncodeUtil.checkEncode(accessToken, false, jsonObject);
             if(ParamsUtil.isSuccess(status)) {
-                int userId = UserUtil.loadUserIdByToken(accessToken);//玩家ID
-                int productId = jsonObject.getInteger("devId");//设备ID
+                int userId = UserUtil.loadUserIdByToken(accessToken);
+                int productId = jsonObject.getInteger("devId");
                 if(userId>0){
                     status = ForbidUtil.checkForbidProduct(userId, productId);
                     if(ParamsUtil.isSuccess(status)) {
-                        //刷新房间信息
+                        
                         ProductWebsocketService.joinProduct(userId, productId, true);
                     }
                 }
-                //处理进入设备（公共处理）
+                
                 ProductSocketUtil.dealJoinProduct(productId, session);
             }
         });

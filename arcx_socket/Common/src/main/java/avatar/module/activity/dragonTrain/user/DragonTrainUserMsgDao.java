@@ -11,7 +11,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * 龙珠玛丽机玩家信息数据接口
+
  */
 public class DragonTrainUserMsgDao {
     private static final DragonTrainUserMsgDao instance = new DragonTrainUserMsgDao();
@@ -20,20 +20,20 @@ public class DragonTrainUserMsgDao {
     }
 
     /**
-     * 查询信息
+
      */
     public DragonTrainUserMsgEntity loadByUserId(int userId) {
-        //从缓存获取
+        
         DragonTrainUserMsgEntity entity = loadCache(userId);
         if(entity==null){
-            //从数据库查询
+            
             entity = loadDbByUserId(userId);
             if(entity==null){
-                //添加信息
+                
                 entity = insert(DragonTrainUtil.initDragonTrainUserMsgEntity(userId));
             }
             if(entity!=null) {
-                //设置缓存
+                
                 setCache(userId, entity);
             }
         }
@@ -43,14 +43,14 @@ public class DragonTrainUserMsgDao {
     //=========================cache===========================
 
     /**
-     * 查询缓存
+
      */
     private DragonTrainUserMsgEntity loadCache(int userId){
         return (DragonTrainUserMsgEntity) GameData.getCache().get(ActivityPrefixMsg.DRAGON_TRAIN_USER_MSG+"_"+userId);
     }
 
     /**
-     * 设置缓存
+
      */
     private void setCache(int userId, DragonTrainUserMsgEntity entity){
         GameData.getCache().set(ActivityPrefixMsg.DRAGON_TRAIN_USER_MSG+"_"+userId, entity);
@@ -59,7 +59,7 @@ public class DragonTrainUserMsgDao {
     //=========================db===========================
 
     /**
-     * 查询配置信息
+
      */
     private DragonTrainUserMsgEntity loadDbByUserId(int userId) {
         Map<String, Object> equalsParams = new HashMap<>();
@@ -69,7 +69,7 @@ public class DragonTrainUserMsgDao {
     }
 
     /**
-     * 添加
+
      */
     private DragonTrainUserMsgEntity insert(DragonTrainUserMsgEntity entity) {
         int id  = GameData.getDB().insertAndReturn(entity);
@@ -81,13 +81,13 @@ public class DragonTrainUserMsgDao {
     }
 
     /**
-     * 更新
+
      */
     public boolean update(DragonTrainUserMsgEntity entity){
-        entity.setUpdateTime(TimeUtil.getNowTimeStr());//更新时间
+        entity.setUpdateTime(TimeUtil.getNowTimeStr());
         boolean flag = GameData.getDB().update(entity);
         if(flag){
-            //设置缓存
+            
             setCache(entity.getUserId(), entity);
         }
         return flag;

@@ -20,7 +20,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 /**
- * 刷新时间
+
  */
 @Service
 public class RefreshTimeApi extends SystemEventHandler2<Session> {
@@ -30,25 +30,25 @@ public class RefreshTimeApi extends SystemEventHandler2<Session> {
 
     @Override
     public void method(Session session, byte[] bytes) throws Exception {
-        //逻辑处理
+        
         ExecutorService cachedPool = Executors.newCachedThreadPool();
         cachedPool.execute(() -> {
-            String accessToken = session.getAccessToken();//玩家通行证
-            //前端传递的参数
+            String accessToken = session.getAccessToken();
+            
             JSONObject jsonObject = JsonUtil.bytesToJson(bytes);
             int status = WebsocketEncodeUtil.checkEncode(accessToken, true, jsonObject);
             if(ParamsUtil.isSuccess(status)) {
-                int productId = jsonObject.getInteger("devId");//设备ID
-                int userId = UserUtil.loadUserIdByToken(accessToken);//玩家ID
-                //查询设备信息
+                int productId = jsonObject.getInteger("devId");
+                int userId = UserUtil.loadUserIdByToken(accessToken);
+                
                 RedisLock lock = new RedisLock(RedisLock.loadCache(), LockMsg.PRODUCT_ROOM_DEAL_LOCK+"_"+productId,
                         2000);
                 try {
                     if (lock.lock()) {
-                        //查询设备信息
+                        
                         ProductRoomMsg productRoomMsg = ProductRoomDao.getInstance().loadByProductId(productId);
                         if(productRoomMsg!=null && productRoomMsg.getGamingUserId()==userId){
-                            //推送刷新
+                            
                             ProductDealUtil.productRefreshTime(userId, productId, productRoomMsg.getPushCoinOnTime());
                         }
                     }

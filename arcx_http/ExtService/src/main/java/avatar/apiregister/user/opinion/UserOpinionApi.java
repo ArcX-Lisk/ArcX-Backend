@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import java.util.Map;
 
 /**
- * 玩家帮助与反馈
+
  */
 @Service
 public class UserOpinionApi extends SystemEventHttpHandler<Session> {
@@ -19,7 +19,7 @@ public class UserOpinionApi extends SystemEventHttpHandler<Session> {
 
     @Override
     public void method(Session session, Map<String, Object> map) throws Exception {
-        //逻辑处理
+        
         UserInfoService.userOpinion(map, session);
     }
 }

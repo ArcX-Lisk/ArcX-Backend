@@ -21,7 +21,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 /**
- * 刷新玩家余额通知
+
  */
 @Service
 public class RefreshUserBalanceNoticeApi extends SystemEventHttpHandler<Session> {
@@ -34,21 +34,21 @@ public class RefreshUserBalanceNoticeApi extends SystemEventHttpHandler<Session>
         ExecutorService cachedPool = Executors.newCachedThreadPool();
         cachedPool.execute(() -> {
             SendMsgUtil.sendBySessionAndMap(session, ClientCode.SUCCESS.getCode(), new HashMap<>());
-            //逻辑处理
+            
             try {
-                int userId = ParamsUtil.intParmasNotNull(map, "dealUserId");//玩家ID
-                String platform = ParamsUtil.stringParmasNotNull(map, "platform");//平台信息
+                int userId = ParamsUtil.intParmasNotNull(map, "dealUserId");
+                String platform = ParamsUtil.stringParmasNotNull(map, "platform");
                 if (platform.equals(ConfigMsg.sysPlatform)) {
-                    String accessToken = UserUtil.loadAccessToken(userId);//玩家通行证
+                    String accessToken = UserUtil.loadAccessToken(userId);
                     if(!StrUtil.checkEmpty(accessToken)) {
                         Session userSession = GameData.getSessionManager().getSessionByAccesstoken(accessToken);
                         if (userSession != null) {
-                            //刷新余额通知
+                            
                             UserNoticePushUtil.userBalancePush(userId);
                         }
                     }
                 } else {
-                    LogUtil.getLogger().info("接收到玩家{}刷新玩家余额通知的请求，但是平台信息不符合--------", userId);
+
                 }
             }catch (Exception e){
                 ErrorDealUtil.printError(e);

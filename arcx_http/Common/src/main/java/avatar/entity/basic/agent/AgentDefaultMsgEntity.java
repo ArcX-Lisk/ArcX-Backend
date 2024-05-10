@@ -7,7 +7,7 @@ import avatar.util.utilDB.annotation.Table;
 import org.springframework.stereotype.Service;
 
 @Service
-@Table(name="agent_default_msg" , comment = "代理默认信息")
+
 public class AgentDefaultMsgEntity extends BaseEntity {
     public AgentDefaultMsgEntity() {
         super(AgentDefaultMsgEntity.class);
@@ -17,10 +17,10 @@ public class AgentDefaultMsgEntity extends BaseEntity {
     @Column(name = "id" , comment = "id" )
     private int id;
 
-    @Column(name = "default_nation" , comment = "默认代理国家")
+
     private String defaultNation;
 
-    @Column(name = "create_time" , comment = "创建时间")
+
     private String createTime;
 
     public int getId() {

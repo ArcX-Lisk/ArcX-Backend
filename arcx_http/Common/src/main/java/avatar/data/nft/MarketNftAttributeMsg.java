@@ -1,16 +1,16 @@
 package avatar.data.nft;
 
 /**
- * NFT属性信息
+
  */
 public class MarketNftAttributeMsg {
-    //玩家属性类型
+    
     private int atbTp;
 
-    //等级
+    
     private int lv;
 
-    //属性信息
+    
     private String atbMsg;
 
     public int getAtbTp() {

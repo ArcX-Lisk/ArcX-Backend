@@ -7,20 +7,20 @@ import avatar.util.utilDB.annotation.Table;
 import org.springframework.stereotype.Service;
 
 @Service
-@Table(name="cross_server_media_prefix" , comment = "跨服多媒体信息")
+
 public class CrossServerMediaPrefixEntity extends BaseEntity {
     public CrossServerMediaPrefixEntity() {
         super(CrossServerMediaPrefixEntity.class);
     }
 
     @Pk
-    @Column(name = "id" , comment = "玩家id" )
+
     private int id;
 
-    @Column(name = "server_type" , comment = "服务端类型" )
+
     private int serverType;
 
-    @Column(name = "media_prefix" , comment = "前缀路径")
+
     private String mediaPrefix;
 
     public int getId() {

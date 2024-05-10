@@ -11,7 +11,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 /**
- * 更新玩家信息
+
  */
 @Service
 public class UpdateUserInfoApi extends SystemEventHttpHandler<Session> {

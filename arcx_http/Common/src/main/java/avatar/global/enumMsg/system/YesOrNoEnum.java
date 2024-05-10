@@ -4,11 +4,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * 枚举：是否
+
  */
 public enum YesOrNoEnum {
-    NO(0,"否"),
-    YES(1,"是"),
+
+
     ;
 
     private int code;
@@ -28,7 +28,7 @@ public enum YesOrNoEnum {
     }
 
     /**
-     * 转换成对象
+
      */
     public static Map<Integer, String> toMap() {
         Map<Integer, String> map = new HashMap<Integer, String>();
@@ -39,7 +39,7 @@ public enum YesOrNoEnum {
     }
 
     /**
-     * 根据code获取名称
+
      */
     public static String getNameByCode(int code){
         return toMap().get(code);

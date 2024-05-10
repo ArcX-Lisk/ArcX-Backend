@@ -1,22 +1,22 @@
 package avatar.data.nft;
 
 /**
- * NFT售币机储币信息
+
  */
 public class NftGoldMsg {
-    //当前储币值
+    
     private long cnGdAmt;
 
-    //可添加的储币值
+    
     private long upGdAmt;
 
-    //折扣(%)
+    
     private double dscot;
 
-    //未打折前的金币数量
+    
     private long oriAmt;
 
-    //营业税(%)
+    
     private int tax;
 
     public long getCnGdAmt() {

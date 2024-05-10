@@ -8,7 +8,7 @@ import avatar.util.system.SqlUtil;
 import java.util.HashMap;
 
 /**
- * 设备维护配置信息
+
  */
 public class ProductRepairConfigDao {
     private static final ProductRepairConfigDao instance = new ProductRepairConfigDao();
@@ -17,12 +17,12 @@ public class ProductRepairConfigDao {
     }
 
     /**
-     * 查询缓存信息
+
      */
         public ProductRepairConfigEntity loadMsg(){
         ProductRepairConfigEntity entity = loadCache();
         if(entity==null){
-            //查询数据库
+            
             entity = loadDbMsg();
             if(entity!=null){
                 setCache(entity);
@@ -34,7 +34,7 @@ public class ProductRepairConfigDao {
     //=========================cache===========================
 
     /**
-     * 查询缓存
+
      */
     private ProductRepairConfigEntity loadCache(){
         return (ProductRepairConfigEntity)
@@ -42,7 +42,7 @@ public class ProductRepairConfigDao {
     }
 
     /**
-     * 添加缓存
+
      */
     private void setCache(ProductRepairConfigEntity entity){
         GameData.getCache().set(ProductPrefixMsg.PRODUCT_REPAIR_CONFIG, entity);
@@ -51,7 +51,7 @@ public class ProductRepairConfigDao {
     //=========================db===========================
 
     /**
-     * 查询信息
+
      */
     private ProductRepairConfigEntity loadDbMsg() {
         String sql = SqlUtil.getSql("product_repair_config", new HashMap<>()).toString();

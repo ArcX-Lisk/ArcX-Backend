@@ -11,7 +11,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 /**
- * 商品直购
+
  */
 @Service
 public class CommodityDirectPurchaseApi extends SystemEventHttpHandler<Session> {

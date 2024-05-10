@@ -11,7 +11,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 /**
- * 售币机维修耐久度
+
  */
 @Service
 public class SellGoldMachineRepairDurabilityApi extends SystemEventHttpHandler<Session> {

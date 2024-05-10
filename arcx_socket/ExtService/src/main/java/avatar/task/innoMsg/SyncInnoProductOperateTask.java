@@ -7,17 +7,17 @@ import avatar.util.product.InnoParamsUtil;
 import com.yaowan.game.common.scheduler.ScheduledTask;
 
 /**
- * 推送自研设备服务器设备操作定时器
+
  */
 public class SyncInnoProductOperateTask extends ScheduledTask {
-    private String host;//连接的服务器IP
+    private String host;
 
-    private int port;//端口
+    private int port;
 
-    private InnoProductOperateMsg productOperateMsg;//设备操作信息
+    private InnoProductOperateMsg productOperateMsg;
 
     public SyncInnoProductOperateTask(String host, int port, InnoProductOperateMsg productOperateMsg) {
-        super("推送自研设备服务器设备操作定时器");
+
         this.host = host;
         this.port = port;
         this.productOperateMsg = productOperateMsg;
@@ -25,11 +25,11 @@ public class SyncInnoProductOperateTask extends ScheduledTask {
 
     @Override
     public void run() {
-        String linkMsg = SyncInnoConnectUtil.linkMsg(host, port);//链接信息
-        //推送操作信息
+        String linkMsg = SyncInnoConnectUtil.linkMsg(host, port);
+        
         SyncInnoClient client = SyncInnoOperateUtil.loadClient(host, port, linkMsg);
         if (client != null && client.isOpen()) {
-            //推送设备操作请求
+            
             SyncInnoUtil.productOperate(client, productOperateMsg);
         }else{
             InnoSendWebsocketUtil.sendWebsocketMsg(productOperateMsg.getUserId(),

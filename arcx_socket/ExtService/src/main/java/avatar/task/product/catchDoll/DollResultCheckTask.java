@@ -15,21 +15,21 @@ import com.yaowan.game.common.scheduler.ScheduledTask;
 import java.util.ArrayList;
 
 /**
- * 抓娃娃下爪结果检测定时器
+
  */
 public class DollResultCheckTask extends ScheduledTask {
-    private int userId;//玩家ID
+    private int userId;
 
-    private int productId;//设备ID
+    private int productId;
 
-    private int time;//次数
+    private int time;
 
-    private long onProductTime;//上机时间
+    private long onProductTime;
 
-    private long startGameTime;//缓存的开始游戏时间
+    private long startGameTime;
 
     public DollResultCheckTask(int userId, int productId, int time, long onProductTime, long startGameTime) {
-        super("抓娃娃定时下爪结果检测");
+
         this.userId = userId;
         this.productId = productId;
         this.time = time;
@@ -39,7 +39,7 @@ public class DollResultCheckTask extends ScheduledTask {
 
     @Override
     public void run() {
-        //获取设备锁
+        
         RedisLock lock = new RedisLock(RedisLock.loadCache(), LockMsg.PRODUCT_ROOM_DEAL_LOCK+"_"+productId,
                 2000);
         try {
@@ -47,15 +47,15 @@ public class DollResultCheckTask extends ScheduledTask {
                 ProductRoomMsg roomMsg = ProductRoomDao.getInstance().loadByProductId(productId);
                 DollGamingMsg gamingMsg = DollGamingMsgDao.getInstance().loadByProductId(productId);
                 if(roomMsg!=null && gamingMsg!=null){
-                    //是当前玩家并且是当前本次操作
+                    
                     if(roomMsg.getGamingUserId()==userId && gamingMsg.getTime()==time
                             && roomMsg.getOnProductTime()==onProductTime){
-                        LogUtil.getLogger().info("玩家{}在设备{}上抓娃娃定时下爪结果检测的时候，还没接收到服务器返回---------",userId,productId);
-                        //处理获取结果后的设备信息
+
+                        
                         DollInnerReceiveDealUtil.dealResultProductMsg(CatchDollResultEnum.LOSE.getCode(),
                                 userId, productId, time, onProductTime, new ArrayList<>());
                     }else if(gamingMsg.isInitalization()){
-                        //检测初始化
+                        
                         DollInnerReceiveDealUtil.checkInit(productId, startGameTime, userId);
                     }
                 }

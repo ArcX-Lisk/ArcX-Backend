@@ -3,28 +3,28 @@ package avatar.data.nft;
 import java.util.List;
 
 /**
- * NFT市场信息
+
  */
 public class MarketNftMsg {
-    //NFT编号
+    
     private String nftCd;
 
-    //名称
+    
     private String nm;
 
-    //图片
+    
     private String pct;
 
-    //NFT类型
+    
     private int nftTp;
 
-    //出售商品类型
+    
     private int slCmdTp;
 
-    //出售价格
+    
     private long slAmt;
 
-    //属性列表
+    
     private List<ConciseNftAttributeMsg> atbTbln;
 
     public String getNftCd() {

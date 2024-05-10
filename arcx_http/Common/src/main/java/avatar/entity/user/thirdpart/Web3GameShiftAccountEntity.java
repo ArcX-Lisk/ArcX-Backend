@@ -7,7 +7,7 @@ import avatar.util.utilDB.annotation.Table;
 import org.springframework.stereotype.Service;
 
 @Service
-@Table(name="web3_game_shift_account" , comment = "web3 gameShift账号")
+
 public class Web3GameShiftAccountEntity extends BaseEntity {
     public Web3GameShiftAccountEntity() {
         super(Web3GameShiftAccountEntity.class);
@@ -17,19 +17,19 @@ public class Web3GameShiftAccountEntity extends BaseEntity {
     @Column(name = "id" , comment = "id" )
     private int id;
 
-    @Column(name = "user_id" , comment = "玩家ID" )
+
     private int userId;
 
-    @Column(name = "wallet" , comment = "gameshift钱包" )
+
     private String wallet;
 
-    @Column(name = "axc_account" , comment = "axc代币账号" )
+
     private String axcAccount;
 
-    @Column(name = "usdt_account" , comment = "usdt代币账号" )
+
     private String usdtAccount;
 
-    @Column(name = "create_time" , comment = "创建时间" )
+
     private String createTime;
 
     public int getId() {

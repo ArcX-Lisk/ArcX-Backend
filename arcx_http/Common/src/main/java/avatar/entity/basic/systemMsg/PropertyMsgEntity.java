@@ -7,7 +7,7 @@ import avatar.util.utilDB.annotation.Table;
 import org.springframework.stereotype.Service;
 
 @Service
-@Table(name="property_msg" , comment = "道具信息")
+
 public class PropertyMsgEntity extends BaseEntity {
     public PropertyMsgEntity() {
         super(PropertyMsgEntity.class);
@@ -17,34 +17,34 @@ public class PropertyMsgEntity extends BaseEntity {
     @Column(name = "id" , comment = "id" )
     private int id;
 
-    @Column(name = "property_type" , comment = "奖励类型" )
+
     private int propertyType;
 
-    @Column(name = "property_use_type" , comment = "使用类型" )
+
     private int propertyUseType;
 
-    @Column(name = "num" , comment = "类型数量" )
+
     private int num;
 
-    @Column(name = "name" , comment = "道具名称")
+
     private String name;
 
-    @Column(name = "desc" , comment = "描述")
+
     private String desc;
 
-    @Column(name = "img_url" , comment = "道具图片")
+
     private String imgUrl;
 
-    @Column(name = "sequence" , comment = "排序" )
+
     private int sequence;
 
-    @Column(name = "active_flag" , comment = "是否激活" )
+
     private int activeFlag;
 
-    @Column(name = "create_time" , comment = "创建时间")
+
     private String createTime;
 
-    @Column(name = "update_time" , comment = "更新时间")
+
     private String updateTime;
 
     public int getId() {

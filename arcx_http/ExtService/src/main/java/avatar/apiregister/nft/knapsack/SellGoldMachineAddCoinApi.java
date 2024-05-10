@@ -11,7 +11,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 /**
- * 售币机增加储币
+
  */
 @Service
 public class SellGoldMachineAddCoinApi extends SystemEventHttpHandler<Session> {

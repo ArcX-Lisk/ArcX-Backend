@@ -40,36 +40,36 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 设备工具类
+
  */
 public class ProductUtil {
     /**
-     * 是否娃娃机（包括礼品机）
+
      */
     public static boolean isDollMachine(int productId) {
-        int productType = loadProductType(productId);//设备类型
+        int productType = loadProductType(productId);
         return productType==ProductTypeEnum.DOLL_MACHINE.getCode() ||
                 productType==ProductTypeEnum.PRESENT_MACHINE.getCode();
     }
 
     /**
-     * 获取设备类型
+
      */
     public static int loadProductType(int productId) {
-        //查询设备信息
+        
         ProductInfoEntity entity = ProductInfoDao.getInstance().loadByProductId(productId);
         return entity==null?0:entity.getProductType();
     }
 
     /**
-     * 是否自研设备
+
      */
     public static boolean isInnoProduct(int productId) {
         boolean flag = false;
-        //查询二级分类
+        
         int secondType = loadSecondType(productId);
         if(secondType>0){
-            //查询设备二级分类信息
+            
             ProductSecondLevelTypeEntity entity = ProductSecondLevelTypeDao.getInstance().loadBySecondType(secondType);
             flag = entity!=null && entity.getIsInnoProduct()== YesOrNoEnum.YES.getCode();
         }
@@ -77,29 +77,29 @@ public class ProductUtil {
     }
 
     /**
-     * 获取设备二级分类
+
      */
     public static int loadSecondType(int productId) {
-        //查询设备信息
+        
         ProductInfoEntity infoEntity = ProductInfoDao.getInstance().loadByProductId(productId);
         return infoEntity==null?0:infoEntity.getSecondType();
     }
 
     /**
-     * 获取设备信息日志
+
      */
     public static String productLog(int productId){
         return productId+"-"+getProductTypeName(productId)+"-"+loadProductName(productId);
     }
 
     /**
-     * 获取设备类型名称
+
      */
     public static String getProductTypeName(int productId) {
         String retName = "";
-        //查询设备信息
+        
         ProductInfoEntity entity = ProductInfoDao.getInstance().loadByProductId(productId);
-        int productType = entity.getProductType();//设备类型
+        int productType = entity.getProductType();
         if(productType>0){
             retName = ProductTypeEnum.loadNameByCode(productType);
         }
@@ -107,11 +107,11 @@ public class ProductUtil {
     }
 
     /**
-     * 获取设备名称
+
      */
     public static String loadProductName(int productId) {
-        String name = "";//设备名称
-        //查询设备信息
+        String name = "";
+        
         ProductInfoEntity entity = ProductInfoDao.getInstance().loadByProductId(productId);
         if(entity!=null){
             name = entity.getProductName();
@@ -120,14 +120,14 @@ public class ProductUtil {
     }
 
     /**
-     * 设备价格
+
      */
     public static int productCost(int productId) {
-        //查询设备信息
+        
         ProductInfoEntity entity = ProductInfoDao.getInstance().loadByProductId(productId);
         int cost = entity==null?0:entity.getCost();
         if(isInnoProduct(productId)) {
-            //查询设备锁定信息
+            
             ProductAwardLockMsg lockMsg = ProductAwardLockDao.getInstance().loadByProductId(productId);
             if (lockMsg.getCoinMulti() > 0) {
                 cost = lockMsg.getCoinMulti();
@@ -137,17 +137,17 @@ public class ProductUtil {
     }
 
     /**
-     * 处理自研设备中奖信息
+
      */
     public static void dealSelfProductAwardMsg(List<Long> list, List<Long> awardList, long onProductTime) {
         if(list.size()>0){
             for(long awardId : list){
-                //查询中奖信息
+                
                 InnoProductWinPrizeMsgEntity entity = InnoProductWinPrizeMsgDao.getInstance().loadDbById(awardId);
-                long createTime = TimeUtil.strToLong(entity.getCreateTime());//奖项创建时间
+                long createTime = TimeUtil.strToLong(entity.getCreateTime());
                 if(entity.getIsStart()==YesOrNoEnum.YES.getCode() && createTime>=onProductTime
                         && (TimeUtil.getNowTime()-createTime)<=ProductConfigMsg.innoAwardTillTime){
-                    //还在中奖并且是当前玩家
+                    
                     awardList.add(awardId);
                 }
             }
@@ -155,12 +155,12 @@ public class ProductUtil {
     }
 
     /**
-     * 设备剩余时间
+
      */
     public static long loadProductLeftTime(long refreshTime, int productId) {
-        long leftTime = 0;//剩余时间
-        long leftLongTime = TimeUtil.getNowTime()-refreshTime;//剩余时间戳
-        int productOffTime = productOffLineTime(productId)-10;//设备下机时间
+        long leftTime = 0;
+        long leftLongTime = TimeUtil.getNowTime()-refreshTime;
+        int productOffTime = productOffLineTime(productId)-10;
         if(leftLongTime>=0){
             leftTime = Math.max(0,(productOffTime-leftLongTime/1000));
         }
@@ -168,13 +168,13 @@ public class ProductUtil {
     }
 
     /**
-     * 设备下机时间
+
      */
     public static int productOffLineTime(int productId){
-        int offLineTime = 0;//下机时间
+        int offLineTime = 0;
         int secondType = loadSecondType(productId);
         if(secondType>0){
-            //查询设备二级分类信息
+            
             ProductSecondLevelTypeEntity entity = ProductSecondLevelTypeDao.getInstance().loadBySecondType(secondType);
             offLineTime = entity==null?0:entity.getServerOffLineTime();
         }
@@ -182,13 +182,13 @@ public class ProductUtil {
     }
 
     /**
-     * 刷新设备房间信息
+
      */
     public static void refreshRoomMsg(int productId) {
-        //查询设备在线socket
+        
         List<Session> sessionList = ProductSocketUtil.dealOnlineSession(productId);
         if(sessionList.size()>0){
-            //填充设备房间信息
+            
             JSONObject jsonMap = initProductRoomMsg(productId);
             sessionList.forEach(session-> SendWebsocketMsgUtil.sendBySession(WebSocketCmd.S2C_ROOM_MSG, ClientCode.SUCCESS.getCode(),
                     session, jsonMap));
@@ -196,40 +196,40 @@ public class ProductUtil {
     }
 
     /**
-     * 刷新设备房间信息
+
      */
     public static void refreshRoomMsg(int productId, int userId) {
-        //填充设备房间信息
+        
         JSONObject jsonMap = initProductRoomMsg(productId);
-        //推送玩家
+        
         SendWebsocketMsgUtil.sendByUserId(WebSocketCmd.S2C_ROOM_MSG, ClientCode.SUCCESS.getCode(),
                 userId, jsonMap);
     }
 
     /**
-     * 填充设备房间信息
+
      */
     private static JSONObject initProductRoomMsg(int productId) {
         JSONObject jsonMap = new JSONObject();
-        jsonMap.put("devId", productId);//设备ID
-        //查询游戏玩家信息
+        jsonMap.put("devId", productId);
+        
         ProductGamingUserMsg gamingUserMsg = ProductGamingUserMsgDao.getInstance().loadByProductId(productId);
         if(gamingUserMsg.getUserId()>0){
             jsonMap.put("gmPly", CrossServerMsgUtil.initServerTypeUserMsg(
-                    gamingUserMsg.getUserId(), gamingUserMsg.getServerSideType()));//游戏玩家
+                    gamingUserMsg.getUserId(), gamingUserMsg.getServerSideType()));
         }
-        jsonMap.put("vsUsrTbln", loadProductVisitUserList(productId));//旁观人
-        jsonMap.put("ppAmt", ProductSocketUtil.sessionMap.get(productId).size());//人气
+        jsonMap.put("vsUsrTbln", loadProductVisitUserList(productId));
+        jsonMap.put("ppAmt", ProductSocketUtil.sessionMap.get(productId).size());
         return jsonMap;
     }
 
     /**
-     * 设备旁观
+
      */
     private static List<ConciseUserMsg> loadProductVisitUserList(int productId) {
-        int gamingUserId = ProductGamingUtil.loadGamingUserId(productId);//游戏玩家
+        int gamingUserId = ProductGamingUtil.loadGamingUserId(productId);
         List<ConciseUserMsg> retList = new ArrayList<>();
-        //查询在线信息
+        
         List<Integer> onlineList = UserProductOnlineListDao.getInstance().loadByProductId(productId);
         if(onlineList.size()>0){
             onlineList.forEach(userId-> {
@@ -242,63 +242,63 @@ public class ProductUtil {
     }
 
     /**
-     * 是否余额够扣除
+
      */
     public static boolean isEnoughCost(int userId, int productId, int coinMulti) {
-        int cost = coinMulti>0?coinMulti:ProductUtil.productCost(productId);//游戏币
+        int cost = coinMulti>0?coinMulti:ProductUtil.productCost(productId);
         long balance = UserBalanceUtil.getUserBalance(userId, CommodityTypeEnum.GOLD_COIN.getCode());
         return balance>=cost;
     }
 
     /**
-     * 是否正常设备
+
      */
     public static boolean isNormalProduct(int productId){
-        //查询设备信息
+        
         ProductInfoEntity entity = ProductInfoDao.getInstance().loadByProductId(productId);
         return entity!=null && entity.getStatus()== ProductStatusEnum.NORMAL.getCode();
     }
 
     /**
-     * 判断是否结算指令
+
      */
     public static boolean isOffLine(int operate) {
         return operate == ProductOperationEnum.OFF_LINE.getCode();
     }
 
     /**
-     * 设备IP
+
      */
     public static String productIp(int productId) {
-        //查询设备信息
+        
         ProductInfoEntity entity = ProductInfoDao.getInstance().loadByProductId(productId);
         return entity==null?"":entity.getIp();
     }
 
     /**
-     * 设备socket端口
+
      */
     public static int productSocketPort(int productId) {
-        //查询设备信息
+        
         ProductInfoEntity entity = ProductInfoDao.getInstance().loadByProductId(productId);
         return entity==null?0:Integer.parseInt(entity.getPort());
     }
 
     /**
-     * 获取设备号
+
      */
     public static String loadProductAlias(int productId) {
-        //查询设备信息
+        
         ProductInfoEntity entity = ProductInfoDao.getInstance().loadByProductId(productId);
         return entity==null?"":entity.getAlias();
     }
 
     /**
-     * 获取设备二级分类名称
+
      */
     public static String loadSecondTypeName(int secondType) {
         if(secondType>0) {
-            //查询设备二级类型信息
+            
             ProductSecondLevelTypeEntity entity = ProductSecondLevelTypeDao.getInstance().loadBySecondType(secondType);
             return entity == null ? "" : entity.getName();
         }else{
@@ -307,18 +307,18 @@ public class ProductUtil {
     }
 
     /**
-     * 是否超出开始游戏获得币时间
+
      */
     public static boolean isOutStartGameTime(int productId) {
         boolean flag = false;
-        //查询超时时间
+        
         long startGameGetCoinTime = ProductConfigMsg.startGameGetCoinTime*1000;
         if(startGameGetCoinTime==0){
             flag = true;
         }else {
-            //查询设备下机信息
+            
             InnoProductOffLineMsg offLineMsg = ProductSettlementMsgDao.getInstance().loadByProductId(productId);
-            long offTime = offLineMsg.getOffLineTime();//最近下机时间
+            long offTime = offLineMsg.getOffLineTime();
             if (offTime==0 || (offTime > 0 && (TimeUtil.getNowTime() - offTime) >= startGameGetCoinTime)) {
                 flag = true;
             }
@@ -327,81 +327,81 @@ public class ProductUtil {
     }
 
     /**
-     * 填充自研设备中奖实体信息
+
      */
     public static InnoProductWinPrizeMsgEntity initInnoProductWinPrizeMsgEntity(int userId, int productId,
             int awardType, int awardNum, int isStart) {
         InnoProductWinPrizeMsgEntity entity = new InnoProductWinPrizeMsgEntity();
-        entity.setUserId(userId);//玩家ID
-        entity.setProductId(productId);//设备ID
-        entity.setAwardType(awardType);//奖励类型
-        entity.setAwardNum(awardNum);//设备显示奖励游戏币
-        entity.setIsStart(isStart);//是否中奖中
-        entity.setCreateTime(TimeUtil.getNowTimeStr());//创建时间
-        entity.setUpdateTime(TimeUtil.getNowTimeStr());//更新时间
+        entity.setUserId(userId);
+        entity.setProductId(productId);
+        entity.setAwardType(awardType);
+        entity.setAwardNum(awardNum);
+        entity.setIsStart(isStart);
+        entity.setCreateTime(TimeUtil.getNowTimeStr());
+        entity.setUpdateTime(TimeUtil.getNowTimeStr());
         return entity;
     }
 
     /**
-     * 添加报修信息
+
      */
     public static void addRepairMsg(int productId, int breakType) {
-        //查询设备在线玩家
+        
         ProductGamingUserMsg msg = loadGamingUser(productId);
-        int userId = msg.getUserId();//玩家ID
+        int userId = msg.getUserId();
         if(userId>0 && CrossServerMsgUtil.isArcxServer(msg.getServerSideType())){
-            //查询设备信息
+            
             ProductInfoEntity productInfoEntity = ProductInfoDao.getInstance().loadByProductId(productId);
-            //查询维修信息
+            
             ProductRepairEntity repairProductEntity = ProductRepairDao.getInstance().loadByProductId(productId);
             if(productInfoEntity!=null && repairProductEntity==null){
-                //添加数据
+                
                 ProductRepairDao.getInstance().insert(initProductRepairEntity(userId, productId, breakType));
             }else if(repairProductEntity!=null){
-                LogUtil.getLogger().info("添加设备{}报修信息的时候报修信息已存在，不添加-----", productId);
+
             }else{
-                LogUtil.getLogger().info("添加设备{}报修信息的时候查询不到设备信息-----", productId);
+
             }
-            //推送机修维护信息
+            
             OfficialAccountUtil.sendOfficalAccount(productId);
         }else{
-            LogUtil.getLogger().info("添加设备{}报修信息的时候查询不到在线的玩家ID-----", productId);
+
         }
     }
 
     /**
-     * 获取设备在玩玩家
+
      */
     private static ProductGamingUserMsg loadGamingUser(int productId){
-        //查询游戏玩家信息
+        
         return ProductGamingUserMsgDao.getInstance().loadByProductId(productId);
     }
 
     /**
-     * 填充报修设备实体信息
+
      */
     private static ProductRepairEntity initProductRepairEntity(int userId, int productId, int breakType) {
         ProductRepairEntity entity = new ProductRepairEntity();
-        entity.setUserId(userId);//玩家ID
-        entity.setProductId(productId);//设备ID
-        entity.setBreakType(breakType);//故障类型
-        entity.setStatus(YesOrNoEnum.NO.getCode());//是否已维护：否
-        entity.setCreateTime(TimeUtil.getNowTimeStr());//创建时间
-        entity.setUpdateTime("");//更新时间
+        entity.setUserId(userId);
+        entity.setProductId(productId);
+        entity.setBreakType(breakType);
+        entity.setStatus(YesOrNoEnum.NO.getCode());
+        entity.setCreateTime(TimeUtil.getNowTimeStr());
+        entity.setUpdateTime("");
         return entity;
     }
 
     /**
-     * 处理推币机获得币
+
      */
     public static boolean checkPushCoinProductGetCoin(int productId, InnerProductJsonMapMsg jsonMapMsg) {
         boolean flag = true;
         int result = jsonMapMsg.getDataMap().get("retNum") == null ? 0 :
-                (int) jsonMapMsg.getDataMap().get("retNum");//获得币结果
+                (int) jsonMapMsg.getDataMap().get("retNum");
         if (result > 0) {
             flag = isOutStartGameTime(productId);
             if (!flag) {
-                LogUtil.getLogger().error("设备{}获得币的时间未超出获得币间隔时间{}秒，不做得币处理-----", productId,
+
                         ProductConfigMsg.startGameGetCoinTime);
             }
         }
@@ -409,154 +409,154 @@ public class ProductUtil {
     }
 
     /**
-     * 是否彩票设备
+
      */
     public static boolean isLotteryProduct(int secondType) {
-        //查询设备二级分配信息
+        
         ProductSecondLevelTypeEntity entity = ProductSecondLevelTypeDao.getInstance().loadBySecondType(secondType);
         return entity!=null && entity.getIsLotteryProduct()==YesOrNoEnum.YES.getCode();
     }
 
     /**
-     * 查询设备指令
+
      */
     public static String loadInstruct(int productType, int secondType, String operateStr) {
         String instruct = "";
         if (productType == ProductTypeEnum.DOLL_MACHINE.getCode()) {
-            //娃娃机
+            
             instruct = getDollPushInstruct(operateStr, secondType);
         } else if (productType == ProductTypeEnum.PUSH_COIN_MACHINE.getCode()) {
-            //推币机
+            
             instruct = getCoinPusherInstruct(operateStr, secondType);
         } else if (productType == ProductTypeEnum.PRESENT_MACHINE.getCode()) {
-            //礼品
+            
             instruct = getPresentPushInstruct(operateStr, secondType);
         }
         return instruct;
     }
 
     /**
-     * 获取礼品机设备操作指令
+
      */
     private static String getPresentPushInstruct(String operate, int levelType) {
-        String sendStr = "";//操作指令
-        //查询二级信息
+        String sendStr = "";
+        
         ProductSecondLevelTypeEntity levelEntity = ProductSecondLevelTypeDao.getInstance()
                 .loadBySecondType(levelType);
         if (levelEntity != null) {
             String name = levelEntity.getInstructType() + "_" + operate;
-            //获取指令信息
+            
             sendStr = InstructPresentDao.getInstance().loadByName(name);
         }
         return sendStr;
     }
 
     /**
-     * 获取抓娃娃设备操作指令
+
      */
     private static String getDollPushInstruct(String operate, int levelType) {
-        String sendStr = "";//操作指令
-        //查询二级信息
+        String sendStr = "";
+        
         ProductSecondLevelTypeEntity levelEntity = ProductSecondLevelTypeDao.getInstance()
                 .loadBySecondType(levelType);
         if (levelEntity != null) {
-            //todo 暂用强爪
+            
             if(operate.equals(ProductOperationEnum.CATCH.getCode()+"")){
                 operate = ProductOperationEnum.STRONG_CATCH.getCode()+"";
             }
             String name = levelEntity.getInstructType() + "_" + operate;
-            //获取指令信息
+            
             sendStr = InstructCatchDollDao.getInstance().loadByName(name);
         }
         return sendStr;
     }
 
     /**
-     * 获取推币机操作指令
+
      */
     private static String getCoinPusherInstruct(String operate, int levelType) {
-        String sendStr = "";//操作指令
-        //查询二级信息
+        String sendStr = "";
+        
         ProductSecondLevelTypeEntity levelEntity = ProductSecondLevelTypeDao.getInstance()
                 .loadBySecondType(levelType);
         if (levelEntity != null) {
             String name = levelEntity.getInstructType() + "_" + operate;
-            //获取指令信息
+            
             sendStr = InstructPushCoinDao.getInstance().loadByName(name);
         }
         return sendStr;
     }
 
     /**
-     * 游戏次数
+
      */
     public static int startGameTime(int productId) {
-        //查询缓存
+        
         DollGamingMsg gamingMsg = DollGamingMsgDao.getInstance().loadByProductId(productId);
         return gamingMsg==null?0:gamingMsg.getTime();
     }
 
     /**
-     * 填充玩家彩票进度信息
+
      */
     public static LotteryMsg initUserLotteryMsg(int userId, int secondLevelType, int num, int addLotteryNum) {
         if (isLotteryProduct(secondLevelType)) {
             LotteryMsg msg = new LotteryMsg();
-            //查询玩家设备分类彩票
+            
             UserLotteryMsg entity = UserLotteryMsgDao.getInstance().loadByMsg(userId, secondLevelType);
             if (entity != null) {
-                msg.setAddLotteryNum(addLotteryNum);//添加彩票数
-                msg.setNum(entity.getLotteryNum());//彩票数
-                //获取彩票兑比
+                msg.setAddLotteryNum(addLotteryNum);
+                msg.setNum(entity.getLotteryNum());
+                
                 int maxNum = LotteryCoinPercentDao.getInstance().loadBySecondLevelType(secondLevelType);
                 maxNum = maxNum > 0 ? maxNum : ProductConfigMsg.lotteryCoinExchange;
-                msg.setMaxNum(maxNum);//彩票上限
-                msg.setAddCoin(num);//添加的游戏币数
+                msg.setMaxNum(maxNum);
+                msg.setAddCoin(num);
             } else {
-                LogUtil.getLogger().info("获取玩家{}彩票分类{}的彩票信息失败--------", userId, secondLevelType);
+
             }
             return msg;
         } else {
-            LogUtil.getLogger().info("不存在{}对应的彩票二级分类--------", secondLevelType);
+
             return null;
         }
     }
 
     /**
-     * 通知玩家进入设备通知
+
      */
     public static void joinProductNotice(int productId, int userId) {
         List<Session> sessionList = ProductSocketUtil.dealOnlineSession(productId);
         if(sessionList.size()>0) {
-            //填充进入设备通知信息
+            
             JSONObject jsonMap = initJoinProductNoticeMsg(productId, userId);
-            //推送玩家
+            
             sessionList.forEach(session-> SendWebsocketMsgUtil.sendBySession(WebSocketCmd.S2C_JOIN_PRODUCT,
                     ClientCode.SUCCESS.getCode(), session, jsonMap));
         }
     }
 
     /**
-     * 填充进入设备通知信息
+
      */
     private static JSONObject initJoinProductNoticeMsg(int productId, int userId) {
         JSONObject jsonMap = new JSONObject();
-        jsonMap.put("devId", productId);//设备ID
-        jsonMap.put("plyId", userId);//玩家ID
-        //获取简易玩家信息
+        jsonMap.put("devId", productId);
+        jsonMap.put("plyId", userId);
+        
         ConciseUserMsg conciseUserMsg = UserUtil.initConciseUserMsg(userId);
-        jsonMap.put("plyNm", conciseUserMsg.getPlyNm());//玩家昵称
-        jsonMap.put("plyPct", conciseUserMsg.getPlyPct());//玩家头像
+        jsonMap.put("plyNm", conciseUserMsg.getPlyNm());
+        jsonMap.put("plyPct", conciseUserMsg.getPlyPct());
         return jsonMap;
     }
 
     /**
-     * 是否投币倍率存在
+
      */
     public static boolean isCoinMultiExist(int productId, int coinMulti) {
         boolean flag = false;
         if(isInnoProduct(productId)) {
-            int secondType = loadSecondType(productId);//设备二级分类
+            int secondType = loadSecondType(productId);
             if (secondType > 0) {
                 List<Integer> list = InnoPushCoinMultiDao.getInstance().loadBySecondType(secondType);
                 if (list.size() > 0) {
@@ -568,7 +568,7 @@ public class ProductUtil {
     }
 
     /**
-     * 是否指定设备类型机器
+
      */
     public static boolean isSpecifyMachine(int productId, int productType) {
         return loadProductType(productId)==productType;

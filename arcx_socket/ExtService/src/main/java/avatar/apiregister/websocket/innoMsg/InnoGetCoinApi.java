@@ -15,7 +15,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 /**
- * 自研到设备获得币（订阅）
+
  */
 @Service
 public class InnoGetCoinApi extends SystemEventHandler2<Session> {
@@ -25,16 +25,16 @@ public class InnoGetCoinApi extends SystemEventHandler2<Session> {
 
     @Override
     public void method(Session session, byte[] bytes) throws Exception {
-        //逻辑处理
+        
         ExecutorService cachedPool = Executors.newCachedThreadPool();
         cachedPool.execute(() -> {
-            //前端传递的参数
+            
             JSONObject jsonObject = JsonUtil.bytesToJson(bytes);
             if(InnerEnCodeUtil.checkEncode(jsonObject)) {
-                //转换参数
-//                LogUtil.getLogger().info("收到自研设备服务器发送的订阅获得币信息{}--------", JsonUtil.mapToJson(jsonObject));
+                
+
                 InnoGetCoinMsg innoGetCoinMsg = InnoParamsUtil.initInnoGetCoinMsg(jsonObject);
-                //流程处理
+                
                 InnoProductService.describeGetCoinMsg(innoGetCoinMsg);
             }
         });

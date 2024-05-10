@@ -7,7 +7,7 @@ import avatar.util.utilDB.annotation.Table;
 import org.springframework.stereotype.Service;
 
 @Service
-@Table(name="energy_exchange_config" , comment = "能量兑换配置")
+
 public class EnergyExchangeConfigEntity extends BaseEntity {
     public EnergyExchangeConfigEntity() {
         super(EnergyExchangeConfigEntity.class);
@@ -17,13 +17,13 @@ public class EnergyExchangeConfigEntity extends BaseEntity {
     @Column(name = "id" , comment = "id" )
     private int id;
 
-    @Column(name = "nick_name" , comment = "名称" )
+
     private String nickName;
 
-    @Column(name = "create_time" , comment = "创建时间")
+
     private String createTime;
 
-    @Column(name = "update_time" , comment = "更新时间")
+
     private String updateTime;
 
     public int getId() {

@@ -8,11 +8,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 文件工具类
+
  */
 public class FileUtil {
     /**
-     * 获取敏感词汇文件
+
      * @param filePath
      * @return
      */
@@ -21,9 +21,9 @@ public class FileUtil {
         try {
             String encoding="UTF-8";
             File file=new File(filePath);
-            if(file.isFile() && file.exists()){ //判断文件是否存在
+            if(file.isFile() && file.exists()){ 
                 InputStreamReader read = new InputStreamReader(
-                        new FileInputStream(file),encoding);//考虑到编码格式
+                        new FileInputStream(file),encoding);
                 BufferedReader bufferedReader = new BufferedReader(read);
                 String lineTxt = null;
                 while((lineTxt = bufferedReader.readLine()) != null){
@@ -37,10 +37,10 @@ public class FileUtil {
                 }
                 read.close();
             }else{
-                System.out.println("找不到指定的文件");
+
             }
         } catch (Exception e) {
-            System.out.println("读取文件内容出错");
+
             e.printStackTrace();
         }
         return list;

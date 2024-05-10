@@ -7,7 +7,7 @@ import avatar.util.utilDB.annotation.Table;
 import org.springframework.stereotype.Service;
 
 @Service
-@Table(name="user_register_ip" , comment = "玩家注册ip")
+
 public class UserRegisterIpEntity extends BaseEntity {
     public UserRegisterIpEntity() {
         super(UserRegisterIpEntity.class);
@@ -17,34 +17,34 @@ public class UserRegisterIpEntity extends BaseEntity {
     @Column(name = "id" , comment = "id" )
     private int id;
 
-    @Column(name = "user_id" , comment = "玩家ID" )
+
     private int userId;
 
     @Column(name = "ip" , comment = "ip")
     private String ip;
 
-    @Column(name = "register_version" , comment = "注册版本号")
+
     private String registerVersion;
 
-    @Column(name = "login_way_type" , comment = "登录方式" )
+
     private int loginWayType;
 
-    @Column(name = "login_platform" , comment = "登录平台" )
+
     private int loginPlatform;
 
-    @Column(name = "last_ip" , comment = "当前登录IP")
+
     private String lastIp;
 
-    @Column(name = "last_login_way" , comment = "当前登录方式" )
+
     private int lastLoginWay;
 
-    @Column(name = "last_login_platform" , comment = "当前登录平台" )
+
     private int lastLoginPlatform;
 
-    @Column(name = "last_version" , comment = "当前版本号")
+
     private String lastVersion;
 
-    @Column(name = "create_time" , comment = "创建时间")
+
     private String createTime;
 
     public int getId() {

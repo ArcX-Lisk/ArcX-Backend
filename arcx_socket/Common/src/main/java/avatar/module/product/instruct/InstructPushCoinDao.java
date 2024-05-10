@@ -9,7 +9,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * 推币机操作指令数据接口
+
  */
 public class InstructPushCoinDao {
     private static final InstructPushCoinDao instance = new InstructPushCoinDao();
@@ -18,15 +18,15 @@ public class InstructPushCoinDao {
     }
 
     /**
-     * 查询缓存信息
+
      */
     public String loadByName(String name){
         String instruct = loadCache(name);
         if(instruct==null){
-            //查询数据库
+            
             InstructPushCoinEntity entity = loadDbByName(name);
             if(entity!=null){
-                instruct = entity.getInstruct();//指令
+                instruct = entity.getInstruct();
                 setCache(name, instruct);
             }
         }
@@ -36,7 +36,7 @@ public class InstructPushCoinDao {
     //=========================cache===========================
 
     /**
-     * 查询缓存
+
      */
     private String loadCache(String name){
         Object obj = GameData.getCache().get(ProductPrefixMsg.INSTRUCT_PUSH_COIN+"_"+name);
@@ -47,7 +47,7 @@ public class InstructPushCoinDao {
     }
 
     /**
-     * 添加缓存
+
      */
     private void setCache(String name, String instruct){
         GameData.getCache().set(ProductPrefixMsg.INSTRUCT_PUSH_COIN+"_"+name, instruct);
@@ -56,11 +56,11 @@ public class InstructPushCoinDao {
     //=========================db===========================
 
     /**
-     * 根据玩家ID查询
+
      */
     private InstructPushCoinEntity loadDbByName(String name) {
         Map<String, Object> paramsMap = new HashMap<>();
-        paramsMap.put("name", name);//名称
+        paramsMap.put("name", name);
         String sql = SqlUtil.getSql("instruct_push_coin", paramsMap).toString();
         return GameData.getDB().get(InstructPushCoinEntity.class, sql, new Object[]{});
     }

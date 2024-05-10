@@ -7,7 +7,7 @@ import avatar.util.utilDB.annotation.Table;
 import org.springframework.stereotype.Service;
 
 @Service
-@Table(name="inner_normal_product_ip" , comment = "普通设备内推IP")
+
 public class InnerNormalProductIpEntity extends BaseEntity {
     public InnerNormalProductIpEntity() {
         super(InnerNormalProductIpEntity.class);
@@ -17,19 +17,19 @@ public class InnerNormalProductIpEntity extends BaseEntity {
     @Column(name = "id" , comment = "id" )
     private int id;
 
-    @Column(name = "from_ip" , comment = "来源IP" )
+
     private String fromIp;
 
-    @Column(name = "from_port" , comment = "来源端口" )
+
     private int fromPort;
 
-    @Column(name = "to_ip" , comment = "接收IP" )
+
     private String toIp;
 
-    @Column(name = "to_port" , comment = "接收端口" )
+
     private int toPort;
 
-    @Column(name = "user_id" , comment = "唯一ID" )
+
     private int userId;
 
     public int getId() {

@@ -16,18 +16,18 @@ import com.alibaba.fastjson.JSONObject;
 import com.yaowan.game.common.scheduler.ScheduledTask;
 
 /**
- * 结算窗口通知定时器
+
  */
 public class InnoSettlementWindowTask extends ScheduledTask {
 
-    //结算窗口信息
+    
     private InnoSettlementWindowMsg innoSettlementWindowMsg;
 
-    //设备ID
+    
     private int productId;
 
     public InnoSettlementWindowTask(InnoSettlementWindowMsg innoSettlementWindowMsg, int productId) {
-        super("结算窗口通知定时器");
+
         this.innoSettlementWindowMsg = innoSettlementWindowMsg;
         this.productId = productId;
     }
@@ -41,11 +41,11 @@ public class InnoSettlementWindowTask extends ScheduledTask {
                 ProductRoomMsg roomMsg = ProductRoomDao.getInstance().loadByProductId(productId);
                 if(roomMsg.getGamingUserId()==innoSettlementWindowMsg.getUserId() &&
                         CrossServerMsgUtil.isArcxServer(innoSettlementWindowMsg.getServerSideType())){
-                    LogUtil.getLogger().info("推送设备{}结算窗口通知--------", productId);
-                    //推送通知
+
+                    
                     pushNotice(innoSettlementWindowMsg);
                 }else{
-                    LogUtil.getLogger().error("设备{}结算窗口通知定时器关闭，接收到的信息不是当前上机玩家---------", productId);
+
                 }
             }
         }catch (Exception e){
@@ -56,14 +56,14 @@ public class InnoSettlementWindowTask extends ScheduledTask {
     }
 
     /**
-     * 推送通知
+
      */
     private void pushNotice(InnoSettlementWindowMsg innoSettlementWindowMsg) {
-        int userId = innoSettlementWindowMsg.getUserId();//玩家ID
+        int userId = innoSettlementWindowMsg.getUserId();
         if(UserOnlineUtil.isOnline(userId)){
             JSONObject dataJson = new JSONObject();
-            dataJson.put("devId", productId);//设备ID
-            //推送前端
+            dataJson.put("devId", productId);
+            
             SendWebsocketMsgUtil.sendByUserId(WebSocketCmd.S2C_SETTLEMENT_WINDOW_NOTICE,
                     ClientCode.SUCCESS.getCode(), userId, dataJson);
         }

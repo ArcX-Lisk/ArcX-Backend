@@ -7,7 +7,7 @@ import avatar.util.utilDB.annotation.Table;
 import org.springframework.stereotype.Service;
 
 @Service
-@Table(name="recharge_property_config" , comment = "道具充值配置")
+
 public class RechargePropertyConfigEntity extends BaseEntity {
     public RechargePropertyConfigEntity() {
         super(RechargePropertyConfigEntity.class);
@@ -17,16 +17,16 @@ public class RechargePropertyConfigEntity extends BaseEntity {
     @Column(name = "id" , comment = "id" )
     private int id;
 
-    @Column(name = "show_num" , comment = "展示数量" )
+
     private int showNum;
 
-    @Column(name = "refresh_price" , comment = "价格" )
+
     private int refreshPrice;
 
-    @Column(name = "create_time" , comment = "创建时间")
+
     private String createTime;
 
-    @Column(name = "update_time" , comment = "更新时间")
+
     private String updateTime;
 
     public int getId() {

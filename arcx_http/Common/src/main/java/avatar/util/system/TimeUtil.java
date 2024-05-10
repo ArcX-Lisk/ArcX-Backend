@@ -9,12 +9,12 @@ import java.util.Calendar;
 import java.util.Date;
 
 /**
- * 时间工具类
+
  */
 public class TimeUtil {
 
     /**
-     * 转换日期
+
      * @param time
      * @return
      */
@@ -29,7 +29,7 @@ public class TimeUtil {
     }
 
     /**
-     * 转换日期
+
      */
     public static String dateToStr(Date time){
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -37,7 +37,7 @@ public class TimeUtil {
     }
 
     /**
-     * 获取现在的时间字符串
+
      * @return
      */
     public static String getNowTimeStr(){
@@ -46,7 +46,7 @@ public class TimeUtil {
     }
 
     /**
-     * 把string类型的时间转成时间戳
+
      * @param time
      * @return
      */
@@ -65,24 +65,24 @@ public class TimeUtil {
     }
 
     /**
-     * 获取时间范围的时间戳
+
      * @return
      */
     public static Date getTimeRange(int range){
         Calendar c = Calendar.getInstance();
         Date m = null;
         if(range == SearchTimeEnum.ONE_MONTH.getCode()){
-            //一个月
+            
             c.setTime(new Date());
             c.add(Calendar.MONTH, -SearchTimeEnum.ONE_MONTH.getMonth());
             m = c.getTime();
         }else if(range == SearchTimeEnum.THREE_MONTH.getCode()){
-            //三个月
+            
             c.setTime(new Date());
             c.add(Calendar.MONTH, -SearchTimeEnum.THREE_MONTH.getMonth());
             m = c.getTime();
         }else if(range == SearchTimeEnum.HALF_YEAR.getCode()){
-            //半年
+            
             c.setTime(new Date());
             c.add(Calendar.MONTH, -SearchTimeEnum.HALF_YEAR.getMonth());
             m = c.getTime();
@@ -91,7 +91,7 @@ public class TimeUtil {
     }
 
     /**
-     * 获取当天的日期
+
      * @return
      */
     public static String getNowDay(){
@@ -100,7 +100,7 @@ public class TimeUtil {
     }
 
     /**
-     * 获取指定时间日期
+
      * @param time
      * @return
      */
@@ -118,7 +118,7 @@ public class TimeUtil {
     }
 
     /**
-     * 把时间戳转换成时间日期
+
      * @param time
      * @return
      */
@@ -129,7 +129,7 @@ public class TimeUtil {
     }
 
     /**
-     * 把时间戳转换成时间日期
+
      */
     public static String longToSimpleDay(long time){
         SimpleDateFormat sdfDay = new SimpleDateFormat("yyyyMMdd");
@@ -138,7 +138,7 @@ public class TimeUtil {
     }
 
     /**
-     * 将字符串时间修改格式
+
      * @param time
      * @return
      */
@@ -156,7 +156,7 @@ public class TimeUtil {
     }
 
     /**
-     * 把时间戳转换成详细日期
+
      * @param time
      * @return
      */
@@ -167,7 +167,7 @@ public class TimeUtil {
     }
 
     /**
-     * 把String类型的时间转换成年份
+
      * @param time
      * @return
      */
@@ -184,7 +184,7 @@ public class TimeUtil {
     }
 
     /**
-     * 获取现在的时间
+
      * @returntest
      */
     public static long getNowTime(){
@@ -192,7 +192,7 @@ public class TimeUtil {
     }
 
     /**
-     * 获取N个月以后的时间
+
      * @return
      */
     public static String getNMonth(String time, int month){
@@ -209,55 +209,55 @@ public class TimeUtil {
         return sdf.format(m);
     }
 
-    //获取第一个24点时间
+    
     public static Date getFirstDay(){
         Calendar calendar = Calendar.getInstance();
-        calendar.set(Calendar.HOUR_OF_DAY, 24);//24点
-        calendar.set(Calendar.MINUTE, 00);//0分
-        calendar.set(Calendar.SECOND, 00);//0秒
-//        calendar.set(Calendar.HOUR_OF_DAY, 10);//24点
-//        calendar.set(Calendar.MINUTE, 55);//0分
-//        calendar.set(Calendar.SECOND, 00);//0秒
-        Date date = calendar.getTime();//获取日期
+        calendar.set(Calendar.HOUR_OF_DAY, 24);
+        calendar.set(Calendar.MINUTE, 00);
+        calendar.set(Calendar.SECOND, 00);
+
+
+
+        Date date = calendar.getTime();
         return date;
     }
 
     /**
-     * 维护时间，方便睡觉
+
      * @return
      */
     public static Date repairTime(){
         Calendar calendar = Calendar.getInstance();
-        calendar.set(Calendar.HOUR_OF_DAY, 12);//24点
-        calendar.set(Calendar.MINUTE, 00);//0分
-        calendar.set(Calendar.SECOND, 00);//0秒
-        Date date = calendar.getTime();//获取日期
+        calendar.set(Calendar.HOUR_OF_DAY, 12);
+        calendar.set(Calendar.MINUTE, 00);
+        calendar.set(Calendar.SECOND, 00);
+        Date date = calendar.getTime();
         return date;
     }
 
     /**
-     * 维护完成时间，方便睡觉
+
      * @return
      */
     public static Date completeTime(){
         Calendar calendar = Calendar.getInstance();
-        calendar.set(Calendar.HOUR_OF_DAY, 13);//24点
-        calendar.set(Calendar.MINUTE, 29);//0分
-        calendar.set(Calendar.SECOND, 00);//0秒
-        Date date = calendar.getTime();//获取日期
+        calendar.set(Calendar.HOUR_OF_DAY, 13);
+        calendar.set(Calendar.MINUTE, 29);
+        calendar.set(Calendar.SECOND, 00);
+        Date date = calendar.getTime();
         return date;
     }
 
     public static Date getFirstDay1(){
         Calendar calendar = Calendar.getInstance();
-        calendar.set(Calendar.HOUR_OF_DAY, 17);//24点
-        calendar.set(Calendar.MINUTE, 48);//0分
-        calendar.set(Calendar.SECOND, 00);//0秒
-        Date date = calendar.getTime();//获取日期
+        calendar.set(Calendar.HOUR_OF_DAY, 17);
+        calendar.set(Calendar.MINUTE, 48);
+        calendar.set(Calendar.SECOND, 00);
+        Date date = calendar.getTime();
         return date;
     }
 
-    // 增加或减少天数
+    
     public static Date addDay(Date date, int num) {
         Calendar startDT = Calendar.getInstance();
         startDT.setTime(date);
@@ -266,7 +266,7 @@ public class TimeUtil {
     }
 
     /**
-     * 获取指定日期年份
+
      * @param time
      * @return
      */
@@ -283,7 +283,7 @@ public class TimeUtil {
     }
 
     /**
-     * 获取指定日期月份
+
      * @param time
      * @return
      */
@@ -300,7 +300,7 @@ public class TimeUtil {
     }
 
     /**
-     * 获取指定日期的日期
+
      * @param time
      * @return
      */
@@ -317,7 +317,7 @@ public class TimeUtil {
     }
 
     /**
-     * 获取当天年份
+
      * @return
      */
     public static int getTodayYear(){
@@ -327,7 +327,7 @@ public class TimeUtil {
     }
 
     /**
-     * 获取当天月份
+
      * @return
      */
     public static int getTodayMonth(){
@@ -337,7 +337,7 @@ public class TimeUtil {
     }
 
     /**
-     * 获取当天日期
+
      * @return
      */
     public static int getTodayDate(){
@@ -347,7 +347,7 @@ public class TimeUtil {
     }
 
     /**
-     * 获取当天时间
+
      * @return
      */
     public static String getTodayTime(){
@@ -356,7 +356,7 @@ public class TimeUtil {
     }
 
     /**
-     * 获取当天日期
+
      * @return
      */
     public static String getTodayDay(){
@@ -365,7 +365,7 @@ public class TimeUtil {
     }
 
     /**
-     * 获取当天时间戳
+
      * @return
      */
     public static long getTodayLongTime(){
@@ -383,7 +383,7 @@ public class TimeUtil {
 
 
     /**
-     * 获取当天星期，星期天是1
+
      * @return
      */
     public static int getTodatWeek(){
@@ -394,7 +394,7 @@ public class TimeUtil {
     }
 
     /**
-     * 获取最近一个星期一
+
      * @return
      */
     public static String getNearlyMonday(){
@@ -403,7 +403,7 @@ public class TimeUtil {
         String retDay;
         c.setTime(new Date());
         int dayOfWeek = getTodatWeek();
-        //星期一是第一天
+        
         if(dayOfWeek==2){
             retDay = sdfDay.format(new Date())+" 00:00:00";
         }else{
@@ -416,7 +416,7 @@ public class TimeUtil {
     }
 
     /**
-     * 获取一天后的时间
+
      * @param time
      * @return
      */
@@ -437,7 +437,7 @@ public class TimeUtil {
     }
 
     /**
-     * 获取N个小时后的时间
+
      * @param time
      * @param hour
      * @return
@@ -459,7 +459,7 @@ public class TimeUtil {
     }
 
     /**
-     * 获取N个小时前的时间
+
      * @param time
      * @param hour
      * @return
@@ -481,7 +481,7 @@ public class TimeUtil {
     }
 
     /**
-     * 获取N小时前的日期
+
      * @param time
      * @param hour
      * @return
@@ -504,7 +504,7 @@ public class TimeUtil {
     }
 
     /**
-     * 获取N分钟前的时间
+
      * @param time
      * @param minute
      * @return
@@ -526,7 +526,7 @@ public class TimeUtil {
     }
 
     /**
-     * 获取时间戳
+
      * @param createTime
      * @return
      */
@@ -545,7 +545,7 @@ public class TimeUtil {
     }
 
     /**
-     * 汇付宝提交单据时间
+
      * @return
      */
     public static String billTime() {
@@ -555,27 +555,27 @@ public class TimeUtil {
     }
 
     /**
-     * 获取支付时间戳
+
      */
     public static String loadPayTime(){
-        //时间戳
+        
         Date date = new Date();
         long time = date.getTime();
-        //mysq 时间戳只有10位 要做处理
+        
         String dateline = time + "";
         dateline = dateline.substring(0, 10);
         return dateline;
     }
 
     /**
-     * 获取当天零点
+
      */
     public static long getZeroLongTime(long todayTime){
         long retTime = 0;
         try {
-            //时间格式
+            
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-            //日期的时间格式
+            
             SimpleDateFormat sdfDay = new SimpleDateFormat("yyyy-MM-dd");
             String time = sdfDay.format(todayTime) + " 00:00:00";
             retTime = sdf.parse(time).getTime();
@@ -586,14 +586,14 @@ public class TimeUtil {
     }
 
     /**
-     * 获取N个小时后的时间
+
      */
     public static String getAfterNHour(String time, int hour) {
         String retTime = "";
         try {
-            //日期信息
+            
             Calendar c = Calendar.getInstance();
-            //时间格式
+            
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             Date date = sdf.parse(time);
             c.setTime(date);

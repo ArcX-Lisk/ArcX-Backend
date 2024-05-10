@@ -7,7 +7,7 @@ import avatar.util.utilDB.annotation.Table;
 import org.springframework.stereotype.Service;
 
 @Service
-@Table(name="super_player_user_msg" , comment = "超级玩家玩家信息")
+
 public class SuperPlayerUserMsgEntity extends BaseEntity {
     public SuperPlayerUserMsgEntity() {
         super(SuperPlayerUserMsgEntity.class);
@@ -17,16 +17,16 @@ public class SuperPlayerUserMsgEntity extends BaseEntity {
     @Column(name = "id" , comment = "id" )
     private int id;
 
-    @Column(name = "user_id" , comment = "玩家ID" )
+
     private int userId;
 
-    @Column(name = "effect_time" , comment = "有效时间")
+
     private String effectTime;
 
-    @Column(name = "create_time" , comment = "创建时间")
+
     private String createTime;
 
-    @Column(name = "update_time" , comment = "更新时间")
+
     private String updateTime;
 
     public int getId() {

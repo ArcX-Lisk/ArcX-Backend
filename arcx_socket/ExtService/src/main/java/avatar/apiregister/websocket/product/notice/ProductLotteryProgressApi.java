@@ -16,7 +16,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 /**
- * 设备彩票进度
+
  */
 @Service
 public class ProductLotteryProgressApi extends SystemEventHandler2<Session> {
@@ -26,15 +26,15 @@ public class ProductLotteryProgressApi extends SystemEventHandler2<Session> {
 
     @Override
     public void method(Session session, byte[] bytes) throws Exception {
-        //逻辑处理
+        
         ExecutorService cachedPool = Executors.newCachedThreadPool();
         cachedPool.execute(() -> {
-            String accessToken = session.getAccessToken();//玩家通行证
-            //前端传递的参数
+            String accessToken = session.getAccessToken();
+            
             JSONObject jsonObject = JsonUtil.bytesToJson(bytes);
             int status = WebsocketEncodeUtil.checkEncode(accessToken, true, jsonObject);
             if(ParamsUtil.isSuccess(status)) {
-                int productId = jsonObject.getInteger("devId");//设备ID
+                int productId = jsonObject.getInteger("devId");
                 UserNoticePushUtil.pushLotteryNotice(productId, ProductUtil.loadSecondType(productId),
                         UserUtil.loadUserIdByToken(accessToken), 0, 0);
             }

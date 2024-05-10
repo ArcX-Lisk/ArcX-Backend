@@ -1,11 +1,11 @@
 package avatar.global.enumMsg.basic.system;
 
 /**
- * 处理状态枚举
+
  */
 public enum DealStatusEnum {
-    NO_DEAL(0,"未处理"),
-    DEAL(1,"已处理"),
+
+
     ;
 
     private int code;

@@ -7,7 +7,7 @@ import avatar.util.utilDB.annotation.Table;
 import org.springframework.stereotype.Service;
 
 @Service
-@Table(name="super_player_config" , comment = "超级玩家配置")
+
 public class SuperPlayerConfigEntity extends BaseEntity {
     public SuperPlayerConfigEntity() {
         super(SuperPlayerConfigEntity.class);
@@ -17,19 +17,19 @@ public class SuperPlayerConfigEntity extends BaseEntity {
     @Column(name = "id" , comment = "id" )
     private int id;
 
-    @Column(name = "img_url" , comment = "展示图片" )
+
     private String imgUrl;
 
-    @Column(name = "price" , comment = "价格(USDT)" )
+
     private int price;
 
-    @Column(name = "effect_day" , comment = "有效天数" )
+
     private int effectDay;
 
-    @Column(name = "create_time" , comment = "创建时间")
+
     private String createTime;
 
-    @Column(name = "update_time" , comment = "更新时间")
+
     private String updateTime;
 
     public int getId() {

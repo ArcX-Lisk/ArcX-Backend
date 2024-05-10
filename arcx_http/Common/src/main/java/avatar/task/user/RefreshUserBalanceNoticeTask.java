@@ -12,15 +12,15 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * 刷新玩家余额定时器
+
  */
 public class RefreshUserBalanceNoticeTask extends ScheduledTask {
 
-    //玩家ID
+    
     private int userId;
 
     public RefreshUserBalanceNoticeTask(int userId) {
-        super("刷新玩家余额定时器");
+
         this.userId = userId;
     }
 
@@ -32,16 +32,16 @@ public class RefreshUserBalanceNoticeTask extends ScheduledTask {
     }
 
     /**
-     * 通知
+
      */
     private static void sendNotice(int userId) {
         Map<String, Object> paramsMap = new HashMap<>();
-        paramsMap.put("dealUserId", userId);//玩家ID
-        paramsMap.put("platform", ConfigMsg.sysPlatform);//平台：内部
-        //获取请求url
+        paramsMap.put("dealUserId", userId);
+        paramsMap.put("platform", ConfigMsg.sysPlatform);
+        
         String httpRequest = ParamsUtil.httpRequestProduct(NoticeHttpCmdName.REFRESH_USER_BALANCE_NOTICE, paramsMap);
         if (!StrUtil.checkEmpty(httpRequest)) {
-            //发送请求
+            
             HttpClientUtil.sendHttpGet(httpRequest);
         }
     }

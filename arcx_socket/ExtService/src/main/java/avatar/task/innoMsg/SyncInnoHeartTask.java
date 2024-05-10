@@ -9,17 +9,17 @@ import avatar.util.trigger.SchedulerSample;
 import com.yaowan.game.common.scheduler.ScheduledTask;
 
 /**
- * 自研设备服务器心跳
+
  */
 public class SyncInnoHeartTask extends ScheduledTask {
-    private String host;//连接的服务器IP
+    private String host;
 
-    private int port;//端口
+    private int port;
 
-    private long startTime;//开始时间戳
+    private long startTime;
 
     public SyncInnoHeartTask(String host, int port, long startTime) {
-        super("websocket自研设备服务器内部心跳");
+
         this.host = host;
         this.port = port;
         this.startTime = startTime;
@@ -29,13 +29,13 @@ public class SyncInnoHeartTask extends ScheduledTask {
     public void run() {
         String linkMsg = SyncInnoConnectUtil.linkMsg(host, port);
         if(startTime== SyncInnoHeartTimeDao.getInstance().loadTime(linkMsg)) {
-            //发送心跳
+            
             SyncInnoClient client = SyncInnoOperateUtil.loadClient(host, port, linkMsg);
             if (client != null && client.isOpen()) {
-                //推送心跳
+                
                 SyncInnoUtil.heart(client);
             }
-            //10秒后再次发送
+            
             SchedulerSample.delayed(10000, new SyncInnoHeartTask(host, port, startTime));
         }
     }
